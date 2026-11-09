@@ -6,30 +6,51 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		888272E930A18E31001DCA2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888272E430A18E31001DCA2B /* Assets.xcassets */; };
+		888272EB30A18E31001DCA2B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272D830A18E31001DCA2B /* AppCoordinator.swift */; };
+		888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DA30A18E31001DCA2B /* DeepLink.swift */; };
+		888272ED30A18E31001DCA2B /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DB30A18E31001DCA2B /* DeepLinkHandler.swift */; };
+		888272EE30A18E31001DCA2B /* DeepLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DC30A18E31001DCA2B /* DeepLinkParser.swift */; };
+		888272EF30A18E31001DCA2B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DE30A18E31001DCA2B /* MainCoordinator.swift */; };
+		888272F030A18E31001DCA2B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272E030A18E31001DCA2B /* Coordinator.swift */; };
+		888272F130A18E31001DCA2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272E330A18E31001DCA2B /* AppDelegate.swift */; };
+		888272F230A18E31001DCA2B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272E630A18E31001DCA2B /* SceneDelegate.swift */; };
+		888272F330A18E31001DCA2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272E730A18E31001DCA2B /* ViewController.swift */; };
+		888272F630A18E4C001DCA2B /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272F530A18E4C001DCA2B /* AppSettings.swift */; };
+		888272FE30A19010001DCA2B /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272FD30A19008001DCA2B /* OnboardingCoordinator.swift */; };
+		8882730030A1901F001DCA2B /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272FF30A1901A001DCA2B /* OnboardingViewModel.swift */; };
+		8882730230A190E9001DCA2B /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882730130A190E4001DCA2B /* OnboardingModel.swift */; };
+		8882730530A19145001DCA2B /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882730430A19142001DCA2B /* OnboardingView.swift */; };
+		8882730830A19173001DCA2B /* Colors + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882730730A19173001DCA2B /* Colors + Extension.swift */; };
+		8882730A30A19C34001DCA2B /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882730930A19C2F001DCA2B /* AppTab.swift */; };
+		8882730C30A19CFE001DCA2B /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882730B30A19CF8001DCA2B /* HomeCoordinator.swift */; };
+		8882730E30A1A05D001DCA2B /* OnboardingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882730D30A1A058001DCA2B /* OnboardingCard.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		888272AF30A1894C001DCA2B /* Finora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finora.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		888272D830A18E31001DCA2B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		888272DA30A18E31001DCA2B /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
+		888272DB30A18E31001DCA2B /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
+		888272DC30A18E31001DCA2B /* DeepLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkParser.swift; sourceTree = "<group>"; };
+		888272DE30A18E31001DCA2B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		888272E030A18E31001DCA2B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		888272E330A18E31001DCA2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		888272E430A18E31001DCA2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		888272E530A18E31001DCA2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		888272E630A18E31001DCA2B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		888272E730A18E31001DCA2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		888272F530A18E4C001DCA2B /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		888272FD30A19008001DCA2B /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
+		888272FF30A1901A001DCA2B /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		8882730130A190E4001DCA2B /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
+		8882730430A19142001DCA2B /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		8882730730A19173001DCA2B /* Colors + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors + Extension.swift"; sourceTree = "<group>"; };
+		8882730930A19C2F001DCA2B /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		8882730B30A19CF8001DCA2B /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		8882730D30A1A058001DCA2B /* OnboardingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		888272C130A1894E001DCA2B /* Exceptions for "Finora" folder in "Finora" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 888272AE30A1894C001DCA2B /* Finora */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		888272B130A1894C001DCA2B /* Finora */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				888272C130A1894E001DCA2B /* Exceptions for "Finora" folder in "Finora" target */,
-			);
-			path = Finora;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		888272AC30A1894C001DCA2B /* Frameworks */ = {
@@ -45,7 +66,7 @@
 		888272A630A1894C001DCA2B = {
 			isa = PBXGroup;
 			children = (
-				888272B130A1894C001DCA2B /* Finora */,
+				888272E830A18E31001DCA2B /* Finora */,
 				888272B030A1894C001DCA2B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +77,113 @@
 				888272AF30A1894C001DCA2B /* Finora.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		888272D930A18E31001DCA2B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				888272D830A18E31001DCA2B /* AppCoordinator.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		888272DD30A18E31001DCA2B /* DeepLink */ = {
+			isa = PBXGroup;
+			children = (
+				888272DA30A18E31001DCA2B /* DeepLink.swift */,
+				888272DB30A18E31001DCA2B /* DeepLinkHandler.swift */,
+				888272DC30A18E31001DCA2B /* DeepLinkParser.swift */,
+			);
+			path = DeepLink;
+			sourceTree = "<group>";
+		};
+		888272DF30A18E31001DCA2B /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				888272DE30A18E31001DCA2B /* MainCoordinator.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		888272E130A18E31001DCA2B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				888272E030A18E31001DCA2B /* Coordinator.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		888272E230A18E31001DCA2B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				888272D930A18E31001DCA2B /* App */,
+				888272DD30A18E31001DCA2B /* DeepLink */,
+				888272DF30A18E31001DCA2B /* Main */,
+				888272E130A18E31001DCA2B /* Protocol */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		888272E830A18E31001DCA2B /* Finora */ = {
+			isa = PBXGroup;
+			children = (
+				888272F430A18E37001DCA2B /* App */,
+				888272E430A18E31001DCA2B /* Assets.xcassets */,
+				888272E230A18E31001DCA2B /* Coordinator */,
+				8882730630A19157001DCA2B /* Extensions */,
+				888272E530A18E31001DCA2B /* Info.plist */,
+				888272FB30A18FFA001DCA2B /* Screens */,
+				888272E730A18E31001DCA2B /* ViewController.swift */,
+			);
+			path = Finora;
+			sourceTree = "<group>";
+		};
+		888272F430A18E37001DCA2B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8882730930A19C2F001DCA2B /* AppTab.swift */,
+				888272F530A18E4C001DCA2B /* AppSettings.swift */,
+				888272E630A18E31001DCA2B /* SceneDelegate.swift */,
+				888272E330A18E31001DCA2B /* AppDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		888272FB30A18FFA001DCA2B /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8882730B30A19CF8001DCA2B /* HomeCoordinator.swift */,
+				888272FC30A19002001DCA2B /* Onboarding */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		888272FC30A19002001DCA2B /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				8882730330A1913C001DCA2B /* View */,
+				8882730130A190E4001DCA2B /* OnboardingModel.swift */,
+				888272FF30A1901A001DCA2B /* OnboardingViewModel.swift */,
+				888272FD30A19008001DCA2B /* OnboardingCoordinator.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		8882730330A1913C001DCA2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8882730D30A1A058001DCA2B /* OnboardingCard.swift */,
+				8882730430A19142001DCA2B /* OnboardingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8882730630A19157001DCA2B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8882730730A19173001DCA2B /* Colors + Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -72,9 +200,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				888272B130A1894C001DCA2B /* Finora */,
 			);
 			name = Finora;
 			packageProductDependencies = (
@@ -122,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				888272E930A18E31001DCA2B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +258,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8882730830A19173001DCA2B /* Colors + Extension.swift in Sources */,
+				888272EB30A18E31001DCA2B /* AppCoordinator.swift in Sources */,
+				888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */,
+				8882730C30A19CFE001DCA2B /* HomeCoordinator.swift in Sources */,
+				888272ED30A18E31001DCA2B /* DeepLinkHandler.swift in Sources */,
+				888272EE30A18E31001DCA2B /* DeepLinkParser.swift in Sources */,
+				888272EF30A18E31001DCA2B /* MainCoordinator.swift in Sources */,
+				888272F030A18E31001DCA2B /* Coordinator.swift in Sources */,
+				888272F130A18E31001DCA2B /* AppDelegate.swift in Sources */,
+				8882730030A1901F001DCA2B /* OnboardingViewModel.swift in Sources */,
+				888272F230A18E31001DCA2B /* SceneDelegate.swift in Sources */,
+				888272FE30A19010001DCA2B /* OnboardingCoordinator.swift in Sources */,
+				888272F630A18E4C001DCA2B /* AppSettings.swift in Sources */,
+				8882730230A190E9001DCA2B /* OnboardingModel.swift in Sources */,
+				888272F330A18E31001DCA2B /* ViewController.swift in Sources */,
+				8882730530A19145001DCA2B /* OnboardingView.swift in Sources */,
+				8882730E30A1A05D001DCA2B /* OnboardingCard.swift in Sources */,
+				8882730A30A19C34001DCA2B /* AppTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +293,7 @@
 				INFOPLIST_FILE = Finora/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -180,7 +324,7 @@
 				INFOPLIST_FILE = Finora/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
