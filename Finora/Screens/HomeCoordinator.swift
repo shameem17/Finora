@@ -19,13 +19,13 @@ class HomeCoordinator: Coordinator {
         return vc
     }()
     
-    init(rootViewController: UINavigationController? = nil,
-         settings: AppSettings) {
-        self.rootViewController = rootViewController
+    init(settings: AppSettings) {
+        self.rootViewController = UINavigationController()
         self.settings = settings
     }
     
     func start() {
+        print("start HomeCoordinator. rootViewController: \(rootViewController == nil)")
         rootViewController?.setViewControllers([homeVC], animated: false)
     }
     
@@ -35,18 +35,21 @@ class HomeCoordinator: Coordinator {
 
 class IncomeCoordinator: Coordinator {
     var rootViewController: UINavigationController?
-    
-    
     let settings: AppSettings
     
-    init(rootViewController: UINavigationController? = nil,
-         settings: AppSettings) {
-        self.rootViewController = rootViewController
+    lazy var incomeView: UIViewController = {
+        let view = IncomeView()
+        let vc = UIHostingController(rootView: view)
+        return vc
+    }()
+    
+    init(settings: AppSettings) {
+        self.rootViewController = UINavigationController()
         self.settings = settings
     }
     
     func start() {
-        
+        rootViewController?.setViewControllers([incomeView], animated: false)
     }
     
     
@@ -58,14 +61,20 @@ class ExpenseCoordinator: Coordinator {
     
     let settings: AppSettings
     
-    init(rootViewController: UINavigationController? = nil,
-         settings: AppSettings) {
-        self.rootViewController = rootViewController
+    lazy var expenseView: UIViewController = {
+        let view = ExpenseView()
+        let vc = UIHostingController(rootView: view)
+        return vc
+    }()
+    
+    
+    init(settings: AppSettings) {
+        self.rootViewController = UINavigationController()
         self.settings = settings
     }
     
     func start() {
-        
+        rootViewController?.setViewControllers([expenseView], animated: false)
     }
     
     
@@ -77,14 +86,19 @@ class TransactionCoordinator: Coordinator {
     
     let settings: AppSettings
     
-    init(rootViewController: UINavigationController? = nil,
-         settings: AppSettings) {
-        self.rootViewController = rootViewController
+    lazy var transactionView: UIViewController = {
+        let view = TransactionView()
+        let vc = UIHostingController(rootView: view)
+        return vc
+    }()
+    
+    init(settings: AppSettings) {
+        self.rootViewController = UINavigationController()
         self.settings = settings
     }
     
     func start() {
-        
+        rootViewController?.setViewControllers([transactionView], animated: false)
     }
     
     
@@ -95,14 +109,19 @@ class LoanCoordinator: Coordinator {
     
     let settings: AppSettings
     
-    init(rootViewController: UINavigationController? = nil,
-         settings: AppSettings) {
-        self.rootViewController = rootViewController
+    lazy var loanView: UIViewController = {
+        let view = LoanView()
+        let vc = UIHostingController(rootView: view)
+        return vc
+    }()
+    
+    init(settings: AppSettings) {
+        self.rootViewController = UINavigationController()
         self.settings = settings
     }
     
     func start() {
-        
+        rootViewController?.setViewControllers([loanView], animated: false)
     }
     
     
@@ -114,14 +133,19 @@ class SettingsCoordinator: Coordinator {
     
     let settings: AppSettings
     
-    init(rootViewController: UINavigationController? = nil,
-         settings: AppSettings) {
-        self.rootViewController = rootViewController
+    lazy var settingsView: UIViewController = {
+        let view = SettingsView()
+        let vc = UIHostingController(rootView: view)
+        return vc
+    }()
+    
+    init(settings: AppSettings) {
+        self.rootViewController = UINavigationController()
         self.settings = settings
     }
     
     func start() {
-        
+        rootViewController?.setViewControllers([settingsView], animated: false)
     }
     
     

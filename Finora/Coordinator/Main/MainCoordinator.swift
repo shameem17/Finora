@@ -40,6 +40,7 @@ final class MainCoordinator: Coordinator {
             childCoordinators.append(coordinator)
         }
         
+        print("child coordinators count: \(childCoordinators.count)")
         tabBarController.viewControllers = childCoordinators.compactMap { $0.rootViewController }
     }
     

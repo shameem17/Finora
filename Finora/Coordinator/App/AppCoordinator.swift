@@ -74,6 +74,7 @@ class AppCoordinator: Coordinator {
         let value = UserDefaults.standard.bool(forKey: key)
         
         if value {
+            print("Onboarding status found in UserDefaults: \(value)")
             hasOnboarded.send(true)
         }
         
