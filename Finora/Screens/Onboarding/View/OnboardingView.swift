@@ -10,14 +10,16 @@ import SwiftUI
 
 struct OnboardingView<ViewModel: OnboardingViewModelProtocol>: View {
     let model: ViewModel
-    let onBoardingDone: () -> Void
     
-    // Assuming your ID is an Int or String. Replace 'String' with whatever type step.model.id is.
     @State private var selectedTabId: Int? = nil
-    
+  
     var body: some View {
         ZStack(alignment: .top) {
             model.currentModel?.bgcolorCode
+            
+            WaveShape(amplitude: 20, frequency: 1.0, phase: 0 , baseline: 0.52)
+                .fill(Color.white.opacity(0.9))
+            
                 .ignoresSafeArea()
                 .animation(.easeInOut(duration: 0.5), value: model.currentModel?.id)
             
@@ -36,8 +38,13 @@ struct OnboardingView<ViewModel: OnboardingViewModelProtocol>: View {
                 
                 TabView(selection: $selectedTabId) {
                     ForEach(OnboardingStep.allCases, id: \.self) { step in
-                        OnboardingCard(data: step.model)
-                            .tag(step.model.id)
+                        OnboardingCard(data: step.model){
+                            withAnimation(.easeInOut(duration: 0.5)) {
+                                model.next()
+                                selectedTabId = model.currentModel?.id
+                            }
+                        }
+                        .tag(step.model.id)
                     }
                 }
                 .tabViewStyle(.page(indexDisplayMode: .never))
@@ -45,7 +52,7 @@ struct OnboardingView<ViewModel: OnboardingViewModelProtocol>: View {
                     DragGesture()
                         .onEnded { value in
                             let horizontalDrag = value.translation.width
-                            let threshold: CGFloat = 50 
+                            let threshold: CGFloat = 50
                             
                             withAnimation(.easeInOut(duration: 0.5)) {
                                 if horizontalDrag > threshold {
@@ -57,8 +64,8 @@ struct OnboardingView<ViewModel: OnboardingViewModelProtocol>: View {
                                 }
                             }
                         }
-                     )
-                 
+                )
+                
                 Spacer()
                     .frame(height: 30)
             }
@@ -78,21 +85,23 @@ struct OnboardingView<ViewModel: OnboardingViewModelProtocol>: View {
 extension OnboardingView {
     var skipButton: some View {
         Button(action: {
-            // 5. This triggers the smooth tab transition animation natively
             withAnimation(.easeInOut(duration: 0.5)) {
                 model.next()
                 selectedTabId = model.currentModel?.id
             }
         }) {
             Text("Skip")
-                .font(.body)
-                .foregroundColor(.blue)
-                .padding()
+                .font(.manrope, size: 20, weight: .bold)
+                .foregroundColor(.white)
+                .padding(.horizontal)
+                .padding(.vertical, 5)
+                .background(Color(hex: "#FF6347"))
+                .clipShape(Capsule())
         }
     }
 }
 
 
 #Preview {
-    OnboardingView(model: OnboardingViewModel()){}
+    OnboardingView(model: OnboardingViewModel())
 }

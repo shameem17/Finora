@@ -17,7 +17,21 @@ struct OnboardingModel: Identifiable {
     let bgcolorCode: Color
     let titleColor: Color
     let descriptionColor: Color
-    let buttonTitle: String
+    let button: OnboardinButton
+    let shortNote: String
+}
+
+enum OnboardinButton{
+    case next, getStarted
+    
+    var title: String {
+        switch self {
+        case .next:
+            return "Next ->"
+        case .getStarted:
+            return "Get Started"
+        }
+    }
 }
 
 enum OnboardingStep: Int, CaseIterable {
@@ -35,8 +49,10 @@ enum OnboardingStep: Int, CaseIterable {
                 description: "Track every income and expense effortlessly. Understand where your money goes and make smarter financial decisions every day.",
                 imageName: "onboardFirst",
                 bgcolorCode: Color.firstStepBackground,
-                titleColor: Color(hex: "#1C1E1F"),
-                descriptionColor: Color(hex: "#1C1E1F"), buttonTitle: "Next ->"
+                titleColor: .customBlack,
+                descriptionColor: Color(hex: "#1C1E1F"),
+                button: .next,
+                shortNote: "Your financial journey\nstarts here"
             )
 
         case .second:
@@ -46,8 +62,10 @@ enum OnboardingStep: Int, CaseIterable {
                 description: "Manage your budgets, loans, savings and financial goals in one place. Build better money habits and achieve your dreams.",
                 imageName: "onboardSecond",
                 bgcolorCode: Color.secondStepBackground,
-                titleColor: Color(hex: "#1C1E1F"),
-                descriptionColor: Color(hex: "#1C1E1F"), buttonTitle: "Next ->"
+                titleColor: .customBlack,
+                descriptionColor: Color(hex: "#1C1E1F"),
+                button: .next,
+                shortNote: "Budget, save, and plan your\nfinancial future with ease"
             )
 
         case .third:
@@ -57,9 +75,10 @@ enum OnboardingStep: Int, CaseIterable {
                 description: "Your financial information stays on your device. No account, no internet connection, and no cloud storage required.",
                 imageName: "onboardThird",
                 bgcolorCode: Color.thirdStepBackground,
-                titleColor: Color(hex: "#1C1E1F"),
+                titleColor: .customBlack,
                 descriptionColor: Color(hex: "#1C1E1F"),
-                buttonTitle: "Get Started"
+                button: .getStarted,
+                shortNote: "Your privacy is our priority.\nYour data stays with you"
             )
         }
     }
@@ -75,42 +94,5 @@ enum OnboardingStep: Int, CaseIterable {
     var isLast: Bool {
         self == .third
     }
-}
-
-extension Color {
-    
-    static let firstStepBackground = Color(hex: "#F0C3BC")
-    static let secondStepBackground = Color(hex: "#E8F3C9")
-    static let thirdStepBackground = Color(hex: "#FFAB39").opacity(0.4)
-    
-
-    // MARK: - Brand Colors
-    static let brandBlue = Color(hex: "#152ABE")
-    static let brandWhite = Color(hex: "#FFFFFE")
-    static let brandOrange = Color(hex: "#FFAB39")
-
-    // MARK: - Gradient Colors
-    static let blueGradientEnd = Color(hex: "#3548D0")
-    static let whiteGradientEnd = Color(hex: "#F2F3F8")
-    static let orangeGradientEnd = Color(hex: "#F89527")
-
-    // MARK: - Background Gradients
-    static let blueGradient = LinearGradient(
-        colors: [.brandBlue, .blueGradientEnd],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-    )
-
-    static let whiteGradient = LinearGradient(
-        colors: [.brandWhite, .whiteGradientEnd],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-    )
-
-    static let orangeGradient = LinearGradient(
-        colors: [.brandOrange, .orangeGradientEnd],
-        startPoint: .topLeading,
-        endPoint: .bottomTrailing
-    )
 }
 

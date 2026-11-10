@@ -20,6 +20,7 @@ protocol OnboardingViewModelProtocol: AnyObject{
 final class OnboardingViewModel: OnboardingViewModelProtocol {
     
     private(set) var currentStep: OnboardingStep = .first
+    let onBoardingDone: () -> Void
     
     let pages: [OnboardingStep: OnboardingModel] =
     Dictionary(
@@ -27,6 +28,10 @@ final class OnboardingViewModel: OnboardingViewModelProtocol {
             ($0, $0.model)
         }
     )
+    
+    init(onBoardingDone: @escaping () -> Void = {}) {
+        self.onBoardingDone = onBoardingDone
+    }
     
     var currentModel: OnboardingModel? {
         pages[currentStep]
@@ -37,10 +42,12 @@ final class OnboardingViewModel: OnboardingViewModelProtocol {
     }
     
     func next() {
-        guard let nextStep = currentStep.next else {
-            return
+        switch currentStep {
+        case .first: currentStep = .second
+        case .second: currentStep = .third
+        case .third: onBoardingDone()
         }
-        currentStep = nextStep
+        
     }
     
     func previous() {
@@ -51,6 +58,10 @@ final class OnboardingViewModel: OnboardingViewModelProtocol {
     }
     
     func skip() {
-        currentStep = .third
+        onBoardingDone()
+    }
+    
+    func onboardingCompleted(){
+        onBoardingDone()
     }
 }

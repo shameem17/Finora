@@ -7,10 +7,17 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class HomeCoordinator: Coordinator {
     var rootViewController: UINavigationController?
     let settings: AppSettings
+    
+    lazy var homeVC: UIViewController = {
+        let view = HomeView()
+        let vc = UIHostingController(rootView: view)
+        return vc
+    }()
     
     init(rootViewController: UINavigationController? = nil,
          settings: AppSettings) {
@@ -19,7 +26,7 @@ class HomeCoordinator: Coordinator {
     }
     
     func start() {
-        
+        rootViewController?.setViewControllers([homeVC], animated: false)
     }
     
     

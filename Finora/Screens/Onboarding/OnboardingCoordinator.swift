@@ -22,10 +22,10 @@ class OnboardingCoordinator: Coordinator {
     }
     
     func start() {
-        let viewModel = OnboardingViewModel()
-        let view = OnboardingView(model: viewModel){[weak self] in
+        let viewModel = OnboardingViewModel(){[weak self] in
             self?.hasOnboarded.send(true)
         }
+        let view = OnboardingView(model: viewModel)
         let vc = UIHostingController(rootView: view)
         rootViewController = UINavigationController(rootViewController: vc)
     }

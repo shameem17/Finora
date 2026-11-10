@@ -59,7 +59,7 @@ class AppCoordinator: Coordinator {
         let mainCoordinator = MainCoordinator(settings: settings)
         mainCoordinator.start()
         childCoordinator.append(mainCoordinator)
-        window.rootViewController = mainCoordinator.tabBarController //tabar is the root view controller of main coordinator
+        window.rootViewController = mainCoordinator.tabBarController
     }
     
     private func showOnboarding() {

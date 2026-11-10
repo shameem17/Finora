@@ -35,6 +35,9 @@
 		8882732030A1D1C4001DCA2B /* Manrope-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8882731430A1D1C4001DCA2B /* Manrope-ExtraLight.ttf */; };
 		8882732130A1D1C4001DCA2B /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8882731530A1D1C4001DCA2B /* Manrope-Light.ttf */; };
 		8882732430A1DDD5001DCA2B /* AppFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732330A1DDD0001DCA2B /* AppFont.swift */; };
+		8882732630A2E37E001DCA2B /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732530A2E37A001DCA2B /* WaveView.swift */; };
+		8882732830A2E3C3001DCA2B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732730A2E3C2001DCA2B /* Colors.swift */; };
+		8882732B30A2ED71001DCA2B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732A30A2ED6D001DCA2B /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +71,9 @@
 		8882731830A1D1C4001DCA2B /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
 		8882731930A1D1C4001DCA2B /* OFL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		8882732330A1DDD0001DCA2B /* AppFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFont.swift; sourceTree = "<group>"; };
+		8882732530A2E37A001DCA2B /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
+		8882732730A2E3C2001DCA2B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		8882732A30A2ED6D001DCA2B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +178,7 @@
 		888272FB30A18FFA001DCA2B /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				8882732930A2ED61001DCA2B /* Home */,
 				8882730B30A19CF8001DCA2B /* HomeCoordinator.swift */,
 				888272FC30A19002001DCA2B /* Onboarding */,
 			);
@@ -192,6 +199,7 @@
 		8882730330A1913C001DCA2B /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8882732530A2E37A001DCA2B /* WaveView.swift */,
 				8882730D30A1A058001DCA2B /* OnboardingCard.swift */,
 				8882730430A19142001DCA2B /* OnboardingView.swift */,
 			);
@@ -240,9 +248,18 @@
 		8882732230A1DDCA001DCA2B /* Customs */ = {
 			isa = PBXGroup;
 			children = (
+				8882732730A2E3C2001DCA2B /* Colors.swift */,
 				8882732330A1DDD0001DCA2B /* AppFont.swift */,
 			);
 			path = Customs;
+			sourceTree = "<group>";
+		};
+		8882732930A2ED61001DCA2B /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8882732A30A2ED6D001DCA2B /* HomeView.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,12 +347,15 @@
 				888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */,
 				8882732430A1DDD5001DCA2B /* AppFont.swift in Sources */,
 				8882730C30A19CFE001DCA2B /* HomeCoordinator.swift in Sources */,
+				8882732B30A2ED71001DCA2B /* HomeView.swift in Sources */,
 				888272ED30A18E31001DCA2B /* DeepLinkHandler.swift in Sources */,
 				888272EE30A18E31001DCA2B /* DeepLinkParser.swift in Sources */,
 				888272EF30A18E31001DCA2B /* MainCoordinator.swift in Sources */,
 				888272F030A18E31001DCA2B /* Coordinator.swift in Sources */,
 				888272F130A18E31001DCA2B /* AppDelegate.swift in Sources */,
+				8882732830A2E3C3001DCA2B /* Colors.swift in Sources */,
 				8882730030A1901F001DCA2B /* OnboardingViewModel.swift in Sources */,
+				8882732630A2E37E001DCA2B /* WaveView.swift in Sources */,
 				888272F230A18E31001DCA2B /* SceneDelegate.swift in Sources */,
 				888272FE30A19010001DCA2B /* OnboardingCoordinator.swift in Sources */,
 				888272F630A18E4C001DCA2B /* AppSettings.swift in Sources */,
