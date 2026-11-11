@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+enum CustomColor: String {
+    case primaryBlue = "#007bff"
+    case infoTeal = "#17a2b8"
+    case successGreen = "#28a745"
+    case warningYellow = "#ffc107"
+    case dangerRed = "#dc3545"
+    case darkGray = "#343a40"
+    case secondaryGray = "#6c757d"
+    case lightGray = "#f8f9fa"
+    case customWhite = "#ffffff"
+    
+    var color: Color {
+        Color(hex: self.rawValue)
+    }
+}
+
 extension Color {
     
     static let customPurple = Color(hex: "#6900AA")
@@ -47,3 +63,8 @@ extension Color {
     )
 }
 
+extension String{
+    func toColor() -> Color {
+        return Color(hex: self)
+    }
+}

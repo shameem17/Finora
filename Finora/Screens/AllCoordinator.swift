@@ -9,28 +9,6 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class HomeCoordinator: Coordinator {
-    var rootViewController: UINavigationController?
-    let settings: AppSettings
-    
-    lazy var homeVC: UIViewController = {
-        let view = HomeView()
-        let vc = UIHostingController(rootView: view)
-        return vc
-    }()
-    
-    init(settings: AppSettings) {
-        self.rootViewController = UINavigationController()
-        self.settings = settings
-    }
-    
-    func start() {
-        print("start HomeCoordinator. rootViewController: \(rootViewController == nil)")
-        rootViewController?.setViewControllers([homeVC], animated: false)
-    }
-    
-    
-}
 
 
 class IncomeCoordinator: Coordinator {
