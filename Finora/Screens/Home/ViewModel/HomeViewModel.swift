@@ -46,15 +46,6 @@ struct HomeViewData{
     
 }
 
-struct Account: Identifiable {
-    let id = UUID()
-    let name: String
-    let number: String
-    let type: AccountType
-    let balance: Double
-    let logo: String?      // asset catalog image name (optional)
-    let tint: String        // brand color
-}
 
 @Observable
 final class HomeViewModel: HomeViewModelProtocol {

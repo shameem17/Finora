@@ -34,7 +34,7 @@ struct SummaryCard: View {
 
             // Amount
             Text(amount)
-                .font(.manrope, size: 26, weight: .extraBold)
+                .font(.system(size: 28, weight: .bold, design: .rounded))
                 .foregroundStyle(.primary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)

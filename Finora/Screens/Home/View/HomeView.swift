@@ -1,5 +1,24 @@
 import SwiftUI
 
+protocol PickerOption: CaseIterable, Identifiable, Hashable where ID == Self {
+    var title: String { get }
+}
+
+extension PickerOption {
+    var id: Self { self }                 // enums don't need to repeat this
+}
+
+// Default title for String-backed enums
+extension PickerOption where Self: RawRepresentable, RawValue == String {
+    var title: String { rawValue }
+}
+
+enum SumaryPicker: String, PickerOption {
+    case income = "Income"
+    case expense = "Expense"
+    var id: Self { self }
+    
+}
 struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     let model: ViewModel
     
@@ -9,6 +28,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     private let columns = [GridItem(.adaptive(minimum: 160), spacing: 16)]
     
     @State private var hideBalances = false
+    @State private var picker: SumaryPicker = .income
     
     var body: some View {
         ZStack {
@@ -17,12 +37,8 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 20) {
                     overviewCard
-                    
-                    accountSummaryCard
-                    
                     summaryCard
-                    
-                    
+                    accountSummaryCard
                 }
             }
             .padding(20)
@@ -53,10 +69,27 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     
     
     var summaryCard: some View {
-        VStack{
-            Text("Summary")
+        VStack(spacing: 16){
+            HStack{
+                Text("Summary")
+                    .font(.manrope, size: 20, weight: .bold)
+                    .foregroundStyle(CustomColor.darkGray.color)
+                
+                Spacer()
+                
+                Button {
+                    withAnimation { hideBalances.toggle() }
+                } label: {
+                    Text("View All ->")
+                        .font(.manrope, size: 20, weight: .bold)
+                        .foregroundStyle(CustomColor.electricPurple.color)
+                }
+
+            }
             
-            IncomeDonutCard()
+            PillPicker(selection: $picker)
+            
+            DonutCard()
             
         }
     }

@@ -18,6 +18,17 @@ enum CustomColor: String {
     case lightGray = "#f8f9fa"
     case customWhite = "#ffffff"
     
+    case electricPurple = "#A259FF"
+    case vividTeal = "#00BFA6"
+    case warmCoral = "#FF6B6B"
+    case amberYellow = "#FFB400"
+    case royalAzure = "#006BDF"
+    case midnightIndigo = "#040F49"
+    case deepViolet = "#241446"
+    case darkLavender = "#474787"
+    case deepForestGreen = "#124622"
+    case darkCyanSlate = "#0A2F30"
+    
     var color: Color {
         Color(hex: self.rawValue)
     }
@@ -32,30 +43,30 @@ extension Color {
     static let secondStepBackground = Color(hex: "#F0F1E8")  //Color(hex: "#E8F3C9")
     static let thirdStepBackground = Color(hex: "F5EDE0")  //Color(hex: "#FFAB39").opacity(0.4)
     
-
+    
     // MARK: - Brand Colors
     static let brandBlue = Color(hex: "#152ABE")
     static let brandWhite = Color(hex: "#FFFFFE")
     static let brandOrange = Color(hex: "#FFAB39")
-
+    
     // MARK: - Gradient Colors
     static let blueGradientEnd = Color(hex: "#3548D0")
     static let whiteGradientEnd = Color(hex: "#F2F3F8")
     static let orangeGradientEnd = Color(hex: "#F89527")
-
+    
     // MARK: - Background Gradients
     static let blueGradient = LinearGradient(
         colors: [.brandBlue, .blueGradientEnd],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
-
+    
     static let whiteGradient = LinearGradient(
         colors: [.brandWhite, .whiteGradientEnd],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )
-
+    
     static let orangeGradient = LinearGradient(
         colors: [.brandOrange, .orangeGradientEnd],
         startPoint: .topLeading,

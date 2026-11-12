@@ -16,7 +16,15 @@ struct IncomeItem: Identifiable {
     let icon: String
 }
 
-struct IncomeDonutCard: View {
+private func takaString(_ value: Double) -> String {
+    let f = NumberFormatter()
+    f.numberStyle = .decimal
+    f.locale = Locale(identifier: "en_IN")   // lakh/crore grouping
+    f.maximumFractionDigits = 0
+    return "৳" + (f.string(from: NSNumber(value: value)) ?? "0")
+}
+
+struct DonutCard: View {
     let items: [IncomeItem] = [
         .init(name: "Salary",    amount: 2000, color: Color(red: 0.12, green: 0.64, blue: 0.49), icon: "banknote"),
         .init(name: "Freelance", amount: 500,  color: Color(red: 0.18, green: 0.50, blue: 0.95), icon: "laptopcomputer"),
@@ -28,26 +36,34 @@ struct IncomeDonutCard: View {
 
     var body: some View {
         VStack(spacing: 28) {
-            Chart(items) { item in
+            Chart(items) { s in
                 SectorMark(
-                    angle: .value("Amount", item.amount),
-                    innerRadius: .ratio(0.72),   // bigger = thinner ring
-                    angularInset: 2              // gap between segments
+                    angle: .value("Amount", s.amount),
+                    innerRadius: .ratio(0.74),
+                    angularInset: 3
                 )
-                .cornerRadius(2)
-                .foregroundStyle(item.color)
+                .cornerRadius(6)
+                .foregroundStyle(s.color)
             }
-            .frame(height: 300)
+            .frame(height: 230)
             .overlay {
                 VStack(spacing: 4) {
-                    Text("Earned in November")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                    Text("৳\(Int(total))")
-                        .font(.system(size: 32, weight: .heavy))
+                    Text("Earned")
+                        .font(.manrope, size: 13, weight: .medium)
+                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .tracking(1)
+                        .textCase(.uppercase)
+                    
+                    Text(takaString(total))
+                        .font(.manrope, size: 32, weight: .extraBold)
+                        .foregroundStyle(CustomColor.darkGray.color)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.5)
+                        .contentTransition(.numericText())
                 }
+                .padding(.horizontal, 50)
+                
             }
-
             VStack(spacing: 20) {
                 ForEach(items) { item in
                     LegendRow(item: item, percent: item.amount / total)
@@ -91,6 +107,6 @@ struct LegendRow: View {
 #Preview {
     ZStack {
         Color(red: 0.96, green: 0.94, blue: 0.90).ignoresSafeArea()
-        IncomeDonutCard()
+        DonutCard()
     }
 }

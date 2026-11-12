@@ -16,6 +16,7 @@ enum AccountType: String {
     case virtual = "Virtual"
     case card = "Card"
     case cash = "Cash"
+    case unknown = "Unknown"
 
     var icon: String {
         switch self {
@@ -25,6 +26,7 @@ enum AccountType: String {
         case .virtual: return "cube.transparent.fill"
         case .card:    return "creditcard.fill"
         case .cash:    return "banknote.fill"
+        case .unknown: return "questionmark"
         }
     }
 }

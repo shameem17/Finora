@@ -49,6 +49,7 @@
 		8882734B30A3396F001DCA2B /* DonutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882734A30A3396C001DCA2B /* DonutCard.swift */; };
 		8882734D30A4319D001DCA2B /* SummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882734C30A4319A001DCA2B /* SummaryCard.swift */; };
 		8882734F30A43686001DCA2B /* AccountCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882734E30A4367F001DCA2B /* AccountCard.swift */; };
+		8882735130A4431D001DCA2B /* Accounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882735030A4431B001DCA2B /* Accounts.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		8882734A30A3396C001DCA2B /* DonutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutCard.swift; sourceTree = "<group>"; };
 		8882734C30A4319A001DCA2B /* SummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCard.swift; sourceTree = "<group>"; };
 		8882734E30A4367F001DCA2B /* AccountCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCard.swift; sourceTree = "<group>"; };
+		8882735030A4431B001DCA2B /* Accounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accounts.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -364,6 +366,7 @@
 		8882733E30A2F618001DCA2B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8882735030A4431B001DCA2B /* Accounts.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				8882733430A2F01F001DCA2B /* Expense.swift in Sources */,
 				8882730830A19173001DCA2B /* Colors + Extension.swift in Sources */,
 				8882734130A2F62D001DCA2B /* HomeCoordinator.swift in Sources */,
+				8882735130A4431D001DCA2B /* Accounts.swift in Sources */,
 				888272EB30A18E31001DCA2B /* AppCoordinator.swift in Sources */,
 				888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */,
 				8882732430A1DDD5001DCA2B /* AppFont.swift in Sources */,
