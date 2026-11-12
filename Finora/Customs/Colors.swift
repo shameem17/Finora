@@ -36,6 +36,7 @@ enum CustomColor: String {
 
 extension Color {
     
+    static let appBackground = Color(hex: "#F5F0E6")
     static let customPurple = Color(hex: "#6900AA")
     static let customBlack = Color(hex: "#1C1E1F") //1C1E1F
     

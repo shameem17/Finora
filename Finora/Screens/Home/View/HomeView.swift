@@ -37,7 +37,6 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 20) {
                     overviewCard
-                    summaryCard
                     accountSummaryCard
                 }
             }
@@ -67,32 +66,6 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    
-    var summaryCard: some View {
-        VStack(spacing: 16){
-            HStack{
-                Text("Summary")
-                    .font(.manrope, size: 20, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
-                
-                Spacer()
-                
-                Button {
-                    withAnimation { hideBalances.toggle() }
-                } label: {
-                    Text("View All ->")
-                        .font(.manrope, size: 20, weight: .bold)
-                        .foregroundStyle(CustomColor.electricPurple.color)
-                }
-
-            }
-            
-            PillPicker(selection: $picker)
-            
-            DonutCard()
-            
-        }
-    }
     
     var accountSummaryCard: some View {
         VStack{
