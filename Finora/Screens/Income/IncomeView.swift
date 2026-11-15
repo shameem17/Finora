@@ -20,7 +20,7 @@ struct IncomeView: View {
     var body: some View {
         @Bindable var model = model
 
-        NavigationStack {
+       // NavigationStack {
             ZStack {
                 Color.appBackground.ignoresSafeArea()
 
@@ -44,7 +44,7 @@ struct IncomeView: View {
                     // add new income
                 }
             }
-        }
+       // }
     }
 }
 
