@@ -13,7 +13,7 @@ struct Account: Identifiable {
     let name: String
     let number: String
     let type: AccountType
-    let balance: Double
+    var balance: Double
     let logo: String?
     let tint: String
 }
