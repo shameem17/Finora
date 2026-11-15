@@ -56,6 +56,8 @@
 		8882736230A58372001DCA2B /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736130A5836B001DCA2B /* AddButton.swift */; };
 		8882736430A583F0001DCA2B /* BreakdownRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736330A583EB001DCA2B /* BreakdownRow.swift */; };
 		8882736630A58411001DCA2B /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736530A5840B001DCA2B /* ProgressBar.swift */; };
+		8882736830A985F1001DCA2B /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736730A985F1001DCA2B /* ExpenseViewModel.swift */; };
+		8882736B30A98633001DCA2B /* ExpenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736A30A9862E001DCA2B /* ExpenseCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +112,8 @@
 		8882736130A5836B001DCA2B /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		8882736330A583EB001DCA2B /* BreakdownRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakdownRow.swift; sourceTree = "<group>"; };
 		8882736530A5840B001DCA2B /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
+		8882736730A985F1001DCA2B /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
+		8882736A30A9862E001DCA2B /* ExpenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +329,8 @@
 		8882732D30A2EF91001DCA2B /* Expense */ = {
 			isa = PBXGroup;
 			children = (
+				8882736930A98627001DCA2B /* Coordinator */,
+				8882736730A985F1001DCA2B /* ExpenseViewModel.swift */,
 				8882733330A2F01A001DCA2B /* Expense.swift */,
 			);
 			path = Expense;
@@ -468,6 +474,14 @@
 			path = ReusableViews;
 			sourceTree = "<group>";
 		};
+		8882736930A98627001DCA2B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				8882736A30A9862E001DCA2B /* ExpenseCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -569,11 +583,13 @@
 				8882734330A2F670001DCA2B /* HomeViewModel.swift in Sources */,
 				8882733630A2F03C001DCA2B /* Transaction.swift in Sources */,
 				8882730030A1901F001DCA2B /* OnboardingViewModel.swift in Sources */,
+				8882736830A985F1001DCA2B /* ExpenseViewModel.swift in Sources */,
 				8882732630A2E37E001DCA2B /* WaveView.swift in Sources */,
 				8882736030A5831A001DCA2B /* FilterPicker.swift in Sources */,
 				8882734D30A4319D001DCA2B /* SummaryCard.swift in Sources */,
 				8882733830A2F062001DCA2B /* Loan.swift in Sources */,
 				888272F230A18E31001DCA2B /* SceneDelegate.swift in Sources */,
+				8882736B30A98633001DCA2B /* ExpenseCoordinator.swift in Sources */,
 				8882735B30A58275001DCA2B /* Filter.swift in Sources */,
 				888272FE30A19010001DCA2B /* OnboardingCoordinator.swift in Sources */,
 				8882735D30A5829E001DCA2B /* IncomeViewModel.swift in Sources */,
