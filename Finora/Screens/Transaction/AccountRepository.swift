@@ -11,6 +11,8 @@ protocol AccountRepositoryProtocol: AnyObject {
     func fetchAccounts() -> [Account]
     /// Debits `amount + charge` from the source and credits `amount` to the destination.
     func apply(_ transfer: Transfer)
+    /// Adds `delta` (negative to debit) to one account's balance.
+    func adjustBalance(of id: Account.ID, by delta: Double)
 }
 
 /// In-memory implementation. Swap for SwiftData / Core Data later without
@@ -38,7 +40,7 @@ final class InMemoryAccountRepository: AccountRepositoryProtocol {
         adjustBalance(of: transfer.to.id, by: transfer.amount)
     }
 
-    private func adjustBalance(of id: Account.ID, by delta: Double) {
+    func adjustBalance(of id: Account.ID, by delta: Double) {
         guard let index = accounts.firstIndex(where: { $0.id == id }) else { return }
         accounts[index].balance += delta
     }

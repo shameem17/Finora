@@ -39,7 +39,6 @@
 		8882732B30A2ED71001DCA2B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732A30A2ED6D001DCA2B /* HomeView.swift */; };
 		8882733230A2EFFA001DCA2B /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882733130A2EFF5001DCA2B /* IncomeView.swift */; };
 		8882733430A2F01F001DCA2B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882733330A2F01A001DCA2B /* Expense.swift */; };
-		8882733830A2F062001DCA2B /* Loan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882733730A2F05F001DCA2B /* Loan.swift */; };
 		8882733A30A2F076001DCA2B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882733930A2F073001DCA2B /* Settings.swift */; };
 		8882734130A2F62D001DCA2B /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882734030A2F62C001DCA2B /* HomeCoordinator.swift */; };
 		8882734330A2F670001DCA2B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882734230A2F66B001DCA2B /* HomeViewModel.swift */; };
@@ -67,6 +66,31 @@
 		8882738030A989B4001DCA2B /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882737330A989B4001DCA2B /* Transfer.swift */; };
 		8882738130A989B4001DCA2B /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882737030A989B4001DCA2B /* Transaction.swift */; };
 		8882738330A98A1F001DCA2B /* TransactionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882738230A98A1C001DCA2B /* TransactionCoordinator.swift */; };
+		88827A0330AB0002001DCA2B /* PersonModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0230AB0001001DCA2B /* PersonModels.swift */; };
+		88827A0530AB0002001DCA2B /* LoanModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0430AB0001001DCA2B /* LoanModels.swift */; };
+		88827A0730AB0002001DCA2B /* LoanSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0630AB0001001DCA2B /* LoanSummary.swift */; };
+		88827A0930AB0002001DCA2B /* LoanSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0830AB0001001DCA2B /* LoanSampleData.swift */; };
+		88827A0C30AB0002001DCA2B /* PersonRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0B30AB0001001DCA2B /* PersonRepository.swift */; };
+		88827A0E30AB0002001DCA2B /* LoanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0D30AB0001001DCA2B /* LoanRepository.swift */; };
+		88827A1130AB0002001DCA2B /* LoanReminderScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1030AB0001001DCA2B /* LoanReminderScheduler.swift */; };
+		88827A1330AB0002001DCA2B /* LoanService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1230AB0001001DCA2B /* LoanService.swift */; };
+		88827A1530AB0002001DCA2B /* LoanDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1430AB0001001DCA2B /* LoanDependencies.swift */; };
+		88827A1830AB0002001DCA2B /* LoanViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1730AB0001001DCA2B /* LoanViewModel.swift */; };
+		88827A1A30AB0002001DCA2B /* PersonFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1930AB0001001DCA2B /* PersonFormViewModel.swift */; };
+		88827A1C30AB0002001DCA2B /* LoanFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1B30AB0001001DCA2B /* LoanFormViewModel.swift */; };
+		88827A1E30AB0002001DCA2B /* RepaymentFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1D30AB0001001DCA2B /* RepaymentFormViewModel.swift */; };
+		88827A2030AB0002001DCA2B /* LoanDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A1F30AB0001001DCA2B /* LoanDetailViewModel.swift */; };
+		88827A2230AB0002001DCA2B /* PeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A2130AB0001001DCA2B /* PeopleViewModel.swift */; };
+		88827A2530AB0002001DCA2B /* LoanComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A2430AB0001001DCA2B /* LoanComponents.swift */; };
+		88827A2730AB0002001DCA2B /* LoanSummaryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A2630AB0001001DCA2B /* LoanSummaryCard.swift */; };
+		88827A2930AB0002001DCA2B /* LoanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A2830AB0001001DCA2B /* LoanView.swift */; };
+		88827A2B30AB0002001DCA2B /* PersonViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A2A30AB0001001DCA2B /* PersonViews.swift */; };
+		88827A2D30AB0002001DCA2B /* LoanFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A2C30AB0001001DCA2B /* LoanFormView.swift */; };
+		88827A2F30AB0002001DCA2B /* RepaymentFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A2E30AB0001001DCA2B /* RepaymentFormView.swift */; };
+		88827A3130AB0002001DCA2B /* LoanDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A3030AB0001001DCA2B /* LoanDetailView.swift */; };
+		88827A3430AB0002001DCA2B /* LoanRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A3330AB0001001DCA2B /* LoanRouting.swift */; };
+		88827A3630AB0002001DCA2B /* LoanCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A3530AB0001001DCA2B /* LoanCoordinator.swift */; };
+		88827A3830AB0002001DCA2B /* FormComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A3730AB0001001DCA2B /* FormComponents.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,7 +128,6 @@
 		8882732A30A2ED6D001DCA2B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		8882733130A2EFF5001DCA2B /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
 		8882733330A2F01A001DCA2B /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
-		8882733730A2F05F001DCA2B /* Loan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loan.swift; sourceTree = "<group>"; };
 		8882733930A2F073001DCA2B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8882734030A2F62C001DCA2B /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		8882734230A2F66B001DCA2B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -132,6 +155,31 @@
 		8882737530A989B4001DCA2B /* TransferFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFormViewModel.swift; sourceTree = "<group>"; };
 		8882737630A989B4001DCA2B /* TransferRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepository.swift; sourceTree = "<group>"; };
 		8882738230A98A1C001DCA2B /* TransactionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCoordinator.swift; sourceTree = "<group>"; };
+		88827A0230AB0001001DCA2B /* PersonModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModels.swift; sourceTree = "<group>"; };
+		88827A0430AB0001001DCA2B /* LoanModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanModels.swift; sourceTree = "<group>"; };
+		88827A0630AB0001001DCA2B /* LoanSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanSummary.swift; sourceTree = "<group>"; };
+		88827A0830AB0001001DCA2B /* LoanSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanSampleData.swift; sourceTree = "<group>"; };
+		88827A0B30AB0001001DCA2B /* PersonRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonRepository.swift; sourceTree = "<group>"; };
+		88827A0D30AB0001001DCA2B /* LoanRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanRepository.swift; sourceTree = "<group>"; };
+		88827A1030AB0001001DCA2B /* LoanReminderScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanReminderScheduler.swift; sourceTree = "<group>"; };
+		88827A1230AB0001001DCA2B /* LoanService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanService.swift; sourceTree = "<group>"; };
+		88827A1430AB0001001DCA2B /* LoanDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanDependencies.swift; sourceTree = "<group>"; };
+		88827A1730AB0001001DCA2B /* LoanViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanViewModel.swift; sourceTree = "<group>"; };
+		88827A1930AB0001001DCA2B /* PersonFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonFormViewModel.swift; sourceTree = "<group>"; };
+		88827A1B30AB0001001DCA2B /* LoanFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanFormViewModel.swift; sourceTree = "<group>"; };
+		88827A1D30AB0001001DCA2B /* RepaymentFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepaymentFormViewModel.swift; sourceTree = "<group>"; };
+		88827A1F30AB0001001DCA2B /* LoanDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanDetailViewModel.swift; sourceTree = "<group>"; };
+		88827A2130AB0001001DCA2B /* PeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewModel.swift; sourceTree = "<group>"; };
+		88827A2430AB0001001DCA2B /* LoanComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanComponents.swift; sourceTree = "<group>"; };
+		88827A2630AB0001001DCA2B /* LoanSummaryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanSummaryCard.swift; sourceTree = "<group>"; };
+		88827A2830AB0001001DCA2B /* LoanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanView.swift; sourceTree = "<group>"; };
+		88827A2A30AB0001001DCA2B /* PersonViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonViews.swift; sourceTree = "<group>"; };
+		88827A2C30AB0001001DCA2B /* LoanFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanFormView.swift; sourceTree = "<group>"; };
+		88827A2E30AB0001001DCA2B /* RepaymentFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepaymentFormView.swift; sourceTree = "<group>"; };
+		88827A3030AB0001001DCA2B /* LoanDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanDetailView.swift; sourceTree = "<group>"; };
+		88827A3330AB0001001DCA2B /* LoanRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanRouting.swift; sourceTree = "<group>"; };
+		88827A3530AB0001001DCA2B /* LoanCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCoordinator.swift; sourceTree = "<group>"; };
+		88827A3730AB0001001DCA2B /* FormComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormComponents.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -374,7 +422,12 @@
 		8882732F30A2EFA7001DCA2B /* Loan */ = {
 			isa = PBXGroup;
 			children = (
-				8882733730A2F05F001DCA2B /* Loan.swift */,
+				88827A0130AB0003001DCA2B /* Model */,
+				88827A0A30AB0003001DCA2B /* Repository */,
+				88827A0F30AB0003001DCA2B /* Service */,
+				88827A1630AB0003001DCA2B /* ViewModel */,
+				88827A2330AB0003001DCA2B /* View */,
+				88827A3230AB0003001DCA2B /* Coordinator */,
 			);
 			path = Loan;
 			sourceTree = "<group>";
@@ -492,6 +545,7 @@
 		8882735E30A582F3001DCA2B /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				88827A3730AB0001001DCA2B /* FormComponents.swift */,
 				8882736530A5840B001DCA2B /* ProgressBar.swift */,
 				8882736330A583EB001DCA2B /* BreakdownRow.swift */,
 				8882736130A5836B001DCA2B /* AddButton.swift */,
@@ -505,6 +559,72 @@
 			isa = PBXGroup;
 			children = (
 				8882736A30A9862E001DCA2B /* ExpenseCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		88827A0130AB0003001DCA2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88827A0230AB0001001DCA2B /* PersonModels.swift */,
+				88827A0430AB0001001DCA2B /* LoanModels.swift */,
+				88827A0630AB0001001DCA2B /* LoanSummary.swift */,
+				88827A0830AB0001001DCA2B /* LoanSampleData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		88827A0A30AB0003001DCA2B /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				88827A0B30AB0001001DCA2B /* PersonRepository.swift */,
+				88827A0D30AB0001001DCA2B /* LoanRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		88827A0F30AB0003001DCA2B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				88827A1030AB0001001DCA2B /* LoanReminderScheduler.swift */,
+				88827A1230AB0001001DCA2B /* LoanService.swift */,
+				88827A1430AB0001001DCA2B /* LoanDependencies.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		88827A1630AB0003001DCA2B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				88827A1730AB0001001DCA2B /* LoanViewModel.swift */,
+				88827A1930AB0001001DCA2B /* PersonFormViewModel.swift */,
+				88827A1B30AB0001001DCA2B /* LoanFormViewModel.swift */,
+				88827A1D30AB0001001DCA2B /* RepaymentFormViewModel.swift */,
+				88827A1F30AB0001001DCA2B /* LoanDetailViewModel.swift */,
+				88827A2130AB0001001DCA2B /* PeopleViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		88827A2330AB0003001DCA2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				88827A2430AB0001001DCA2B /* LoanComponents.swift */,
+				88827A2630AB0001001DCA2B /* LoanSummaryCard.swift */,
+				88827A2830AB0001001DCA2B /* LoanView.swift */,
+				88827A2A30AB0001001DCA2B /* PersonViews.swift */,
+				88827A2C30AB0001001DCA2B /* LoanFormView.swift */,
+				88827A2E30AB0001001DCA2B /* RepaymentFormView.swift */,
+				88827A3030AB0001001DCA2B /* LoanDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		88827A3230AB0003001DCA2B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				88827A3330AB0001001DCA2B /* LoanRouting.swift */,
+				88827A3530AB0001001DCA2B /* LoanCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -613,7 +733,6 @@
 				8882732630A2E37E001DCA2B /* WaveView.swift in Sources */,
 				8882736030A5831A001DCA2B /* FilterPicker.swift in Sources */,
 				8882734D30A4319D001DCA2B /* SummaryCard.swift in Sources */,
-				8882733830A2F062001DCA2B /* Loan.swift in Sources */,
 				888272F230A18E31001DCA2B /* SceneDelegate.swift in Sources */,
 				8882736B30A98633001DCA2B /* ExpenseCoordinator.swift in Sources */,
 				8882735B30A58275001DCA2B /* Filter.swift in Sources */,
@@ -627,6 +746,31 @@
 				8882733A30A2F076001DCA2B /* Settings.swift in Sources */,
 				8882730E30A1A05D001DCA2B /* OnboardingCard.swift in Sources */,
 				8882730A30A19C34001DCA2B /* AppTab.swift in Sources */,
+				88827A0330AB0002001DCA2B /* PersonModels.swift in Sources */,
+				88827A0530AB0002001DCA2B /* LoanModels.swift in Sources */,
+				88827A0730AB0002001DCA2B /* LoanSummary.swift in Sources */,
+				88827A0930AB0002001DCA2B /* LoanSampleData.swift in Sources */,
+				88827A0C30AB0002001DCA2B /* PersonRepository.swift in Sources */,
+				88827A0E30AB0002001DCA2B /* LoanRepository.swift in Sources */,
+				88827A1130AB0002001DCA2B /* LoanReminderScheduler.swift in Sources */,
+				88827A1330AB0002001DCA2B /* LoanService.swift in Sources */,
+				88827A1530AB0002001DCA2B /* LoanDependencies.swift in Sources */,
+				88827A1830AB0002001DCA2B /* LoanViewModel.swift in Sources */,
+				88827A1A30AB0002001DCA2B /* PersonFormViewModel.swift in Sources */,
+				88827A1C30AB0002001DCA2B /* LoanFormViewModel.swift in Sources */,
+				88827A1E30AB0002001DCA2B /* RepaymentFormViewModel.swift in Sources */,
+				88827A2030AB0002001DCA2B /* LoanDetailViewModel.swift in Sources */,
+				88827A2230AB0002001DCA2B /* PeopleViewModel.swift in Sources */,
+				88827A2530AB0002001DCA2B /* LoanComponents.swift in Sources */,
+				88827A2730AB0002001DCA2B /* LoanSummaryCard.swift in Sources */,
+				88827A2930AB0002001DCA2B /* LoanView.swift in Sources */,
+				88827A2B30AB0002001DCA2B /* PersonViews.swift in Sources */,
+				88827A2D30AB0002001DCA2B /* LoanFormView.swift in Sources */,
+				88827A2F30AB0002001DCA2B /* RepaymentFormView.swift in Sources */,
+				88827A3130AB0002001DCA2B /* LoanDetailView.swift in Sources */,
+				88827A3430AB0002001DCA2B /* LoanRouting.swift in Sources */,
+				88827A3630AB0002001DCA2B /* LoanCoordinator.swift in Sources */,
+				88827A3830AB0002001DCA2B /* FormComponents.swift in Sources */,
 				8882736430A583F0001DCA2B /* BreakdownRow.swift in Sources */,
 				8882735830A58215001DCA2B /* IncomeCoordinator.swift in Sources */,
 				8882737830A989B4001DCA2B /* TransferFormViewModel.swift in Sources */,

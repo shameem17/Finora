@@ -37,3 +37,30 @@ enum ReportPeriod: String, PickerOption {
     }
 }
 
+
+// MARK: - Date-range helpers
+
+extension ReportPeriod {
+
+    /// Whether `date` falls inside the current week / month / year (always true for `.all`).
+    func contains(_ date: Date, calendar: Calendar = .current, now: Date = .now) -> Bool {
+        switch self {
+        case .week:  return calendar.isDate(date, equalTo: now, toGranularity: .weekOfYear)
+        case .month: return calendar.isDate(date, equalTo: now, toGranularity: .month)
+        case .year:  return calendar.isDate(date, equalTo: now, toGranularity: .year)
+        case .all:   return true
+        }
+    }
+
+    /// Exclusive end of the current period (start of the next one). `.distantFuture` for `.all`.
+    func endDate(calendar: Calendar = .current, now: Date = .now) -> Date {
+        let component: Calendar.Component
+        switch self {
+        case .week:  component = .weekOfYear
+        case .month: component = .month
+        case .year:  component = .year
+        case .all:   return .distantFuture
+        }
+        return calendar.dateInterval(of: component, for: now)?.end ?? .distantFuture
+    }
+}
