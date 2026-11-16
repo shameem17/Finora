@@ -6,9 +6,18 @@
 //
 
 import Foundation
+import Combine
 
 protocol AccountRepositoryProtocol: AnyObject {
+    /// Emits after every mutation so screens can refresh without polling.
+    var changes: AnyPublisher<Void, Never> { get }
+
     func fetchAccounts() -> [Account]
+    func account(id: Account.ID) -> Account?
+    func add(_ account: Account)
+    /// Saves edited details (name, number, type, logo, colour, initial balance).
+    /// Recorded movement is preserved, so the current balance stays calculated.
+    func update(_ account: Account)
     /// Debits `amount + charge` from the source and credits `amount` to the destination.
     func apply(_ transfer: Transfer)
     /// Adds `delta` (negative to debit) to one account's balance.
@@ -31,17 +40,42 @@ final class InMemoryAccountRepository: AccountRepositoryProtocol {
         .init(name: "Cash",       number: "0000",             type: .cash,    balance: 5_000,       logo: nil,        tint: "#2E7D32")
     ]
 
+    private let subject = PassthroughSubject<Void, Never>()
+
     init() {}
+
+    var changes: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
 
     func fetchAccounts() -> [Account] { accounts }
 
+    func account(id: Account.ID) -> Account? {
+        accounts.first { $0.id == id }
+    }
+
+    func add(_ account: Account) {
+        accounts.append(account)
+        subject.send()
+    }
+
+    func update(_ account: Account) {
+        guard let index = accounts.firstIndex(where: { $0.id == account.id }) else { return }
+        accounts[index] = account.keepingMovement(of: accounts[index])
+        subject.send()
+    }
+
     func apply(_ transfer: Transfer) {
-        adjustBalance(of: transfer.from.id, by: -transfer.totalDebited)
-        adjustBalance(of: transfer.to.id, by: transfer.amount)
+        mutate(transfer.from.id, by: -transfer.totalDebited)
+        mutate(transfer.to.id, by: transfer.amount)
+        subject.send()
     }
 
     func adjustBalance(of id: Account.ID, by delta: Double) {
+        mutate(id, by: delta)
+        subject.send()
+    }
+
+    private func mutate(_ id: Account.ID, by delta: Double) {
         guard let index = accounts.firstIndex(where: { $0.id == id }) else { return }
-        accounts[index].balance += delta
+        accounts[index].recordMovement(delta)
     }
 }

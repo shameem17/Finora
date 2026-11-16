@@ -44,3 +44,12 @@ extension Color {
     }
 }
 
+extension Color {
+    /// `#RRGGBB` (sRGB). Used to persist colours chosen with `ColorPicker`.
+    var hexString: String {
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+        UIColor(self).getRed(&r, green: &g, blue: &b, alpha: &a)
+        func byte(_ value: CGFloat) -> Int { Int((min(max(value, 0), 1) * 255).rounded()) }
+        return String(format: "#%02lX%02lX%02lX", byte(r), byte(g), byte(b))
+    }
+}

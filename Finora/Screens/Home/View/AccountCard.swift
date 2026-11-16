@@ -9,14 +9,21 @@ import SwiftUI
 
 // MARK: - Model
 
-enum AccountType: String {
+enum AccountType: String, CaseIterable, Identifiable {
     case bank = "Bank"
     case mfs = "MFS"
     case online = "Online"
     case virtual = "Virtual"
     case card = "Card"
+    case savings = "Savings"
     case cash = "Cash"
     case unknown = "Unknown"
+
+    var id: Self { self }
+    var title: String { rawValue }
+
+    /// Types a user can pick in forms (`unknown` is only a fallback).
+    static var selectable: [AccountType] { allCases.filter { $0 != .unknown } }
 
     var icon: String {
         switch self {
@@ -25,6 +32,7 @@ enum AccountType: String {
         case .online:  return "globe"
         case .virtual: return "cube.transparent.fill"
         case .card:    return "creditcard.fill"
+        case .savings: return "chart.line.uptrend.xyaxis"
         case .cash:    return "banknote.fill"
         case .unknown: return "questionmark"
         }
@@ -55,7 +63,7 @@ private func formatTaka(_ value: Double) -> String {
 
 private func maskedNumber(_ number: String) -> String {
     let last4 = number.filter(\.isNumber).suffix(4)
-    return "•••• \(last4)"
+    return last4.isEmpty ? "No account number" : "•••• \(last4)"
 }
 
 // MARK: - Card
@@ -158,7 +166,13 @@ private struct ProviderLogo: View {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(.white)
 
-            if let logo = account.logo, UIImage(named: logo) != nil {
+            if let data = account.logoData, let image = UIImage(data: data) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 42, height: 42)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+            } else if let logo = account.logo, UIImage(named: logo) != nil {
                 Image(logo)
                     .resizable()
                     .scaledToFit()

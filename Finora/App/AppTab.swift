@@ -11,7 +11,7 @@ import SwiftUI
 
 enum AppTab: Hashable, CaseIterable, Identifiable {
 
-    case home, income, expense, transaction, loan, settings
+    case home, income, expense, transaction, loan, accounts, categories, settings
 
     var id: Self { self }
 
@@ -27,6 +27,10 @@ enum AppTab: Hashable, CaseIterable, Identifiable {
             return "Transactions"
         case .loan:
             return "Loans"
+        case .accounts:
+            return "Accounts"
+        case .categories:
+            return "Categories"
         case .settings:
             return "Settings"
         }
@@ -44,6 +48,10 @@ enum AppTab: Hashable, CaseIterable, Identifiable {
             return "list.bullet.rectangle"
         case .loan:
             return "banknote"
+        case .accounts:
+            return "creditcard"
+        case .categories:
+            return "square.grid.2x2"
         case .settings:
             return "gearshape"
         }
@@ -72,6 +80,12 @@ enum AppTab: Hashable, CaseIterable, Identifiable {
 
         case .loan:
             return LoanCoordinator(settings: settings)
+
+        case .accounts:
+            return AccountsCoordinator(settings: settings)
+
+        case .categories:
+            return CategoriesCoordinator(settings: settings)
 
         case .settings:
             return SettingsCoordinator(settings: settings)

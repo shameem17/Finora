@@ -91,6 +91,21 @@
 		88827A3430AB0002001DCA2B /* LoanRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A3330AB0001001DCA2B /* LoanRouting.swift */; };
 		88827A3630AB0002001DCA2B /* LoanCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A3530AB0001001DCA2B /* LoanCoordinator.swift */; };
 		88827A3830AB0002001DCA2B /* FormComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A3730AB0001001DCA2B /* FormComponents.swift */; };
+		99927B000230AB0001001DCA2B /* AccountsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B000130AB0001001DCA2B /* AccountsViewModel.swift */; };
+		99927B000430AB0001001DCA2B /* AccountFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B000330AB0001001DCA2B /* AccountFormViewModel.swift */; };
+		99927B000730AB0001001DCA2B /* AccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B000630AB0001001DCA2B /* AccountsView.swift */; };
+		99927B000930AB0001001DCA2B /* AccountFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B000830AB0001001DCA2B /* AccountFormView.swift */; };
+		99927B000C30AB0001001DCA2B /* AccountsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B000B30AB0001001DCA2B /* AccountsCoordinator.swift */; };
+		99927B001030AB0001001DCA2B /* CategoryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B000F30AB0001001DCA2B /* CategoryModels.swift */; };
+		99927B001330AB0001001DCA2B /* CategoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B001230AB0001001DCA2B /* CategoryRepository.swift */; };
+		99927B001630AB0001001DCA2B /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B001530AB0001001DCA2B /* CategoriesViewModel.swift */; };
+		99927B001830AB0001001DCA2B /* CategoryFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B001730AB0001001DCA2B /* CategoryFormViewModel.swift */; };
+		99927B001B30AB0001001DCA2B /* CategoryComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B001A30AB0001001DCA2B /* CategoryComponents.swift */; };
+		99927B001D30AB0001001DCA2B /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B001C30AB0001001DCA2B /* CategoriesView.swift */; };
+		99927B001F30AB0001001DCA2B /* CategoryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B001E30AB0001001DCA2B /* CategoryFormView.swift */; };
+		99927B002230AB0001001DCA2B /* CategoriesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B002130AB0001001DCA2B /* CategoriesCoordinator.swift */; };
+		99927B002630AB0001001DCA2B /* ColorSwatchPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B002530AB0001001DCA2B /* ColorSwatchPicker.swift */; };
+		99927B002830AB0001001DCA2B /* LogoImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927B002730AB0001001DCA2B /* LogoImageProcessor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +195,21 @@
 		88827A3330AB0001001DCA2B /* LoanRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanRouting.swift; sourceTree = "<group>"; };
 		88827A3530AB0001001DCA2B /* LoanCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanCoordinator.swift; sourceTree = "<group>"; };
 		88827A3730AB0001001DCA2B /* FormComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormComponents.swift; sourceTree = "<group>"; };
+		99927B000130AB0001001DCA2B /* AccountsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsViewModel.swift; sourceTree = "<group>"; };
+		99927B000330AB0001001DCA2B /* AccountFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFormViewModel.swift; sourceTree = "<group>"; };
+		99927B000630AB0001001DCA2B /* AccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsView.swift; sourceTree = "<group>"; };
+		99927B000830AB0001001DCA2B /* AccountFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountFormView.swift; sourceTree = "<group>"; };
+		99927B000B30AB0001001DCA2B /* AccountsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountsCoordinator.swift; sourceTree = "<group>"; };
+		99927B000F30AB0001001DCA2B /* CategoryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModels.swift; sourceTree = "<group>"; };
+		99927B001230AB0001001DCA2B /* CategoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryRepository.swift; sourceTree = "<group>"; };
+		99927B001530AB0001001DCA2B /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		99927B001730AB0001001DCA2B /* CategoryFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormViewModel.swift; sourceTree = "<group>"; };
+		99927B001A30AB0001001DCA2B /* CategoryComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryComponents.swift; sourceTree = "<group>"; };
+		99927B001C30AB0001001DCA2B /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
+		99927B001E30AB0001001DCA2B /* CategoryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormView.swift; sourceTree = "<group>"; };
+		99927B002130AB0001001DCA2B /* CategoriesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesCoordinator.swift; sourceTree = "<group>"; };
+		99927B002530AB0001001DCA2B /* ColorSwatchPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSwatchPicker.swift; sourceTree = "<group>"; };
+		99927B002730AB0001001DCA2B /* LogoImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoImageProcessor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +320,8 @@
 				8882732930A2ED61001DCA2B /* Home */,
 				8882730B30A19CF8001DCA2B /* AllCoordinator.swift */,
 				8882732C30A2EF8A001DCA2B /* Income */,
+				99927B000E30AB0001001DCA2B /* Accounts */,
+				99927B002430AB0001001DCA2B /* Categories */,
 				8882732F30A2EFA7001DCA2B /* Loan */,
 				888272FC30A19002001DCA2B /* Onboarding */,
 				8882733030A2EFED001DCA2B /* Settings */,
@@ -545,6 +577,8 @@
 		8882735E30A582F3001DCA2B /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
+				99927B002530AB0001001DCA2B /* ColorSwatchPicker.swift */,
+				99927B002730AB0001001DCA2B /* LogoImageProcessor.swift */,
 				88827A3730AB0001001DCA2B /* FormComponents.swift */,
 				8882736530A5840B001DCA2B /* ProgressBar.swift */,
 				8882736330A583EB001DCA2B /* BreakdownRow.swift */,
@@ -627,6 +661,97 @@
 				88827A3530AB0001001DCA2B /* LoanCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		99927B000530AB0001001DCA2B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				99927B000130AB0001001DCA2B /* AccountsViewModel.swift */,
+				99927B000330AB0001001DCA2B /* AccountFormViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		99927B000A30AB0001001DCA2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99927B000630AB0001001DCA2B /* AccountsView.swift */,
+				99927B000830AB0001001DCA2B /* AccountFormView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99927B000D30AB0001001DCA2B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				99927B000B30AB0001001DCA2B /* AccountsCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		99927B000E30AB0001001DCA2B /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				99927B000530AB0001001DCA2B /* ViewModel */,
+				99927B000A30AB0001001DCA2B /* View */,
+				99927B000D30AB0001001DCA2B /* Coordinator */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		99927B001130AB0001001DCA2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99927B000F30AB0001001DCA2B /* CategoryModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		99927B001430AB0001001DCA2B /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				99927B001230AB0001001DCA2B /* CategoryRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		99927B001930AB0001001DCA2B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				99927B001530AB0001001DCA2B /* CategoriesViewModel.swift */,
+				99927B001730AB0001001DCA2B /* CategoryFormViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		99927B002030AB0001001DCA2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99927B001A30AB0001001DCA2B /* CategoryComponents.swift */,
+				99927B001C30AB0001001DCA2B /* CategoriesView.swift */,
+				99927B001E30AB0001001DCA2B /* CategoryFormView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99927B002330AB0001001DCA2B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				99927B002130AB0001001DCA2B /* CategoriesCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		99927B002430AB0001001DCA2B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				99927B001130AB0001001DCA2B /* Model */,
+				99927B001430AB0001001DCA2B /* Repository */,
+				99927B001930AB0001001DCA2B /* ViewModel */,
+				99927B002030AB0001001DCA2B /* View */,
+				99927B002330AB0001001DCA2B /* Coordinator */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -770,6 +895,21 @@
 				88827A3130AB0002001DCA2B /* LoanDetailView.swift in Sources */,
 				88827A3430AB0002001DCA2B /* LoanRouting.swift in Sources */,
 				88827A3630AB0002001DCA2B /* LoanCoordinator.swift in Sources */,
+				99927B000230AB0001001DCA2B /* AccountsViewModel.swift in Sources */,
+				99927B000430AB0001001DCA2B /* AccountFormViewModel.swift in Sources */,
+				99927B000730AB0001001DCA2B /* AccountsView.swift in Sources */,
+				99927B000930AB0001001DCA2B /* AccountFormView.swift in Sources */,
+				99927B000C30AB0001001DCA2B /* AccountsCoordinator.swift in Sources */,
+				99927B001030AB0001001DCA2B /* CategoryModels.swift in Sources */,
+				99927B001330AB0001001DCA2B /* CategoryRepository.swift in Sources */,
+				99927B001630AB0001001DCA2B /* CategoriesViewModel.swift in Sources */,
+				99927B001830AB0001001DCA2B /* CategoryFormViewModel.swift in Sources */,
+				99927B001B30AB0001001DCA2B /* CategoryComponents.swift in Sources */,
+				99927B001D30AB0001001DCA2B /* CategoriesView.swift in Sources */,
+				99927B001F30AB0001001DCA2B /* CategoryFormView.swift in Sources */,
+				99927B002230AB0001001DCA2B /* CategoriesCoordinator.swift in Sources */,
+				99927B002630AB0001001DCA2B /* ColorSwatchPicker.swift in Sources */,
+				99927B002830AB0001001DCA2B /* LogoImageProcessor.swift in Sources */,
 				88827A3830AB0002001DCA2B /* FormComponents.swift in Sources */,
 				8882736430A583F0001DCA2B /* BreakdownRow.swift in Sources */,
 				8882735830A58215001DCA2B /* IncomeCoordinator.swift in Sources */,

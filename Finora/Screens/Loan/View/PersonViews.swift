@@ -157,6 +157,10 @@ private struct PeopleEmptyState: View {
 struct PersonFormView: View {
 
     @Bindable var form: PersonFormViewModel
+    /// `true` when pushed inside another NavigationStack (e.g. the person picker);
+    /// `false` when presented as its own sheet.
+    var isEmbedded = false
+
     @Environment(\.dismiss) private var dismiss
     @FocusState private var focused: Field?
     @State private var confirmDelete = false
@@ -166,7 +170,15 @@ struct PersonFormView: View {
     private let categoryColumns = [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)]
 
     var body: some View {
-        NavigationStack {
+        if isEmbedded {
+            content
+        } else {
+            NavigationStack { content }
+                .presentationDragIndicator(.visible)
+        }
+    }
+
+    private var content: some View {
             ZStack {
                 Color.appBackground.ignoresSafeArea()
 
@@ -187,9 +199,11 @@ struct PersonFormView: View {
             .navigationTitle(form.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                        .font(.manrope, size: 16, weight: .semiBold)
+                if !isEmbedded {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") { dismiss() }
+                            .font(.manrope, size: 16, weight: .semiBold)
+                    }
                 }
                 ToolbarItemGroup(placement: .keyboard) {
                     Spacer()
@@ -211,8 +225,6 @@ struct PersonFormView: View {
             } message: {
                 Text("They'll be removed from your people list.")
             }
-        }
-        .presentationDragIndicator(.visible)
     }
 
     // MARK: Cards
@@ -386,9 +398,10 @@ struct PersonPickerView: View {
                         .font(.manrope, size: 16, weight: .semiBold)
                 }
             }
+            // Pushed (not a second sheet): stacked sheets are where SwiftUI loses dismissals.
+            .navigationDestination(item: $newPerson) { PersonFormView(form: $0, isEmbedded: true) }
         }
         .presentationDragIndicator(.visible)
-        .sheet(item: $newPerson) { PersonFormView(form: $0) }
         // A newly created person is selected by the form view model; close the picker with it.
         .onChange(of: form.personID) { _, _ in dismiss() }
     }

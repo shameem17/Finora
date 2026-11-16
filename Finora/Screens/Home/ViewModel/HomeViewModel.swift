@@ -121,25 +121,29 @@ final class HomeViewModel: HomeViewModelProtocol {
 
    // services
    let dateService: DateServiceProtocol
+   private let accountRepository: AccountRepositoryProtocol
 
-   private let accounts: [Account] = [
-       .init(name: "City Bank",  number: "1234567894821",    type: .bank,    balance: 125_450.75, logo: "citybank", tint: "#007366"),
-       .init(name: "bKash",      number: "01712345678",      type: .mfs,     balance: 8_320,       logo: "bkash",    tint: "#E31266"),
-       .init(name: "Nagad",      number: "01898765432",      type: .mfs,     balance: 2_150.5,     logo: "nagad",    tint: "#F2661A"),
-       .init(name: "PayPal",     number: "ab@mail.com 9921", type: .online,  balance: 640,         logo: "paypal",   tint: "#1A4DB3"),
-       .init(name: "Payoneer",   number: "PY00551234",       type: .virtual, balance: 15_900,      logo: nil,        tint: "#6640D9"),
-       .init(name: "Visa Debit", number: "4111111111113344", type: .card,    balance: 42_000,      logo: nil,        tint: "#1F2433")
-   ]
+   @ObservationIgnored private var cancellables = Set<AnyCancellable>()
 
-   init(dateService: DateServiceProtocol = DateService()) {
+   init(dateService: DateServiceProtocol = DateService(),
+        accountRepository: AccountRepositoryProtocol = InMemoryAccountRepository.shared) {
        self.dateService = dateService
+       self.accountRepository = accountRepository
+
+       // Keep the account cards in sync with edits made on the Accounts tab.
+       accountRepository.changes
+           .sink { [weak self] in
+               guard self?.homeViewData != nil else { return }
+               self?.prepareData()
+           }
+           .store(in: &cancellables)
    }
 
    func prepareData() {
        let date = dateService.currentDate()
        homeViewData = HomeViewData(
            headerTitle: "\(date.month) \(date.year), Overview",
-           accounts: accounts,
+           accounts: accountRepository.fetchAccounts(),
            insights: .sample(progress: dateService.monthProgress())
        )
    }
