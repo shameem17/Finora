@@ -32,13 +32,13 @@ struct CategoryRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(category.name)
                     .font(.manrope, size: 16, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
 
                 if category.kind == .expense {
                     Text(category.monthlyBudget.map { "Budget \(CurrencyFormatter.taka($0, showFraction: false)) / month" } ?? "No budget set")
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                 }
             }
 
@@ -46,7 +46,7 @@ struct CategoryRow: View {
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
+                .foregroundStyle(Color.textTertiary)
         }
         .padding(14)
         .contentShape(Rectangle())

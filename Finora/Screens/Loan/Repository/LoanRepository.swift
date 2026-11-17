@@ -8,10 +8,7 @@
 import Foundation
 import Combine
 
-protocol LoanRepositoryProtocol: AnyObject {
-    /// Emits after every mutation so screens can refresh without polling.
-    var changes: AnyPublisher<Void, Never> { get }
-
+protocol LoanRepositoryProtocol: ChangeNotifying {
     func fetchLoans() -> [Loan]
     func loan(id: Loan.ID) -> Loan?
     func add(_ loan: Loan)
@@ -35,34 +32,17 @@ final class InMemoryLoanRepository: LoanRepositoryProtocol {
         #endif
     }()
 
-    private var loans: [Loan]
-    private let subject = PassthroughSubject<Void, Never>()
+    private let store: InMemoryStore<Loan>
 
     init(loans: [Loan] = []) {
-        self.loans = loans
+        store = InMemoryStore(loans)
     }
 
-    var changes: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
+    var changes: AnyPublisher<Void, Never> { store.changes }
 
-    func fetchLoans() -> [Loan] { loans }
-
-    func loan(id: Loan.ID) -> Loan? {
-        loans.first { $0.id == id }
-    }
-
-    func add(_ loan: Loan) {
-        loans.append(loan)
-        subject.send()
-    }
-
-    func update(_ loan: Loan) {
-        guard let index = loans.firstIndex(where: { $0.id == loan.id }) else { return }
-        loans[index] = loan
-        subject.send()
-    }
-
-    func delete(id: Loan.ID) {
-        loans.removeAll { $0.id == id }
-        subject.send()
-    }
+    func fetchLoans() -> [Loan] { store.items }
+    func loan(id: Loan.ID) -> Loan? { store.item(id: id) }
+    func add(_ loan: Loan) { store.add(loan) }
+    func update(_ loan: Loan) { store.update(loan) }
+    func delete(id: Loan.ID) { store.remove(id: id) }
 }

@@ -24,7 +24,7 @@ final class AccountsCoordinator: Coordinator {
 
     func start() {
         let model = AccountsViewModel(repository: repository)
-        let controller = UIHostingController(rootView: AccountsView(model: model))
+        let controller = UIHostingController(rootView: AccountsView(model: model).environment(\.appSettings, settings))
         rootViewController?.navigationBar.prefersLargeTitles = true
         rootViewController?.setViewControllers([controller], animated: false)
     }

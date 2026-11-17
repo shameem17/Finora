@@ -83,12 +83,12 @@ struct SavingsCard: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(savings.name)
                         .font(.manrope, size: 16, weight: .bold)
-                        .foregroundStyle(CustomColor.darkGray.color)
+                        .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
 
                     Text(item.account.map { "in \($0.name)" } ?? "Account removed")
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                         .lineLimit(1)
                 }
 
@@ -97,14 +97,14 @@ struct SavingsCard: View {
                 VStack(alignment: .trailing, spacing: 3) {
                     Text(CurrencyFormatter.taka(savings.currentSavings, showFraction: true))
                         .font(.manrope, size: 17, weight: .extraBold)
-                        .foregroundStyle(CustomColor.darkGray.color)
+                        .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
 
                     if savings.isGoalReached {
                         Label("Goal reached", systemImage: "checkmark.seal.fill")
                             .font(.manrope, size: 11, weight: .bold)
-                            .foregroundStyle(CustomColor.successGreen.color)
+                            .foregroundStyle(Color.positive)
                     }
                 }
             }
@@ -120,7 +120,7 @@ struct SavingsCard: View {
                         }
                     }
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                 }
             }
         }
@@ -150,22 +150,22 @@ struct SavingsEntryRow: View {
                 if let savingsName {
                     Text(savingsName)
                         .font(.manrope, size: 11, weight: .semiBold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.45))
+                        .foregroundStyle(Color.textTertiary)
                         .lineLimit(1)
                 }
                 Text(entry.kind.historyTitle)
                     .font(.manrope, size: 14, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
 
-                Text("\(source) · \(entry.date.formatted(.dateTime.day().month(.abbreviated).year()))")
+                Text("\(source) · \(entry.date.shortDisplay)")
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
 
                 if !entry.note.isEmpty {
                     Text(entry.note)
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.45))
+                        .foregroundStyle(Color.textTertiary)
                         .lineLimit(1)
                 }
             }
@@ -174,7 +174,7 @@ struct SavingsEntryRow: View {
 
             Text("\(entry.kind.sign)\(CurrencyFormatter.taka(entry.amount, showFraction: true))")
                 .font(.manrope, size: 15, weight: .extraBold)
-                .foregroundStyle(entry.kind == .deposit ? CustomColor.successGreen.color : CustomColor.dangerRed.color)
+                .foregroundStyle(entry.kind == .deposit ? Color.positive : Color.negative)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
         }

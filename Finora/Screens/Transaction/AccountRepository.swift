@@ -8,10 +8,7 @@
 import Foundation
 import Combine
 
-protocol AccountRepositoryProtocol: AnyObject {
-    /// Emits after every mutation so screens can refresh without polling.
-    var changes: AnyPublisher<Void, Never> { get }
-
+protocol AccountRepositoryProtocol: ChangeNotifying {
     func fetchAccounts() -> [Account]
     func account(id: Account.ID) -> Account?
     func add(_ account: Account)

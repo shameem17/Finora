@@ -85,8 +85,8 @@ final class LoanFormViewModel: Identifiable {
             self.accountID = loan.account.id
             self.editingLoan = loan
             self.personID = loan.personID
-            self.amountText = Self.text(loan.principal)
-            self.interestText = loan.interest > 0 ? Self.text(loan.interest) : ""
+            self.amountText = DecimalInput.text(loan.principal)
+            self.interestText = loan.interest > 0 ? DecimalInput.text(loan.interest) : ""
             self.date = loan.date
             if let due = loan.dueDate {
                 self.hasDueDate = true
@@ -214,13 +214,4 @@ final class LoanFormViewModel: Identifiable {
     }
 
     // MARK: Helpers
-
-    private static func text(_ value: Double) -> String {
-        value.formatted(
-            .number
-                .locale(Locale(identifier: "en_US_POSIX"))
-                .grouping(.never)
-                .precision(.fractionLength(0...2))
-        )
-    }
 }

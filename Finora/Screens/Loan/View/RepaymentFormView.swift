@@ -10,55 +10,39 @@ import SwiftUI
 struct RepaymentFormView: View {
 
     @Bindable var form: RepaymentFormViewModel
-    @Environment(\.dismiss) private var dismiss
-    @FocusState private var focused: Field?
-
-    private enum Field: Hashable { case amount, note }
 
     private var kind: LoanKind { form.kind }
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.appBackground.ignoresSafeArea()
+        FormSheet(title: kind.repaymentActionTitle,
+                  primaryTitle: kind.repaymentActionTitle,
+                  isEnabled: form.canSubmit,
+                  onSubmit: form.submit) {
+            headerCard
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 16) {
-                        headerCard
-                        amountCard
-                        accountCard
-                        detailsCard
-                        breakdown
-                        FormErrorBanner(message: form.visibleError)
+            AmountField(title: "Amount", text: $form.amountText) {
+                HStack(spacing: 8) {
+                    AmountChip(title: "Full amount · \(CurrencyFormatter.taka(form.outstanding, showFraction: true))",
+                               tint: kind.tint.color) {
+                        Keyboard.dismiss()
+                        form.payInFull()
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                    .padding(.bottom, 24)
-                    .animation(.smooth, value: form.visibleError)
-                    .animation(.smooth, value: form.amount > 0)
-                }
-                .scrollDismissesKeyboard(.interactively)
-            }
-            .navigationTitle(kind.repaymentActionTitle)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                        .font(.manrope, size: 16, weight: .semiBold)
-                }
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") { focused = nil }
+
+                    if let next = form.nextInstallment {
+                        AmountChip(title: "Next installment · \(CurrencyFormatter.taka(next.remaining, showFraction: true))",
+                                   tint: kind.tint.color) {
+                            Keyboard.dismiss()
+                            form.payNextInstallment()
+                        }
+                    }
                 }
             }
-            .safeAreaInset(edge: .bottom) {
-                FormPrimaryButton(title: kind.repaymentActionTitle, isEnabled: form.canSubmit) {
-                    focused = nil
-                    if form.submit() { dismiss() }
-                }
-            }
+
+            accountCard
+            detailsCard
+            breakdown
+            FormErrorBanner(message: form.visibleError)
         }
-        .presentationDragIndicator(.visible)
     }
 
     // MARK: - Header
@@ -70,12 +54,12 @@ struct RepaymentFormView: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(form.item.person.name)
                     .font(.manrope, size: 16, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
 
                 Text("\(kind.outstandingCaption): \(CurrencyFormatter.taka(form.outstanding, showFraction: true))")
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary)
             }
             Spacer(minLength: 0)
         }
@@ -83,67 +67,6 @@ struct RepaymentFormView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .finoraCard()
         .accessibilityElement(children: .combine)
-    }
-
-    // MARK: - Amount
-
-    private var amountCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("AMOUNT")
-                .font(.manrope, size: 12, weight: .semiBold)
-                .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
-
-            HStack(spacing: 6) {
-                Text("৳")
-                    .font(.manrope, size: 36, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
-
-                TextField("0", text: $form.amountText)
-                    .font(.manrope, size: 40, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
-                    .keyboardType(.decimalPad)
-                    .focused($focused, equals: .amount)
-                    .minimumScaleFactor(0.5)
-                    .onChange(of: form.amountText) { _, new in
-                        let clean = DecimalInput.sanitize(new)
-                        if clean != new { form.amountText = clean }
-                    }
-            }
-
-            HStack(spacing: 8) {
-                quickChip("Full amount · \(CurrencyFormatter.taka(form.outstanding, showFraction: true))") {
-                    focused = nil
-                    form.payInFull()
-                }
-
-                if let next = form.nextInstallment {
-                    quickChip("Next installment · \(CurrencyFormatter.taka(next.remaining, showFraction: true))") {
-                        focused = nil
-                        form.payNextInstallment()
-                    }
-                }
-            }
-        }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .finoraCard()
-        .contentShape(Rectangle())
-        .onTapGesture { focused = .amount }
-    }
-
-    private func quickChip(_ title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Text(title)
-                .font(.manrope, size: 12, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background(kind.tint.color.opacity(0.18), in: Capsule())
-        }
-        .buttonStyle(.plain)
     }
 
     // MARK: - Account / details
@@ -165,7 +88,7 @@ struct RepaymentFormView: View {
                            in: form.earliestDate...Date.now,
                            displayedComponents: .date)
                     .labelsHidden()
-                    .tint(CustomColor.warmCoral.color)
+                    .tint(Color.accent)
             }
 
             Divider()
@@ -174,11 +97,7 @@ struct RepaymentFormView: View {
                 TextField("e.g. Cash handed over", text: $form.note, axis: .vertical)
                     .lineLimit(1...3)
                     .multilineTextAlignment(.trailing)
-                    .font(.manrope, size: 15, weight: .semiBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
-                    .focused($focused, equals: .note)
-                    .submitLabel(.done)
-                    .onSubmit { focused = nil }
+                    .formFieldStyle()
             }
         }
         .padding(.horizontal, 16)
@@ -207,7 +126,6 @@ struct RepaymentFormView: View {
             }
             .padding(16)
             .finoraCard(cornerRadius: 22)
-            .transition(.opacity.combined(with: .move(edge: .top)))
         }
     }
 }

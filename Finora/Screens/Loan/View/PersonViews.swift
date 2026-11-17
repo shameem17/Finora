@@ -87,12 +87,12 @@ private struct PersonRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(person.name)
                     .font(.manrope, size: 15, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
 
                 Text(subtitle)
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
             }
 
@@ -102,22 +102,22 @@ private struct PersonRow: View {
                 if abs(row.netBalance) < Loan.tolerance {
                     Text(row.totalCount == 0 ? "No entries" : "Settled")
                         .font(.manrope, size: 13, weight: .semiBold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
+                        .foregroundStyle(Color.textSecondary)
                 } else {
                     Text(CurrencyFormatter.taka(abs(row.netBalance), showFraction: true))
                         .font(.manrope, size: 15, weight: .extraBold)
                         .foregroundStyle(row.netBalance > 0
-                                         ? CustomColor.successGreen.color
-                                         : CustomColor.dangerRed.color)
+                                         ? Color.positive
+                                         : Color.negative)
                     Text(row.netBalance > 0 ? "owes you" : "you owe")
                         .font(.manrope, size: 11, weight: .semiBold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
+                        .foregroundStyle(Color.textSecondary)
                 }
             }
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 12, weight: .bold))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.3))
+                .foregroundStyle(Color.textTertiary)
         }
         .padding(.vertical, 12)
         .contentShape(Rectangle())
@@ -132,17 +132,17 @@ private struct PeopleEmptyState: View {
         VStack(spacing: 12) {
             Image(systemName: isSearching ? "magnifyingglass" : "person.2")
                 .font(.system(size: 44, weight: .light))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
+                .foregroundStyle(Color.textTertiary)
 
             Text(isSearching ? "No matches" : "No people yet")
                 .font(.manrope, size: 18, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
 
             Text(isSearching
                  ? "Try a different name or number."
                  : "Add friends, family, banks or wallets here so you can pick them quickly when you lend or borrow.")
                 .font(.manrope, size: 14, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)
@@ -234,11 +234,11 @@ struct PersonFormView: View {
             Text("NAME")
                 .font(.manrope, size: 12, weight: .semiBold)
                 .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
 
             TextField("e.g. Rahim Uddin", text: $form.name)
                 .font(.manrope, size: 22, weight: .extraBold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
                 .textContentType(.name)
                 .textInputAutocapitalization(.words)
                 .submitLabel(.next)
@@ -250,7 +250,7 @@ struct PersonFormView: View {
             Text("TYPE")
                 .font(.manrope, size: 12, weight: .semiBold)
                 .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
 
             LazyVGrid(columns: categoryColumns, spacing: 10) {
                 ForEach(PersonCategory.allCases) { category in
@@ -280,11 +280,11 @@ struct PersonFormView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
             }
-            .foregroundStyle(isSelected ? CustomColor.customWhite.color : CustomColor.darkGray.color.opacity(0.7))
+            .foregroundStyle(isSelected ? CustomColor.customWhite.color : Color.textSecondary)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .background(
-                Capsule().fill(isSelected ? CustomColor.darkGray.color : CustomColor.darkGray.color.opacity(0.06))
+                Capsule().fill(isSelected ? Color.textPrimary : Color.fillSubtle)
             )
         }
         .buttonStyle(.plain)
@@ -299,7 +299,7 @@ struct PersonFormView: View {
                     .textContentType(.telephoneNumber)
                     .multilineTextAlignment(.trailing)
                     .font(.manrope, size: 15, weight: .semiBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .focused($focused, equals: .phone)
                     .frame(maxWidth: 170)
                     .onChange(of: form.phone) { _, new in
@@ -315,7 +315,7 @@ struct PersonFormView: View {
                     .lineLimit(1...3)
                     .multilineTextAlignment(.trailing)
                     .font(.manrope, size: 15, weight: .semiBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .textContentType(.fullStreetAddress)
                     .focused($focused, equals: .address)
                     .submitLabel(.done)
@@ -337,8 +337,8 @@ struct PersonFormView: View {
                         .font(.manrope, size: 15, weight: .bold)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
-                        .foregroundStyle(CustomColor.dangerRed.color)
-                        .background(CustomColor.dangerRed.color.opacity(0.1), in: Capsule())
+                        .foregroundStyle(Color.negative)
+                        .background(Color.negative.opacity(0.1), in: Capsule())
                 }
                 .disabled(!form.canDelete)
                 .opacity(form.canDelete ? 1 : 0.45)
@@ -346,7 +346,7 @@ struct PersonFormView: View {
                 if let reason = form.deleteBlockedReason {
                     Text(reason)
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal, 8)
                 }
@@ -413,13 +413,13 @@ struct PersonPickerView: View {
             HStack(spacing: 14) {
                 Image(systemName: "plus")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .frame(width: 46, height: 46)
                     .background(CustomColor.warmCoral.color.opacity(0.25), in: Circle())
 
                 Text("Add new person")
                     .font(.manrope, size: 15, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
 
                 Spacer()
             }
@@ -446,12 +446,12 @@ struct PersonPickerView: View {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text(person.name)
                                     .font(.manrope, size: 15, weight: .bold)
-                                    .foregroundStyle(CustomColor.darkGray.color)
+                                    .foregroundStyle(Color.textPrimary)
                                     .lineLimit(1)
 
                                 Text(person.phone ?? person.category.title)
                                     .font(.manrope, size: 12, weight: .medium)
-                                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                                    .foregroundStyle(Color.textSecondary)
                                     .lineLimit(1)
                             }
 
@@ -459,7 +459,7 @@ struct PersonPickerView: View {
 
                             if person.id == form.personID {
                                 Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(CustomColor.successGreen.color)
+                                    .foregroundStyle(Color.positive)
                             }
                         }
                         .padding(.vertical, 10)
@@ -477,7 +477,7 @@ struct PersonPickerView: View {
         } else if !form.people.isEmpty {
             Text("No one matches “\(search)”.")
                 .font(.manrope, size: 14, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
                 .padding(.top, 8)
         }
     }

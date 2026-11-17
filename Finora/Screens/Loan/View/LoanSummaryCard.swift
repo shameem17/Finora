@@ -23,13 +23,13 @@ struct LoanSummaryCard: View {
                             value: summary.toReceive,
                             caption: countCaption(summary.activeLentCount),
                             icon: "arrow.down.left",
-                            tint: CustomColor.successGreen.color)
+                            tint: Color.positive)
 
                 BalanceTile(title: "To pay",
                             value: summary.toPay,
                             caption: countCaption(summary.activeBorrowedCount),
                             icon: "arrow.up.right",
-                            tint: CustomColor.dangerRed.color)
+                            tint: Color.negative)
             }
 
             Divider()
@@ -49,7 +49,7 @@ struct LoanSummaryCard: View {
                 StatTile(title: "Received back",
                          value: CurrencyFormatter.taka(summary.receivedInPeriod),
                          icon: "checkmark.circle",
-                         tint: CustomColor.successGreen.color)
+                         tint: Color.positive)
 
                 StatTile(title: "Paid back",
                          value: CurrencyFormatter.taka(summary.repaidInPeriod),
@@ -62,13 +62,13 @@ struct LoanSummaryCard: View {
                 StatTile(title: "You need to pay",
                          value: CurrencyFormatter.taka(summary.dueToPay),
                          icon: "calendar.badge.clock",
-                         tint: CustomColor.dangerRed.color,
+                         tint: Color.negative,
                          caption: overdueCaption(summary.overdueToPay))
 
                 StatTile(title: "You'll receive",
                          value: CurrencyFormatter.taka(summary.dueToReceive),
                          icon: "calendar.badge.checkmark",
-                         tint: CustomColor.successGreen.color,
+                         tint: Color.positive,
                          caption: overdueCaption(summary.overdueToReceive))
             }
         }
@@ -84,16 +84,16 @@ struct LoanSummaryCard: View {
         HStack(alignment: .firstTextBaseline) {
             Text("Loan Overview")
                 .font(.manrope, size: 18, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
 
             Spacer()
 
             Text(period.subtitle)
                 .font(.manrope, size: 13, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 5)
-                .background(CustomColor.darkGray.color.opacity(0.06), in: Capsule())
+                .background(Color.fillSubtle, in: Capsule())
                 .contentTransition(.opacity)
         }
     }
@@ -103,7 +103,7 @@ struct LoanSummaryCard: View {
             Text("NET POSITION")
                 .font(.manrope, size: 12, weight: .semiBold)
                 .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
 
             Text(netText)
                 .font(.manrope, size: 40, weight: .extraBold)
@@ -114,7 +114,7 @@ struct LoanSummaryCard: View {
 
             Text(netCaption)
                 .font(.manrope, size: 13, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
         }
     }
 
@@ -122,7 +122,7 @@ struct LoanSummaryCard: View {
         Text(text.uppercased())
             .font(.manrope, size: 12, weight: .semiBold)
             .tracking(1)
-            .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+            .foregroundStyle(Color.textSecondary)
     }
 
     // MARK: Copy
@@ -136,8 +136,8 @@ struct LoanSummaryCard: View {
     }
 
     private var netColor: Color {
-        if isSquare { return CustomColor.darkGray.color }
-        return summary.net > 0 ? CustomColor.successGreen.color : CustomColor.dangerRed.color
+        if isSquare { return Color.textPrimary }
+        return summary.net > 0 ? Color.positive : Color.negative
     }
 
     private var netCaption: String {
@@ -179,21 +179,21 @@ private struct BalanceTile: View {
 
                 Text(title)
                     .font(.manrope, size: 13, weight: .semiBold)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.65))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
             }
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(CurrencyFormatter.taka(value))
                     .font(.manrope, size: 22, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
                     .contentTransition(.numericText())
 
                 Text(caption)
                     .font(.manrope, size: 11, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
+                    .foregroundStyle(Color.textSecondary)
             }
         }
         .padding(14)
@@ -226,13 +226,13 @@ private struct StatTile: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
 
                 Text(value)
                     .font(.manrope, size: 15, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .contentTransition(.numericText())
@@ -240,7 +240,7 @@ private struct StatTile: View {
                 if let caption {
                     Text(caption)
                         .font(.manrope, size: 11, weight: .semiBold)
-                        .foregroundStyle(CustomColor.dangerRed.color)
+                        .foregroundStyle(Color.negative)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
                 }
@@ -249,7 +249,7 @@ private struct StatTile: View {
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(CustomColor.darkGray.color.opacity(0.04),
+        .background(Color.fillSubtle,
                     in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .accessibilityElement(children: .combine)
     }

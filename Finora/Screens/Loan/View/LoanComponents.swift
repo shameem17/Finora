@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Presentation helpers (copy + colours live in the view layer)
 
 extension LoanKind {
-    var tint: CustomColor { self == .lent ? .vividTeal : .warmCoral }
+    var tint: CustomColor { self == .lent ? .incoming : .outgoing }
 
     /// "Borrower" / "Lender"
     var personRole: String { self == .lent ? "Borrower" : "Lender" }
@@ -57,9 +57,9 @@ extension LoanStatus {
     var color: Color {
         switch self {
         case .settled:
-            return CustomColor.successGreen.color
+            return Color.positive
         case .overdue:
-            return CustomColor.dangerRed.color
+            return Color.negative
         case .due(let days):
             return days <= 7 ? Color(hex: "#B26A00") : CustomColor.secondaryGray.color
         case .open:
@@ -151,12 +151,12 @@ struct LoanRow: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(item.person.name)
                         .font(.manrope, size: 15, weight: .bold)
-                        .foregroundStyle(CustomColor.darkGray.color)
+                        .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
 
                     Text(subtitle)
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                         .lineLimit(1)
                 }
 
@@ -166,7 +166,7 @@ struct LoanRow: View {
                     Text(CurrencyFormatter.taka(isSettled ? loan.totalPayable : loan.outstanding,
                                                 showFraction: true))
                         .font(.manrope, size: 15, weight: .extraBold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(isSettled ? 0.5 : 1))
+                        .foregroundStyle(Color.textPrimary.opacity(isSettled ? 0.5 : 1))
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
 
@@ -177,7 +177,7 @@ struct LoanRow: View {
 
                 Image(systemName: "chevron.right")
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.3))
+                    .foregroundStyle(Color.textTertiary)
             }
 
             if showsProgress {
@@ -186,7 +186,7 @@ struct LoanRow: View {
 
                     Text("\(Int((loan.progress * 100).rounded()))% repaid")
                         .font(.manrope, size: 11, weight: .semiBold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                         .fixedSize()
                 }
                 .padding(.leading, 60)
@@ -208,15 +208,15 @@ struct LoanEmptyState: View {
         VStack(spacing: 12) {
             Image(systemName: isSearching ? "magnifyingglass" : "banknote")
                 .font(.system(size: 44, weight: .light))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
+                .foregroundStyle(Color.textTertiary)
 
             Text(isSearching ? "No matches" : kind.emptyTitle)
                 .font(.manrope, size: 18, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
 
             Text(isSearching ? "Try a different name or note." : kind.emptyMessage)
                 .font(.manrope, size: 14, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)

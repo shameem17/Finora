@@ -14,7 +14,7 @@ struct CategoriesView<ViewModel: CategoriesViewModelProtocol>: View {
 
     var body: some View {
         ZStack {
-            Color.appBackground.ignoresSafeArea()
+            Color.screenBackground.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 LazyVStack(spacing: 12) {
@@ -54,40 +54,24 @@ struct CategoriesView<ViewModel: CategoriesViewModelProtocol>: View {
 
     private var summaryCard: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("TOTAL MONTHLY BUDGET")
-                .font(.manrope, size: 12, weight: .semiBold)
-                .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+            SectionLabel("Total monthly budget")
 
-            Text(CurrencyFormatter.taka(model.totalBudget, showFraction: false))
+            Text(CurrencyFormatter.taka(model.totalBudget))
                 .font(.manrope, size: 30, weight: .extraBold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
                 .contentTransition(.numericText())
 
             Text("\(model.budgetedCount) of \(model.categories.count) categories budgeted")
                 .font(.manrope, size: 13, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
         }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .finoraCard()
+        .sectionCard()
     }
 
     private var emptyState: some View {
-        VStack(spacing: 10) {
-            Image(systemName: "square.grid.2x2")
-                .font(.system(size: 42, weight: .light))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
-            Text("No \(model.kind.singular) categories")
-                .font(.manrope, size: 17, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
-            Text("Create one to organise your \(model.kind.singular).")
-                .font(.manrope, size: 14, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 40)
-        .finoraCard()
+        EmptyStateCard(icon: "square.grid.2x2",
+                       title: "No \(model.kind.singular) categories",
+                       message: "Create one to organise your \(model.kind.singular).")
     }
 }
 

@@ -8,10 +8,7 @@
 import Foundation
 import Combine
 
-protocol SavingsRepositoryProtocol: AnyObject {
-    /// Emits after every mutation so screens can refresh without polling.
-    var changes: AnyPublisher<Void, Never> { get }
-
+protocol SavingsRepositoryProtocol: ChangeNotifying {
     func fetchSavings() -> [SavingsAccount]
     func savings(id: SavingsAccount.ID) -> SavingsAccount?
     func add(_ savings: SavingsAccount)
@@ -25,34 +22,17 @@ final class InMemorySavingsRepository: SavingsRepositoryProtocol {
 
     static let shared = InMemorySavingsRepository()
 
-    private var items: [SavingsAccount]
-    private let subject = PassthroughSubject<Void, Never>()
+    private let store: InMemoryStore<SavingsAccount>
 
     init(savings: [SavingsAccount] = []) {
-        self.items = savings
+        store = InMemoryStore(savings)
     }
 
-    var changes: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
+    var changes: AnyPublisher<Void, Never> { store.changes }
 
-    func fetchSavings() -> [SavingsAccount] { items }
-
-    func savings(id: SavingsAccount.ID) -> SavingsAccount? {
-        items.first { $0.id == id }
-    }
-
-    func add(_ savings: SavingsAccount) {
-        items.append(savings)
-        subject.send()
-    }
-
-    func update(_ savings: SavingsAccount) {
-        guard let index = items.firstIndex(where: { $0.id == savings.id }) else { return }
-        items[index] = savings
-        subject.send()
-    }
-
-    func delete(id: SavingsAccount.ID) {
-        items.removeAll { $0.id == id }
-        subject.send()
-    }
+    func fetchSavings() -> [SavingsAccount] { store.items }
+    func savings(id: SavingsAccount.ID) -> SavingsAccount? { store.item(id: id) }
+    func add(_ savings: SavingsAccount) { store.add(savings) }
+    func update(_ savings: SavingsAccount) { store.update(savings) }
+    func delete(id: SavingsAccount.ID) { store.remove(id: id) }
 }

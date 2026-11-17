@@ -62,3 +62,10 @@ extension Calendar {
     }
 }
  
+
+extension Date {
+    /// "12 Nov 2026" — the one date style used in lists and detail rows.
+    var shortDisplay: String {
+        formatted(.dateTime.day().month(.abbreviated).year())
+    }
+}

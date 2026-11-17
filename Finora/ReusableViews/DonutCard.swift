@@ -25,7 +25,7 @@ enum TakaFormatter {
     private static let locale = Locale(identifier: "en_IN")   // lakh/crore grouping
 
     static func string(_ value: Double, fractionDigits: Int = 0) -> String {
-        "৳" + value.formatted(
+        CurrencyFormatter.symbol + value.formatted(
             .number
                 .locale(locale)
                 .precision(.fractionLength(fractionDigits))
@@ -79,17 +79,17 @@ struct DonutCard: View {
         HStack(alignment: .firstTextBaseline) {
             Text(title)
                 .font(.manrope, size: 18, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
 
             Spacer()
 
             if let subtitle {
                 Text(subtitle)
                     .font(.manrope, size: 13, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
-                    .background(CustomColor.darkGray.color.opacity(0.06), in: Capsule())
+                    .background(Color.fillSubtle, in: Capsule())
                     .contentTransition(.opacity)
             }
         }
@@ -110,13 +110,13 @@ struct DonutCard: View {
             VStack(spacing: 4) {
                 Text(centerCaption)
                     .font(.manrope, size: 13, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .tracking(1)
                     .textCase(.uppercase)
 
                 Text(TakaFormatter.string(total))
                     .font(.manrope, size: 32, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .contentTransition(.numericText())

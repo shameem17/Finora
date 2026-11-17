@@ -52,15 +52,6 @@ private extension Color {
     }
 }
 
-private func formatTaka(_ value: Double) -> String {
-    let f = NumberFormatter()
-    f.numberStyle = .decimal
-    f.locale = Locale(identifier: "en_IN")   // lakh/crore grouping: 1,25,000
-    f.minimumFractionDigits = 0
-    f.maximumFractionDigits = 2
-    return "৳" + (f.string(from: NSNumber(value: value)) ?? "0")
-}
-
 private func maskedNumber(_ number: String) -> String {
     let last4 = number.filter(\.isNumber).suffix(4)
     return last4.isEmpty ? "No account number" : "•••• \(last4)"
@@ -105,7 +96,7 @@ struct AccountCard: View {
                     .tracking(0.8)
                     .foregroundStyle(.white.opacity(0.65))
 
-                Text(hideBalance ? "৳ ••••••" : formatTaka(account.balance))
+                Text(hideBalance ? CurrencyFormatter.hidden : CurrencyFormatter.taka(account.balance, showFraction: true))
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1)

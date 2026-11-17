@@ -15,6 +15,7 @@ class HomeCoordinator: Coordinator {
     
     lazy var homeVC: UIViewController = {
         let view = HomeView(model: viewModel)
+            .environment(\.appSettings, settings)
         let vc = UIHostingController(rootView: view)
         return vc
     }()

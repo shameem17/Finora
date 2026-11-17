@@ -9,7 +9,7 @@ import Foundation
 import Observation
 
 @Observable
-final class SavingsFormViewModel: Identifiable {
+final class SavingsFormViewModel: Identifiable, LogoEditing {
 
     enum Mode {
         case create
@@ -35,8 +35,8 @@ final class SavingsFormViewModel: Identifiable {
     var openingText = ""
     var note = ""
 
-    private(set) var logoData: Data?
-    private(set) var isProcessingLogo = false
+    var logoData: Data?
+    var isProcessingLogo = false
 
     @ObservationIgnored private var nameEdited = false
     @ObservationIgnored private var isSuggesting = false
@@ -62,7 +62,7 @@ final class SavingsFormViewModel: Identifiable {
             tintHex = savings.tint
             logoData = savings.logoData
             startDate = savings.startDate
-            targetText = savings.target.map(Self.text) ?? ""
+            targetText = savings.target.map(DecimalInput.text) ?? ""
             if let date = savings.targetDate {
                 hasTargetDate = true
                 targetDate = date
@@ -111,14 +111,6 @@ final class SavingsFormViewModel: Identifiable {
 
     // MARK: Intents
 
-    func setLogo(fromImageData data: Data) async {
-        isProcessingLogo = true
-        defer { isProcessingLogo = false }
-        if let processed = await LogoImageProcessor.makeLogo(from: data) {
-            logoData = processed
-        }
-    }
-
     func removeLogo() { logoData = nil }
 
     @discardableResult
@@ -160,9 +152,5 @@ final class SavingsFormViewModel: Identifiable {
         name = SavingsAccount.suffixed(account.name)
         isSuggesting = false
         if !isEditing { tintHex = account.tint }
-    }
-
-    private static func text(_ value: Double) -> String {
-        value.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(value)) : String(value)
     }
 }

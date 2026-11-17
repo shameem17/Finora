@@ -52,7 +52,7 @@ final class SavingsEntryFormViewModel: Identifiable {
             kind = entry.kind
             usesAccount = entry.account != nil
             accountID = entry.account?.id ?? fallback
-            amountText = Self.text(entry.amount)
+            amountText = DecimalInput.text(entry.amount)
             date = entry.date
             note = entry.note
         }
@@ -119,7 +119,7 @@ final class SavingsEntryFormViewModel: Identifiable {
         amount > 0 && (!usesAccount || account != nil) && visibleError == nil
     }
 
-    func withdrawAll() { amountText = Self.text(max(baseSavings, 0)) }
+    func withdrawAll() { amountText = DecimalInput.text(max(baseSavings, 0)) }
 
     @discardableResult
     func submit() -> Bool {
@@ -139,9 +139,5 @@ final class SavingsEntryFormViewModel: Identifiable {
         case .edit:
             return dependencies.service.updateEntry(entry, in: savings.id)
         }
-    }
-
-    private static func text(_ value: Double) -> String {
-        value.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(value)) : String(format: "%.2f", value)
     }
 }
