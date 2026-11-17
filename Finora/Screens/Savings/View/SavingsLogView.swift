@@ -12,8 +12,28 @@ import SwiftUI
 struct SavingsLogView<ViewModel: SavingsLogViewModelProtocol>: View {
 
     @Bindable var model: ViewModel
+    /// Presented modally (wraps itself in a NavigationStack and adds a Done button).
+    var isSheet = false
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
+        if isSheet {
+            NavigationStack {
+                content
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") { dismiss() }
+                                .font(.manrope, size: 16, weight: .semiBold)
+                        }
+                    }
+            }
+            .presentationDragIndicator(.visible)
+        } else {
+            content
+        }
+    }
+
+    private var content: some View {
         ZStack {
             Color.appBackground.ignoresSafeArea()
 

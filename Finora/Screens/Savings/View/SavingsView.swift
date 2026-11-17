@@ -15,6 +15,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
     let model: ViewModel
     @State private var form: SavingsFormViewModel?
     @State private var entryForm: SavingsEntryFormViewModel?
+    @State private var log: SavingsLogViewModel?
 
     var body: some View {
         ZStack {
@@ -42,7 +43,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
         .navigationTitle("Savings")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button { model.showLog() } label: {
+                Button { log = model.makeLogViewModel() } label: {
                     Image(systemName: "clock.arrow.circlepath")
                 }
                 .accessibilityLabel("Savings log")
@@ -56,6 +57,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
         .task { model.load() }
         .sheet(item: $form) { SavingsFormView(form: $0) }
         .sheet(item: $entryForm) { SavingsEntryFormView(form: $0) }
+        .sheet(item: $log) { SavingsLogView(model: $0, isSheet: true) }
     }
 
     private var list: some View {

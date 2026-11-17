@@ -21,7 +21,7 @@ protocol SavingsDetailViewModelProtocol: AnyObject, Observable {
     func makeEditFormViewModel() -> SavingsFormViewModel?
     func deleteEntry(id: SavingsEntry.ID) -> Bool
     func deleteSavings(returnRemaining: Bool)
-    func showLog()
+    func makeLogViewModel() -> SavingsLogViewModel
 }
 
 @Observable
@@ -80,8 +80,8 @@ final class SavingsDetailViewModel: SavingsDetailViewModelProtocol {
         dependencies.service.deleteEntry(id: id, from: savingsID)
     }
 
-    func showLog() {
-        router?.showLog(of: savingsID)
+    func makeLogViewModel() -> SavingsLogViewModel {
+        SavingsLogViewModel(scope: savingsID, dependencies: dependencies)
     }
 
     func deleteSavings(returnRemaining: Bool) {

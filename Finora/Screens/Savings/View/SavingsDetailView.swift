@@ -13,6 +13,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
 
     @State private var entryForm: SavingsEntryFormViewModel?
     @State private var entryEditForm: SavingsEntryFormViewModel?
+    @State private var log: SavingsLogViewModel?
     @State private var editForm: SavingsFormViewModel?
     @State private var confirmDelete = false
     @State private var entryToDelete: SavingsEntry?
@@ -47,6 +48,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
         .task { model.load() }
         .sheet(item: $entryForm) { SavingsEntryFormView(form: $0) }
         .sheet(item: $entryEditForm) { SavingsEntryFormView(form: $0) }
+        .sheet(item: $log) { SavingsLogView(model: $0, isSheet: true) }
         .sheet(item: $editForm) { SavingsFormView(form: $0) }
         .confirmationDialog("Delete this savings account?",
                             isPresented: $confirmDelete,
@@ -245,7 +247,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                     .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
                 Spacer()
                 if !model.entries.isEmpty {
-                    Button { model.showLog() } label: {
+                    Button { log = model.makeLogViewModel() } label: {
                         Text("Full log")
                             .font(.manrope, size: 13, weight: .bold)
                             .foregroundStyle(CustomColor.vividTeal.color)

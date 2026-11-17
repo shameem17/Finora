@@ -21,7 +21,9 @@ protocol SavingsLogViewModelProtocol: AnyObject, Observable {
 }
 
 @Observable
-final class SavingsLogViewModel: SavingsLogViewModelProtocol {
+final class SavingsLogViewModel: SavingsLogViewModelProtocol, Identifiable {
+
+    let id = UUID()
 
     var filter: SavingsLogFilter = .all {
         didSet { if oldValue != filter { rebuild() } }
