@@ -14,6 +14,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
 
     let model: ViewModel
     @State private var form: SavingsFormViewModel?
+    @State private var entryForm: SavingsEntryFormViewModel?
 
     var body: some View {
         ZStack {
@@ -46,6 +47,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
         }
         .task { model.load() }
         .sheet(item: $form) { SavingsFormView(form: $0) }
+        .sheet(item: $entryForm) { SavingsEntryFormView(form: $0) }
     }
 
     private var list: some View {
@@ -56,10 +58,11 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
                 .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
 
             ForEach(model.items) { item in
-                Button { model.showDetail(of: item.id) } label: {
-                    SavingsCard(item: item)
-                }
-                .buttonStyle(.plain)
+                SavingsCard(item: item,
+                            onAdd: { entryForm = model.makeEntryFormViewModel(for: item.id, kind: .deposit) },
+                            onWithdraw: { entryForm = model.makeEntryFormViewModel(for: item.id, kind: .withdrawal) })
+                    .onTapGesture { model.showDetail(of: item.id) }
+                    .accessibilityAddTraits(.isButton)
             }
         }
     }

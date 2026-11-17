@@ -27,10 +27,11 @@ struct SavingsEntry: Identifiable, Hashable {
     let date: Date
     let note: String
     /// The regular account the money came from (deposit) or went to (withdrawal).
-    let account: AccountSummary
+    /// `nil` when the money moved outside your Finora accounts (no balance is changed).
+    let account: AccountSummary?
 
     init(id: UUID = UUID(), kind: SavingsEntryKind, amount: Double,
-         date: Date = .now, note: String = "", account: AccountSummary) {
+         date: Date = .now, note: String = "", account: AccountSummary? = nil) {
         self.id = id
         self.kind = kind
         self.amount = amount
@@ -38,6 +39,9 @@ struct SavingsEntry: Identifiable, Hashable {
         self.note = note
         self.account = account
     }
+
+    /// Effect this entry has on the linked account's balance.
+    var accountDelta: Double { kind == .deposit ? -amount : amount }
 }
 
 /// A savings pot tagged to a regular account, e.g. "City Bank Savings".

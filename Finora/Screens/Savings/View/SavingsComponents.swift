@@ -38,11 +38,44 @@ struct SavingsLogo: View {
 /// One savings account in the list.
 struct SavingsCard: View {
     let item: SavingsItem
+    /// When both are set, quick "Add" / "Withdraw" buttons appear under the card.
+    var onAdd: (() -> Void)?
+    var onWithdraw: (() -> Void)?
 
     private var savings: SavingsAccount { item.savings }
     private var tint: Color { Color(hex: savings.tint) }
 
     var body: some View {
+        VStack(alignment: .leading, spacing: 14) {
+            summary
+            if let onAdd, let onWithdraw { actions(onAdd: onAdd, onWithdraw: onWithdraw) }
+        }
+        .padding(16)
+        .contentShape(Rectangle())
+        .finoraCard()
+    }
+
+    private func actions(onAdd: @escaping () -> Void, onWithdraw: @escaping () -> Void) -> some View {
+        HStack(spacing: 10) {
+            quickButton(SavingsEntryKind.deposit, action: onAdd)
+            quickButton(SavingsEntryKind.withdrawal, action: onWithdraw)
+                .disabled(savings.currentSavings <= 0)
+        }
+    }
+
+    private func quickButton(_ kind: SavingsEntryKind, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Label(kind == .deposit ? "Add" : "Withdraw", systemImage: kind.icon)
+                .font(.manrope, size: 13, weight: .bold)
+                .foregroundStyle(kind.tint.color)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+                .background(kind.tint.color.opacity(0.14), in: Capsule())
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var summary: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack(spacing: 14) {
                 SavingsLogo(name: savings.name, tint: savings.tint, logoData: savings.logoData)
@@ -91,15 +124,17 @@ struct SavingsCard: View {
                 }
             }
         }
-        .padding(16)
-        .contentShape(Rectangle())
-        .finoraCard()
         .accessibilityElement(children: .combine)
     }
 }
 
 struct SavingsEntryRow: View {
     let entry: SavingsEntry
+
+    private var source: String {
+        guard let account = entry.account else { return "Outside accounts" }
+        return "\(entry.kind == .deposit ? "From" : "To") \(account.name)"
+    }
 
     var body: some View {
         HStack(spacing: 12) {
@@ -114,7 +149,7 @@ struct SavingsEntryRow: View {
                     .font(.manrope, size: 14, weight: .bold)
                     .foregroundStyle(CustomColor.darkGray.color)
 
-                Text("\(entry.kind == .deposit ? "From" : "To") \(entry.account.name) · \(entry.date.formatted(.dateTime.day().month(.abbreviated).year()))")
+                Text("\(source) · \(entry.date.formatted(.dateTime.day().month(.abbreviated).year()))")
                     .font(.manrope, size: 12, weight: .medium)
                     .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
                     .lineLimit(1)

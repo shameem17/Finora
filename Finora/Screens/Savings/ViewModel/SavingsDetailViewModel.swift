@@ -17,6 +17,7 @@ protocol SavingsDetailViewModelProtocol: AnyObject, Observable {
 
     func load()
     func makeEntryFormViewModel(kind: SavingsEntryKind) -> SavingsEntryFormViewModel?
+    func makeEditEntryFormViewModel(_ entry: SavingsEntry) -> SavingsEntryFormViewModel?
     func makeEditFormViewModel() -> SavingsFormViewModel?
     func deleteEntry(id: SavingsEntry.ID) -> Bool
     func deleteSavings(returnRemaining: Bool)
@@ -60,7 +61,12 @@ final class SavingsDetailViewModel: SavingsDetailViewModelProtocol {
 
     func makeEntryFormViewModel(kind: SavingsEntryKind) -> SavingsEntryFormViewModel? {
         guard let savings = item?.savings else { return nil }
-        return SavingsEntryFormViewModel(kind: kind, savings: savings, dependencies: dependencies)
+        return SavingsEntryFormViewModel(mode: .create(kind), savings: savings, dependencies: dependencies)
+    }
+
+    func makeEditEntryFormViewModel(_ entry: SavingsEntry) -> SavingsEntryFormViewModel? {
+        guard let savings = item?.savings else { return nil }
+        return SavingsEntryFormViewModel(mode: .edit(entry), savings: savings, dependencies: dependencies)
     }
 
     func makeEditFormViewModel() -> SavingsFormViewModel? {

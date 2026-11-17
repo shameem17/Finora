@@ -12,6 +12,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
     let model: ViewModel
 
     @State private var entryForm: SavingsEntryFormViewModel?
+    @State private var entryEditForm: SavingsEntryFormViewModel?
     @State private var editForm: SavingsFormViewModel?
     @State private var confirmDelete = false
     @State private var entryToDelete: SavingsEntry?
@@ -45,6 +46,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
         .safeAreaInset(edge: .bottom) { bottomActions }
         .task { model.load() }
         .sheet(item: $entryForm) { SavingsEntryFormView(form: $0) }
+        .sheet(item: $entryEditForm) { SavingsEntryFormView(form: $0) }
         .sheet(item: $editForm) { SavingsFormView(form: $0) }
         .confirmationDialog("Delete this savings account?",
                             isPresented: $confirmDelete,
@@ -69,7 +71,11 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                 if !model.deleteEntry(id: entry.id) { entryDeleteFailed = true }
             }
         } message: { entry in
-            Text("The \(entry.account.name) balance is adjusted back by \(CurrencyFormatter.taka(entry.amount, showFraction: true)).")
+            if let account = entry.account {
+                Text("The \(account.name) balance is adjusted back by \(CurrencyFormatter.taka(entry.amount, showFraction: true)).")
+            } else {
+                Text("No account balance is affected.")
+            }
         }
         .alert("Can't delete this entry", isPresented: $entryDeleteFailed) {
             Button("OK", role: .cancel) {}
@@ -244,14 +250,19 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
             } else {
                 ForEach(model.entries) { entry in
                     SavingsEntryRow(entry: entry)
+                        .contentShape(Rectangle())
+                        .onTapGesture { entryEditForm = model.makeEditEntryFormViewModel(entry) }
                         .contextMenu {
+                            Button { entryEditForm = model.makeEditEntryFormViewModel(entry) } label: {
+                                Label("Edit", systemImage: "pencil")
+                            }
                             Button(role: .destructive) { entryToDelete = entry } label: {
                                 Label("Delete", systemImage: "trash")
                             }
                         }
                     if entry.id != model.entries.last?.id { Divider() }
                 }
-                Text("Touch and hold an entry to delete it.")
+                Text("Tap an entry to edit it, touch and hold to delete.")
                     .font(.manrope, size: 11, weight: .medium)
                     .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
             }

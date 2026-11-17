@@ -15,10 +15,13 @@ protocol SavingsServiceProtocol: AnyObject {
     func update(_ savings: SavingsAccount)
     /// Removes the savings account. With `returnRemaining`, what is left is credited to its tagged account.
     func delete(savingsID: SavingsAccount.ID, returnRemaining: Bool)
-    /// Moves `entry.amount` from `entry.account` into the savings account.
+    /// Moves `entry.amount` into the savings account, debiting `entry.account` when set.
     func deposit(_ entry: SavingsEntry, to savingsID: SavingsAccount.ID)
-    /// Moves `entry.amount` out of the savings account into `entry.account`.
+    /// Moves `entry.amount` out of the savings account, crediting `entry.account` when set.
     func withdraw(_ entry: SavingsEntry, from savingsID: SavingsAccount.ID)
+    /// Replaces an entry (same id) and re-applies its account effect. Returns `false` if the result would be invalid.
+    @discardableResult
+    func updateEntry(_ entry: SavingsEntry, in savingsID: SavingsAccount.ID) -> Bool
     /// Reverses one entry. Returns `false` when removing it would leave the savings negative.
     @discardableResult
     func deleteEntry(id: SavingsEntry.ID, from savingsID: SavingsAccount.ID) -> Bool
@@ -62,7 +65,7 @@ final class SavingsService: SavingsServiceProtocol {
 
     func deposit(_ entry: SavingsEntry, to savingsID: SavingsAccount.ID) {
         guard var item = savings.savings(id: savingsID) else { return }
-        accounts.adjustBalance(of: entry.account.id, by: -entry.amount)
+        apply(entry, sign: 1)
         item.entries.append(entry)
         savings.update(item)
     }
@@ -70,7 +73,7 @@ final class SavingsService: SavingsServiceProtocol {
     func withdraw(_ entry: SavingsEntry, from savingsID: SavingsAccount.ID) {
         guard var item = savings.savings(id: savingsID),
               entry.amount <= item.currentSavings + 0.005 else { return }
-        accounts.adjustBalance(of: entry.account.id, by: entry.amount)
+        apply(entry, sign: 1)
         item.entries.append(entry)
         savings.update(item)
     }
@@ -84,9 +87,29 @@ final class SavingsService: SavingsServiceProtocol {
         // Removing a deposit must not leave more withdrawn than ever saved.
         guard item.totalDeposited - item.totalWithdrawn > -0.005 else { return false }
 
-        let delta = entry.kind == .deposit ? entry.amount : -entry.amount
-        accounts.adjustBalance(of: entry.account.id, by: delta)
+        apply(entry, sign: -1)
         savings.update(item)
         return true
+    }
+
+    @discardableResult
+    func updateEntry(_ entry: SavingsEntry, in savingsID: SavingsAccount.ID) -> Bool {
+        guard var item = savings.savings(id: savingsID),
+              let index = item.entries.firstIndex(where: { $0.id == entry.id }) else { return false }
+
+        let old = item.entries[index]
+        item.entries[index] = entry
+        guard item.totalDeposited - item.totalWithdrawn > -0.005 else { return false }
+
+        apply(old, sign: -1)
+        apply(entry, sign: 1)
+        savings.update(item)
+        return true
+    }
+
+    /// Applies (`sign` 1) or reverses (`sign` -1) an entry's effect on its linked account.
+    private func apply(_ entry: SavingsEntry, sign: Double) {
+        guard let account = entry.account else { return }
+        accounts.adjustBalance(of: account.id, by: entry.accountDelta * sign)
     }
 }

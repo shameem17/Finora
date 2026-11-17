@@ -41,7 +41,7 @@ struct SavingsEntryFormView: View {
                 }
                 .scrollDismissesKeyboard(.interactively)
             }
-            .navigationTitle(kind.title)
+            .navigationTitle(form.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -54,7 +54,7 @@ struct SavingsEntryFormView: View {
                 }
             }
             .safeAreaInset(edge: .bottom) {
-                FormPrimaryButton(title: kind.title, tint: kind.tint, isEnabled: form.canSubmit) {
+                FormPrimaryButton(title: form.saveTitle, tint: kind.tint, isEnabled: form.canSubmit) {
                     focused = nil
                     if form.submit() { dismiss() }
                 }
@@ -133,12 +133,32 @@ struct SavingsEntryFormView: View {
     }
 
     private var accountCard: some View {
-        AccountDropdown(title: kind.accountTitle,
-                        accounts: form.accounts,
-                        selection: $form.accountID,
-                        excluded: nil)
-            .padding(16)
-            .finoraCard()
+        VStack(alignment: .leading, spacing: 12) {
+            Toggle(isOn: $form.usesAccount.animation(.smooth)) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(kind == .deposit ? "Take from an account" : "Add to an account")
+                        .font(.manrope, size: 15, weight: .bold)
+                        .foregroundStyle(CustomColor.darkGray.color)
+                    Text(form.usesAccount
+                         ? "The chosen account's balance is updated."
+                         : (kind == .deposit ? "Recorded only. No account balance changes."
+                                             : "Recorded only. The money isn't added to any account."))
+                        .font(.manrope, size: 12, weight: .medium)
+                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                }
+            }
+            .tint(CustomColor.vividTeal.color)
+            .disabled(form.accounts.isEmpty)
+
+            if form.usesAccount {
+                AccountDropdown(title: kind.accountTitle,
+                                accounts: form.accounts,
+                                selection: $form.accountID,
+                                excluded: nil)
+            }
+        }
+        .padding(16)
+        .finoraCard()
     }
 
     private var detailsCard: some View {
@@ -191,6 +211,6 @@ struct SavingsEntryFormView: View {
 #Preview {
     let dependencies = SavingsDependencies.preview()
     if let savings = dependencies.savings.fetchSavings().first {
-        SavingsEntryFormView(form: SavingsEntryFormViewModel(kind: .withdrawal, savings: savings, dependencies: dependencies))
+        SavingsEntryFormView(form: SavingsEntryFormViewModel(mode: .create(.withdrawal), savings: savings, dependencies: dependencies))
     }
 }
