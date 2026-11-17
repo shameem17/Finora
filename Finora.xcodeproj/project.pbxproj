@@ -567,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				8882734530A2F789001DCA2B /* Date */,
+				99927A00006030AB001DCA2B /* Persistence */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -575,7 +576,6 @@
 			isa = PBXGroup;
 			children = (
 				8882734630A2F78F001DCA2B /* DateService.swift */,
-				99927A00005E30AB001DCA2B /* InMemoryStore.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";
@@ -880,6 +880,14 @@
 				99927A00005930AB001DCA2B /* Coordinator */,
 			);
 			path = Savings;
+			sourceTree = "<group>";
+		};
+		99927A00006030AB001DCA2B /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00005E30AB001DCA2B /* InMemoryStore.swift */,
+			);
+			path = Persistence;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
