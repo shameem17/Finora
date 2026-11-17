@@ -16,7 +16,16 @@ enum PhoneInput {
 }
 
 @Observable
-final class PersonFormViewModel: Identifiable {
+final class PersonFormViewModel: Identifiable, Hashable {
+    
+    static func == (lhs: PersonFormViewModel, rhs: PersonFormViewModel) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
 
     enum Mode {
         case create

@@ -29,7 +29,6 @@ struct TransactionView<ViewModel: TransactionViewModelProtocol>: View {
                     .animation(.smooth, value: model.period)
                 }
             }
-            .navigationTitle("Transactions")
             .safeAreaInset(edge: .bottom) { addButton }
         }
         .task { model.load() }
