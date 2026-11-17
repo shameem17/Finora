@@ -801,6 +801,7 @@
 			isa = PBXGroup;
 			children = (
 				99927A00002030AB001DCA2B /* SavingsModels.swift */,
+				99927A00004430AB001DCA2B /* SavingsLog.swift */,
 				99927A00002230AB001DCA2B /* SavingsSummary.swift */,
 				99927A00002430AB001DCA2B /* SavingsSampleData.swift */,
 			);
@@ -828,6 +829,7 @@
 			isa = PBXGroup;
 			children = (
 				99927A00002C30AB001DCA2B /* SavingsViewModel.swift */,
+				99927A00004630AB001DCA2B /* SavingsLogViewModel.swift */,
 				99927A00002E30AB001DCA2B /* SavingsDetailViewModel.swift */,
 				99927A00003030AB001DCA2B /* SavingsFormViewModel.swift */,
 				99927A00003230AB001DCA2B /* SavingsEntryFormViewModel.swift */,
@@ -841,6 +843,7 @@
 				99927A00003430AB001DCA2B /* SavingsComponents.swift */,
 				99927A00003630AB001DCA2B /* SavingsSummaryCard.swift */,
 				99927A00003830AB001DCA2B /* SavingsView.swift */,
+				99927A00004830AB001DCA2B /* SavingsLogView.swift */,
 				99927A00003A30AB001DCA2B /* SavingsDetailView.swift */,
 				99927A00003C30AB001DCA2B /* SavingsFormView.swift */,
 				99927A00003E30AB001DCA2B /* SavingsEntryFormView.swift */,
@@ -1027,18 +1030,21 @@
 				99927A00001B30AB001DCA2B /* ColorSwatchPicker.swift in Sources */,
 				99927A00001D30AB001DCA2B /* LogoImageProcessor.swift in Sources */,
 				99927A00001F30AB001DCA2B /* SavingsModels.swift in Sources */,
+				99927A00004330AB001DCA2B /* SavingsLog.swift in Sources */,
 				99927A00002130AB001DCA2B /* SavingsSummary.swift in Sources */,
 				99927A00002330AB001DCA2B /* SavingsSampleData.swift in Sources */,
 				99927A00002530AB001DCA2B /* SavingsRepository.swift in Sources */,
 				99927A00002730AB001DCA2B /* SavingsService.swift in Sources */,
 				99927A00002930AB001DCA2B /* SavingsDependencies.swift in Sources */,
 				99927A00002B30AB001DCA2B /* SavingsViewModel.swift in Sources */,
+				99927A00004530AB001DCA2B /* SavingsLogViewModel.swift in Sources */,
 				99927A00002D30AB001DCA2B /* SavingsDetailViewModel.swift in Sources */,
 				99927A00002F30AB001DCA2B /* SavingsFormViewModel.swift in Sources */,
 				99927A00003130AB001DCA2B /* SavingsEntryFormViewModel.swift in Sources */,
 				99927A00003330AB001DCA2B /* SavingsComponents.swift in Sources */,
 				99927A00003530AB001DCA2B /* SavingsSummaryCard.swift in Sources */,
 				99927A00003730AB001DCA2B /* SavingsView.swift in Sources */,
+				99927A00004730AB001DCA2B /* SavingsLogView.swift in Sources */,
 				99927A00003930AB001DCA2B /* SavingsDetailView.swift in Sources */,
 				99927A00003B30AB001DCA2B /* SavingsFormView.swift in Sources */,
 				99927A00003D30AB001DCA2B /* SavingsEntryFormView.swift in Sources */,
