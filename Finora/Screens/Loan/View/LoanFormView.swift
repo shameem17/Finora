@@ -10,58 +10,23 @@ import SwiftUI
 struct LoanFormView: View {
 
     @Bindable var form: LoanFormViewModel
-    @Environment(\.dismiss) private var dismiss
-    @FocusState private var focused: Field?
     @State private var showPersonPicker = false
 
-    private enum Field: Hashable { case amount, interest, note }
-
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.appBackground.ignoresSafeArea()
-
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 16) {
-                        if !form.isEditing {
-                            PillPicker(selection: $form.kind)
-                        }
-                        partyCard
-                        amountCard
-                        detailsCard
-                        breakdown
-                        FormErrorBanner(message: form.visibleError)
-                    }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                    .padding(.bottom, 24)
-                    .animation(.smooth, value: form.visibleError)
-                    .animation(.smooth, value: form.hasDueDate)
-                    .animation(.smooth, value: form.amount > 0)
-                }
-                .scrollDismissesKeyboard(.interactively)
+        FormSheet(title: form.title,
+                  primaryTitle: form.saveTitle,
+                  isEnabled: form.canSubmit,
+                  onSubmit: form.submit) {
+            if !form.isEditing {
+                PillPicker(selection: $form.kind)
             }
-            .navigationTitle(form.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                        .font(.manrope, size: 16, weight: .semiBold)
-                }
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") { focused = nil }
-                }
-            }
-            .safeAreaInset(edge: .bottom) {
-                FormPrimaryButton(title: form.saveTitle, isEnabled: form.canSubmit) {
-                    focused = nil
-                    if form.submit() { dismiss() }
-                }
-            }
+            partyCard
+                .sheet(isPresented: $showPersonPicker) { PersonPickerView(form: form) }
+            amountCard
+            detailsCard
+            breakdown
+            FormErrorBanner(message: form.visibleError)
         }
-        .presentationDragIndicator(.visible)
-        .sheet(isPresented: $showPersonPicker) { PersonPickerView(form: form) }
     }
 
     // MARK: - Person + account
@@ -69,7 +34,7 @@ struct LoanFormView: View {
     private var partyCard: some View {
         VStack(spacing: 0) {
             Button {
-                focused = nil
+                Keyboard.dismiss()
                 showPersonPicker = true
             } label: {
                 personRow
@@ -98,26 +63,26 @@ struct LoanFormView: View {
             } else {
                 Image(systemName: "plus")
                     .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
+                    .foregroundStyle(Color.textTertiary)
                     .frame(width: 44, height: 44)
-                    .background(CustomColor.darkGray.color.opacity(0.06), in: Circle())
+                    .background(Color.fillSubtle, in: Circle())
             }
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(form.kind.personRole.uppercased())
                     .font(.manrope, size: 11, weight: .semiBold)
                     .tracking(1)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
+                    .foregroundStyle(Color.textSecondary)
 
                 Text(form.person?.name ?? "Select \(form.kind.personRole.lowercased())")
                     .font(.manrope, size: 16, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
 
                 if let person = form.person {
                     Text(person.phone ?? person.category.title)
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                         .lineLimit(1)
                 }
             }
@@ -126,7 +91,7 @@ struct LoanFormView: View {
 
             Image(systemName: "chevron.right")
                 .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
+                .foregroundStyle(Color.textTertiary)
         }
         .padding(.vertical, 6)
         .contentShape(Rectangle())
@@ -143,11 +108,11 @@ struct LoanFormView: View {
                 Text(form.kind.accountFieldTitle.uppercased())
                     .font(.manrope, size: 11, weight: .semiBold)
                     .tracking(1)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
+                    .foregroundStyle(Color.textSecondary)
 
                 Text(account.name)
                     .font(.manrope, size: 16, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
             }
 
@@ -155,7 +120,7 @@ struct LoanFormView: View {
 
             Image(systemName: "lock.fill")
                 .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
+                .foregroundStyle(Color.textTertiary)
         }
         .padding(.vertical, 6)
         .accessibilityElement(children: .combine)
@@ -163,59 +128,36 @@ struct LoanFormView: View {
 
     // MARK: - Amount
 
+    @ViewBuilder
     private var amountCard: some View {
+        if form.isEditing {
+            lockedAmountCard
+        } else {
+            AmountField(title: "Amount", text: $form.amountText)
+        }
+    }
+
+    private var lockedAmountCard: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("AMOUNT")
-                    .font(.manrope, size: 12, weight: .semiBold)
-                    .tracking(1)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
-
+                SectionLabel("Amount")
                 Spacer()
-
-                if form.isEditing {
-                    Label("Locked", systemImage: "lock.fill")
-                        .font(.manrope, size: 11, weight: .bold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.45))
-                }
+                Label("Locked", systemImage: "lock.fill")
+                    .font(.manrope, size: 11, weight: .bold)
+                    .foregroundStyle(Color.textTertiary)
             }
 
-            HStack(spacing: 6) {
-                Text("৳")
-                    .font(.manrope, size: 36, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
+            Text(CurrencyFormatter.taka(form.amount, showFraction: true))
+                .font(.manrope, size: 40, weight: .extraBold)
+                .foregroundStyle(Color.textSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
 
-                if form.isEditing {
-                    Text(CurrencyFormatter.taka(form.amount, showFraction: true).dropFirst())
-                        .font(.manrope, size: 40, weight: .extraBold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.6))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.5)
-                } else {
-                    TextField("0", text: $form.amountText)
-                        .font(.manrope, size: 40, weight: .extraBold)
-                        .foregroundStyle(CustomColor.darkGray.color)
-                        .keyboardType(.decimalPad)
-                        .focused($focused, equals: .amount)
-                        .minimumScaleFactor(0.5)
-                        .onChange(of: form.amountText) { _, new in
-                            let clean = DecimalInput.sanitize(new)
-                            if clean != new { form.amountText = clean }
-                        }
-                }
-            }
-
-            if form.isEditing {
-                Text("To change the amount or account, delete this entry and add it again.")
-                    .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
-            }
+            Text("To change the amount or account, delete this entry and add it again.")
+                .font(.manrope, size: 12, weight: .medium)
+                .foregroundStyle(Color.textSecondary)
         }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .finoraCard()
-        .contentShape(Rectangle())
-        .onTapGesture { if !form.isEditing { focused = .amount } }
+        .sectionCard()
     }
 
     // MARK: - Details
@@ -224,11 +166,10 @@ struct LoanFormView: View {
         VStack(spacing: 0) {
             FormFieldRow(icon: "percent", title: "Interest / extra charge") {
                 HStack(spacing: 4) {
-                    Text("৳").foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
+                    Text(CurrencyFormatter.symbol).foregroundStyle(Color.textTertiary)
                     TextField("0", text: $form.interestText)
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
-                        .focused($focused, equals: .interest)
                         .frame(maxWidth: 110)
                         .onChange(of: form.interestText) { _, new in
                             let clean = DecimalInput.sanitize(new)
@@ -236,7 +177,7 @@ struct LoanFormView: View {
                         }
                 }
                 .font(.manrope, size: 16, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
             }
 
             Divider()
@@ -247,14 +188,14 @@ struct LoanFormView: View {
                            in: ...Date.now,
                            displayedComponents: .date)
                     .labelsHidden()
-                    .tint(CustomColor.warmCoral.color)
+                    .tint(Color.accent)
                     .onChange(of: form.date) { _, _ in form.loanDateChanged() }
             }
 
             Divider()
 
             FormFieldRow(icon: "calendar.badge.clock", title: "Set a due date") {
-                Toggle("Set a due date", isOn: $form.hasDueDate)
+                Toggle("Set a due date", isOn: $form.hasDueDate.animation(.smooth))
                     .labelsHidden()
                     .tint(CustomColor.vividTeal.color)
             }
@@ -268,7 +209,7 @@ struct LoanFormView: View {
                                in: form.date...,
                                displayedComponents: .date)
                         .labelsHidden()
-                        .tint(CustomColor.warmCoral.color)
+                        .tint(Color.accent)
                 }
 
                 Divider()
@@ -277,7 +218,7 @@ struct LoanFormView: View {
                     Stepper(value: $form.installmentCount, in: 1...Loan.maxInstallments) {
                         Text("\(form.installmentCount)")
                             .font(.manrope, size: 16, weight: .bold)
-                            .foregroundStyle(CustomColor.darkGray.color)
+                            .foregroundStyle(Color.textPrimary)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                     }
                     .frame(maxWidth: 150)
@@ -291,10 +232,7 @@ struct LoanFormView: View {
                     .lineLimit(1...3)
                     .multilineTextAlignment(.trailing)
                     .font(.manrope, size: 15, weight: .semiBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
-                    .focused($focused, equals: .note)
-                    .submitLabel(.done)
-                    .onSubmit { focused = nil }
+                    .foregroundStyle(Color.textPrimary)
             }
         }
         .padding(.horizontal, 16)

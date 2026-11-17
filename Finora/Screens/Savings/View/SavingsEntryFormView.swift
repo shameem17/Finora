@@ -4,7 +4,7 @@
 //
 //  Screens/Savings/View
 //
-//  One form for both "Add Savings" and "Withdraw" (break savings).
+//  One form for "Add Savings", "Withdraw" (break savings) and editing an entry.
 //
 
 import SwiftUI
@@ -12,55 +12,32 @@ import SwiftUI
 struct SavingsEntryFormView: View {
 
     @Bindable var form: SavingsEntryFormViewModel
-    @Environment(\.dismiss) private var dismiss
-    @FocusState private var focused: Field?
-
-    private enum Field: Hashable { case amount, note }
 
     private var kind: SavingsEntryKind { form.kind }
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                Color.appBackground.ignoresSafeArea()
+        FormSheet(title: form.title,
+                  primaryTitle: form.saveTitle,
+                  tint: kind.tint,
+                  isEnabled: form.canSubmit,
+                  onSubmit: form.submit) {
+            headerCard
 
-                ScrollView(showsIndicators: false) {
-                    VStack(spacing: 16) {
-                        headerCard
-                        amountCard
-                        accountCard
-                        detailsCard
-                        breakdown
-                        FormErrorBanner(message: form.visibleError)
+            AmountField(title: "Amount", text: $form.amountText) {
+                if kind == .withdrawal {
+                    AmountChip(title: "Break all · \(CurrencyFormatter.taka(form.current, showFraction: true))",
+                               tint: kind.tint.color) {
+                        Keyboard.dismiss()
+                        form.withdrawAll()
                     }
-                    .padding(.horizontal, 16)
-                    .padding(.top, 8)
-                    .padding(.bottom, 24)
-                    .animation(.smooth, value: form.visibleError)
-                    .animation(.smooth, value: form.amount > 0)
-                }
-                .scrollDismissesKeyboard(.interactively)
-            }
-            .navigationTitle(form.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") { dismiss() }
-                        .font(.manrope, size: 16, weight: .semiBold)
-                }
-                ToolbarItemGroup(placement: .keyboard) {
-                    Spacer()
-                    Button("Done") { focused = nil }
                 }
             }
-            .safeAreaInset(edge: .bottom) {
-                FormPrimaryButton(title: form.saveTitle, tint: kind.tint, isEnabled: form.canSubmit) {
-                    focused = nil
-                    if form.submit() { dismiss() }
-                }
-            }
+
+            accountCard
+            detailsCard
+            breakdown
+            FormErrorBanner(message: form.visibleError)
         }
-        .presentationDragIndicator(.visible)
     }
 
     private var headerCard: some View {
@@ -71,12 +48,12 @@ struct SavingsEntryFormView: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text(form.savings.name)
                     .font(.manrope, size: 16, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
 
                 Text("Saved: \(CurrencyFormatter.taka(form.current, showFraction: true))")
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.6))
+                    .foregroundStyle(Color.textSecondary)
             }
             Spacer(minLength: 0)
         }
@@ -86,68 +63,19 @@ struct SavingsEntryFormView: View {
         .accessibilityElement(children: .combine)
     }
 
-    private var amountCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("AMOUNT")
-                .font(.manrope, size: 12, weight: .semiBold)
-                .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
-
-            HStack(spacing: 6) {
-                Text("৳")
-                    .font(.manrope, size: 36, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
-
-                TextField("0", text: $form.amountText)
-                    .font(.manrope, size: 40, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
-                    .keyboardType(.decimalPad)
-                    .focused($focused, equals: .amount)
-                    .minimumScaleFactor(0.5)
-                    .onChange(of: form.amountText) { _, new in
-                        let clean = DecimalInput.sanitize(new)
-                        if clean != new { form.amountText = clean }
-                    }
-            }
-
-            if kind == .withdrawal {
-                Button {
-                    focused = nil
-                    form.withdrawAll()
-                } label: {
-                    Text("Break all · \(CurrencyFormatter.taka(form.current, showFraction: true))")
-                        .font(.manrope, size: 12, weight: .bold)
-                        .foregroundStyle(CustomColor.darkGray.color)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(kind.tint.color.opacity(0.18), in: Capsule())
-                }
-                .buttonStyle(.plain)
-            }
-        }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .finoraCard()
-        .contentShape(Rectangle())
-        .onTapGesture { focused = .amount }
-    }
-
     private var accountCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             Toggle(isOn: $form.usesAccount.animation(.smooth)) {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(kind == .deposit ? "Take from an account" : "Add to an account")
                         .font(.manrope, size: 15, weight: .bold)
-                        .foregroundStyle(CustomColor.darkGray.color)
-                    Text(form.usesAccount
-                         ? "The chosen account's balance is updated."
-                         : (kind == .deposit ? "Recorded only. No account balance changes."
-                                             : "Recorded only. The money isn't added to any account."))
+                        .foregroundStyle(Color.textPrimary)
+                    Text(accountCaption)
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                 }
             }
-            .tint(CustomColor.vividTeal.color)
+            .tint(CustomColor.incoming.color)
             .disabled(form.accounts.isEmpty)
 
             if form.usesAccount {
@@ -161,13 +89,19 @@ struct SavingsEntryFormView: View {
         .finoraCard()
     }
 
+    private var accountCaption: String {
+        if form.usesAccount { return "The chosen account's balance is updated." }
+        return kind == .deposit ? "Recorded only. No account balance changes."
+                                : "Recorded only. The money isn't added to any account."
+    }
+
     private var detailsCard: some View {
         VStack(spacing: 0) {
             FormFieldRow(icon: "calendar", title: "Date") {
                 DatePicker("Date", selection: $form.date,
                            in: form.earliestDate...Date.now, displayedComponents: .date)
                     .labelsHidden()
-                    .tint(CustomColor.vividTeal.color)
+                    .tint(Color.accent)
             }
 
             Divider()
@@ -177,11 +111,7 @@ struct SavingsEntryFormView: View {
                           text: $form.note, axis: .vertical)
                     .lineLimit(1...3)
                     .multilineTextAlignment(.trailing)
-                    .font(.manrope, size: 15, weight: .semiBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
-                    .focused($focused, equals: .note)
-                    .submitLabel(.done)
-                    .onSubmit { focused = nil }
+                    .formFieldStyle()
             }
         }
         .padding(.horizontal, 16)
@@ -194,7 +124,9 @@ struct SavingsEntryFormView: View {
             VStack(spacing: 10) {
                 ValueRow(title: "Amount", value: CurrencyFormatter.taka(form.amount, showFraction: true))
                 Divider()
-                ValueRow(title: "Savings after", value: CurrencyFormatter.taka(max(after, 0), showFraction: true), emphasized: true)
+                ValueRow(title: "Savings after",
+                         value: CurrencyFormatter.taka(max(after, 0), showFraction: true),
+                         emphasized: true)
 
                 if let balance = form.balanceAfter, let account = form.account {
                     ValueRow(title: "\(account.name) balance after",
@@ -203,7 +135,6 @@ struct SavingsEntryFormView: View {
             }
             .padding(16)
             .finoraCard(cornerRadius: 22)
-            .transition(.opacity.combined(with: .move(edge: .top)))
         }
     }
 }

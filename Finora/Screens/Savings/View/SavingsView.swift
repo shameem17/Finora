@@ -19,7 +19,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
 
     var body: some View {
         ZStack {
-            Color.appBackground.ignoresSafeArea()
+            Color.screenBackground.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
@@ -50,7 +50,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            AddActionButton(title: "Add Savings Account", tint: .vividTeal) {
+            AddActionButton(title: "Add Savings Account", tint: .incoming) {
                 form = model.makeFormViewModel()
             }
         }
@@ -62,10 +62,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
 
     private var list: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("SAVINGS ACCOUNTS")
-                .font(.manrope, size: 12, weight: .semiBold)
-                .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+            SectionLabel("Savings accounts")
 
             ForEach(model.items) { item in
                 SavingsCard(item: item,
@@ -78,24 +75,9 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "lock.shield")
-                .font(.system(size: 44, weight: .light))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
-
-            Text("No savings yet")
-                .font(.manrope, size: 18, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
-
-            Text("Create a savings account tagged to your bank or wallet, set a target and watch it grow.")
-                .font(.manrope, size: 14, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
-                .multilineTextAlignment(.center)
-        }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 40)
-        .padding(.horizontal, 24)
-        .finoraCard()
+        EmptyStateCard(icon: "lock.shield",
+                       title: "No savings yet",
+                       message: "Create a savings account tagged to your bank or wallet, set a target and watch it grow.")
     }
 }
 

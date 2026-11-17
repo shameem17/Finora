@@ -26,7 +26,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
  
     private let accountColumns = [GridItem(.adaptive(minimum: 160), spacing: 16)]
  
-    @State private var hideBalances = false
+    @Environment(\.appSettings) private var settings
  
     var body: some View {
         ZStack {
@@ -52,7 +52,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         VStack(spacing: 15) {
             Text(model.homeViewData?.headerTitle ?? " ")
                 .font(.manrope, size: 20, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
                 .frame(maxWidth: .infinity, alignment: .leading)
  
             HStack(spacing: 10) {
@@ -77,10 +77,10 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                 SectionHeader(title: "Insights") {
                     Text("This month")
                         .font(.manrope, size: 13, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)
-                        .background(CustomColor.darkGray.color.opacity(0.06), in: Capsule())
+                        .background(Color.fillSubtle, in: Capsule())
                 }
  
                 InsightsCard(insights: insights)
@@ -94,19 +94,19 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         VStack(spacing: 16) {
             SectionHeader(title: "Accounts") {
                 Button {
-                    withAnimation { hideBalances.toggle() }
+                    withAnimation { settings.hidesBalances.toggle() }
                 } label: {
-                    Image(systemName: hideBalances ? "eye.slash" : "eye")
+                    Image(systemName: settings.hidesBalances ? "eye.slash" : "eye")
                         .font(.system(size: 20))
-                        .foregroundStyle(CustomColor.darkGray.color)
+                        .foregroundStyle(Color.textPrimary)
                 }
-                .accessibilityLabel(hideBalances ? "Show balances" : "Hide balances")
+                .accessibilityLabel(settings.hidesBalances ? "Show balances" : "Hide balances")
             }
  
             // No nested ScrollView: the outer one scrolls, so the grid stays lazy.
             LazyVGrid(columns: accountColumns, spacing: 16) {
                 ForEach(model.homeViewData?.accounts ?? []) { account in
-                    AccountCard(account: account, hideBalance: hideBalances)
+                    AccountCard(account: account, hideBalance: settings.hidesBalances)
                         .shadow(color: Color(hex: account.tint).opacity(0.35), radius: 10, x: 0, y: 0)
                 }
             }
@@ -124,7 +124,7 @@ private struct SectionHeader<Trailing: View>: View {
         HStack {
             Text(title)
                 .font(.manrope, size: 20, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
             Spacer()
             trailing
         }

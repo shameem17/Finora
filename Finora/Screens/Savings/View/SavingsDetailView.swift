@@ -21,7 +21,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
 
     var body: some View {
         ZStack {
-            Color.appBackground.ignoresSafeArea()
+            Color.screenBackground.ignoresSafeArea()
 
             if let item = model.item {
                 ScrollView(showsIndicators: false) {
@@ -113,10 +113,10 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
             } label: {
                 Label("Withdraw", systemImage: SavingsEntryKind.withdrawal.icon)
                     .font(.manrope, size: 16, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(CustomColor.darkGray.color.opacity(0.08), in: Capsule())
+                    .background(Color.fillSubtle, in: Capsule())
             }
             .disabled((model.item?.savings.currentSavings ?? 0) <= 0)
 
@@ -128,7 +128,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(CustomColor.vividTeal.color, in: Capsule())
+                    .background(CustomColor.incoming.color, in: Capsule())
             }
         }
         .padding(.horizontal, 16)
@@ -147,11 +147,11 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                     Text("CURRENT SAVINGS")
                         .font(.manrope, size: 11, weight: .semiBold)
                         .tracking(1)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
+                        .foregroundStyle(Color.textSecondary)
 
                     Text(CurrencyFormatter.taka(savings.currentSavings, showFraction: true))
                         .font(.manrope, size: 30, weight: .extraBold)
-                        .foregroundStyle(CustomColor.darkGray.color)
+                        .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.5)
                         .contentTransition(.numericText())
@@ -167,40 +167,24 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                         Spacer()
                         if savings.isGoalReached {
                             Label("Goal reached", systemImage: "checkmark.seal.fill")
-                                .foregroundStyle(CustomColor.successGreen.color)
+                                .foregroundStyle(Color.positive)
                         } else if let remaining = savings.remainingToTarget {
                             Text("\(CurrencyFormatter.taka(remaining, showFraction: true)) to go")
                         }
                     }
                     .font(.manrope, size: 12, weight: .semiBold)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                 }
             }
 
             Divider()
 
             HStack(alignment: .top) {
-                stat("Total saved", CurrencyFormatter.taka(savings.totalDeposited, showFraction: true))
-                stat("Withdrawn", CurrencyFormatter.taka(savings.totalWithdrawn, showFraction: true))
+                StatColumn(title: "Total saved", value: CurrencyFormatter.taka(savings.totalDeposited, showFraction: true))
+                StatColumn(title: "Withdrawn", value: CurrencyFormatter.taka(savings.totalWithdrawn, showFraction: true))
             }
         }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .finoraCard()
-    }
-
-    private func stat(_ title: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
-            Text(title)
-                .font(.manrope, size: 11, weight: .semiBold)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.5))
-            Text(value)
-                .font(.manrope, size: 15, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .sectionCard()
     }
 
     // MARK: - Details
@@ -214,10 +198,10 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                 ValueRow(title: "Account no.", value: savings.number)
             }
 
-            ValueRow(title: "Started", value: savings.startDate.formatted(.dateTime.day().month(.abbreviated).year()))
+            ValueRow(title: "Started", value: savings.startDate.shortDisplay)
 
             if let due = savings.targetDate {
-                ValueRow(title: "Target date", value: due.formatted(.dateTime.day().month(.abbreviated).year()))
+                ValueRow(title: "Target date", value: due.shortDisplay)
             }
 
             if let target = savings.target {
@@ -241,16 +225,13 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
     private var history: some View {
         VStack(alignment: .leading, spacing: 14) {
             HStack {
-                Text("HISTORY")
-                    .font(.manrope, size: 12, weight: .semiBold)
-                    .tracking(1)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                SectionLabel("History")
                 Spacer()
                 if !model.entries.isEmpty {
                     Button { log = model.makeLogViewModel() } label: {
                         Text("Full log")
                             .font(.manrope, size: 13, weight: .bold)
-                            .foregroundStyle(CustomColor.vividTeal.color)
+                            .foregroundStyle(CustomColor.incoming.color)
                     }
                 }
             }
@@ -258,7 +239,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
             if model.entries.isEmpty {
                 Text("No deposits or withdrawals yet.")
                     .font(.manrope, size: 14, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
             } else {
                 ForEach(model.entries) { entry in
                     SavingsEntryRow(entry: entry)
@@ -276,12 +257,10 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                 }
                 Text("Tap an entry to edit it, touch and hold to delete.")
                     .font(.manrope, size: 11, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
+                    .foregroundStyle(Color.textTertiary)
             }
         }
-        .padding(20)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .finoraCard()
+        .sectionCard()
     }
 }
 

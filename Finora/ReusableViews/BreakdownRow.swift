@@ -31,14 +31,14 @@ struct BreakdownRow: View {
                         .font(.manrope, size: 16, weight: .extraBold)
                         .contentTransition(.numericText())
                 }
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
 
                 HStack(spacing: 10) {
                     ProgressBar(fraction: fraction, color: item.color)
 
                     Text("\(Int((fraction * 100).rounded()))%")
                         .font(.manrope, size: 12, weight: .semiBold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                         .frame(width: 34, alignment: .trailing)
                 }
             }

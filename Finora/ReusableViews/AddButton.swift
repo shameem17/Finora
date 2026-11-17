@@ -21,7 +21,7 @@ struct AddActionButton: View {
                 Text(title)
             }
             .font(.manrope, size: 20, weight: .extraBold)
-            .foregroundStyle(CustomColor.darkGray.color)
+            .foregroundStyle(Color.textPrimary)
             .padding(.vertical, 18)
             .frame(maxWidth: .infinity)
             .background(tint.color)

@@ -8,10 +8,7 @@
 import Foundation
 import Combine
 
-protocol PersonRepositoryProtocol: AnyObject {
-    /// Emits after every mutation so screens can refresh without polling.
-    var changes: AnyPublisher<Void, Never> { get }
-
+protocol PersonRepositoryProtocol: ChangeNotifying {
     /// Sorted A–Z.
     func fetchPeople() -> [Person]
     func person(id: Person.ID) -> Person?
@@ -32,36 +29,20 @@ final class InMemoryPersonRepository: PersonRepositoryProtocol {
         #endif
     }()
 
-    private var people: [Person]
-    private let subject = PassthroughSubject<Void, Never>()
+    private let store: InMemoryStore<Person>
 
     init(people: [Person] = []) {
-        self.people = people
+        store = InMemoryStore(people)
     }
 
-    var changes: AnyPublisher<Void, Never> { subject.eraseToAnyPublisher() }
+    var changes: AnyPublisher<Void, Never> { store.changes }
 
     func fetchPeople() -> [Person] {
-        people.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+        store.items.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
     }
 
-    func person(id: Person.ID) -> Person? {
-        people.first { $0.id == id }
-    }
-
-    func add(_ person: Person) {
-        people.append(person)
-        subject.send()
-    }
-
-    func update(_ person: Person) {
-        guard let index = people.firstIndex(where: { $0.id == person.id }) else { return }
-        people[index] = person
-        subject.send()
-    }
-
-    func delete(id: Person.ID) {
-        people.removeAll { $0.id == id }
-        subject.send()
-    }
+    func person(id: Person.ID) -> Person? { store.item(id: id) }
+    func add(_ person: Person) { store.add(person) }
+    func update(_ person: Person) { store.update(person) }
+    func delete(id: Person.ID) { store.remove(id: id) }
 }

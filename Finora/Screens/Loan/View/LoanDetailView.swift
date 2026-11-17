@@ -111,12 +111,12 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(person.name)
                         .font(.manrope, size: 18, weight: .extraBold)
-                        .foregroundStyle(CustomColor.darkGray.color)
+                        .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
 
                     Text("\(loan.kind.personRole) · \(person.category.title)")
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                        .foregroundStyle(Color.textSecondary)
                 }
 
                 Spacer(minLength: 8)
@@ -134,14 +134,14 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
                 Text((loan.isSettled ? "Fully settled" : loan.kind.outstandingCaption).uppercased())
                     .font(.manrope, size: 12, weight: .semiBold)
                     .tracking(1)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
 
                 Text(CurrencyFormatter.taka(loan.isSettled ? loan.totalPayable : loan.outstanding,
                                             showFraction: true))
                     .font(.manrope, size: 40, weight: .extraBold)
                     .foregroundStyle(loan.isSettled
-                                     ? CustomColor.successGreen.color
-                                     : CustomColor.darkGray.color)
+                                     ? Color.positive
+                                     : Color.textPrimary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .contentTransition(.numericText())
@@ -153,7 +153,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
                 HStack {
                     Text("\(loan.kind == .lent ? "Received" : "Paid") \(CurrencyFormatter.taka(loan.totalRepaid, showFraction: true)) of \(CurrencyFormatter.taka(loan.totalPayable, showFraction: true))")
                         .font(.manrope, size: 12, weight: .medium)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.6))
+                        .foregroundStyle(Color.textSecondary)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
 
@@ -161,7 +161,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
 
                     Text("\(Int((loan.progress * 100).rounded()))%")
                         .font(.manrope, size: 12, weight: .bold)
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.6))
+                        .foregroundStyle(Color.textSecondary)
                 }
             }
         }
@@ -191,7 +191,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
                 }
             }
             .font(.manrope, size: 13, weight: .semiBold)
-            .foregroundStyle(CustomColor.darkGray.color.opacity(0.7))
+            .foregroundStyle(Color.textSecondary)
             .labelStyle(.titleAndIcon)
         }
     }
@@ -204,7 +204,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
         return VStack(spacing: 12) {
             ValueRow(title: "Type", value: loan.kind.typeDescription)
             ValueRow(title: loan.kind.accountFieldTitle, value: loan.account.name)
-            ValueRow(title: "Date", value: loan.date.formatted(.dateTime.day().month(.abbreviated).year()))
+            ValueRow(title: "Date", value: loan.date.shortDisplay)
 
             Divider()
 
@@ -220,7 +220,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
             if let due = loan.dueDate {
                 Divider()
                 ValueRow(title: loan.installmentCount > 1 ? "First due" : "Due",
-                         value: due.formatted(.dateTime.day().month(.abbreviated).year()))
+                         value: due.shortDisplay)
                 if loan.installmentCount > 1 {
                     ValueRow(title: "Plan", value: "\(loan.installmentCount) monthly installments")
                 }
@@ -266,7 +266,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
             if model.repayments.isEmpty {
                 Text("Nothing recorded yet.")
                     .font(.manrope, size: 14, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 28)
                     .finoraCard(cornerRadius: 24)
@@ -290,7 +290,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
     private func sectionTitle(_ text: String) -> some View {
         Text(text)
             .font(.manrope, size: 16, weight: .bold)
-            .foregroundStyle(CustomColor.darkGray.color.opacity(0.7))
+            .foregroundStyle(Color.textSecondary)
             .padding(.leading, 4)
     }
 }
@@ -310,8 +310,8 @@ private struct InstallmentRow: View {
     }
 
     private var color: Color {
-        if installment.isPaid { return CustomColor.successGreen.color }
-        return isOverdue ? CustomColor.dangerRed.color : CustomColor.darkGray.color.opacity(0.35)
+        if installment.isPaid { return Color.positive }
+        return isOverdue ? Color.negative : Color.textTertiary
     }
 
     var body: some View {
@@ -323,12 +323,12 @@ private struct InstallmentRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text("Installment \(installment.number)")
                     .font(.manrope, size: 15, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
 
-                Text(installment.dueDate.formatted(.dateTime.day().month(.abbreviated).year()))
+                Text(installment.dueDate.shortDisplay)
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(isOverdue ? CustomColor.dangerRed.color
-                                               : CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(isOverdue ? Color.negative
+                                               : Color.textSecondary)
             }
 
             Spacer(minLength: 8)
@@ -336,12 +336,12 @@ private struct InstallmentRow: View {
             VStack(alignment: .trailing, spacing: 3) {
                 Text(CurrencyFormatter.taka(installment.amount, showFraction: true))
                     .font(.manrope, size: 15, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(installment.isPaid ? 0.5 : 1))
+                    .foregroundStyle(Color.textPrimary.opacity(installment.isPaid ? 0.5 : 1))
 
                 if !installment.isPaid, installment.paid > 0 {
                     Text("\(CurrencyFormatter.taka(installment.paid, showFraction: true)) paid")
                         .font(.manrope, size: 11, weight: .semiBold)
-                        .foregroundStyle(CustomColor.successGreen.color)
+                        .foregroundStyle(Color.positive)
                 }
             }
         }
@@ -365,13 +365,13 @@ private struct RepaymentRow: View {
             AccountBadge(type: repayment.account.type, tint: repayment.account.tint, size: 40)
 
             VStack(alignment: .leading, spacing: 3) {
-                Text(repayment.date.formatted(.dateTime.day().month(.abbreviated).year()))
+                Text(repayment.date.shortDisplay)
                     .font(.manrope, size: 15, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
 
                 Text(subtitle)
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
             }
 
@@ -379,7 +379,7 @@ private struct RepaymentRow: View {
 
             Text(CurrencyFormatter.taka(repayment.amount, showFraction: true))
                 .font(.manrope, size: 15, weight: .extraBold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
 
             Menu {
                 Button(role: .destructive, action: onDelete) {
@@ -388,7 +388,7 @@ private struct RepaymentRow: View {
             } label: {
                 Image(systemName: "ellipsis")
                     .font(.system(size: 14, weight: .bold))
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.4))
+                    .foregroundStyle(Color.textTertiary)
                     .frame(width: 32, height: 32)
                     .contentShape(Rectangle())
             }

@@ -48,7 +48,7 @@ struct TransactionView<ViewModel: TransactionViewModelProtocol>: View {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(section.title)
                             .font(.manrope, size: 16, weight: .bold)
-                            .foregroundStyle(CustomColor.darkGray.color.opacity(0.7))
+                            .foregroundStyle(Color.textSecondary)
                             .padding(.leading, 4)
 
                         VStack(spacing: 0) {
@@ -76,7 +76,7 @@ struct TransactionView<ViewModel: TransactionViewModelProtocol>: View {
                 Text("New Transfer")
             }
             .font(.manrope, size: 20, weight: .extraBold)
-            .foregroundStyle(CustomColor.darkGray.color)
+            .foregroundStyle(Color.textPrimary)
             .padding(.vertical, 18)
             .frame(maxWidth: .infinity)
             .background(CustomColor.warmCoral.color)

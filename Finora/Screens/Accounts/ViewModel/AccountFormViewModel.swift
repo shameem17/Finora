@@ -9,7 +9,7 @@ import Foundation
 import Observation
 
 @Observable
-final class AccountFormViewModel: Identifiable {
+final class AccountFormViewModel: Identifiable, LogoEditing {
 
     enum Mode {
         case create
@@ -25,8 +25,8 @@ final class AccountFormViewModel: Identifiable {
     var tintHex = "#1A4DB3"
     var initialBalanceText = ""
 
-    private(set) var logoData: Data?
-    private(set) var isProcessingLogo = false
+    var logoData: Data?
+    var isProcessingLogo = false
 
     /// Bundled asset logo carried over from an existing account.
     private var logoAsset: String?
@@ -44,7 +44,7 @@ final class AccountFormViewModel: Identifiable {
             tintHex = account.tint
             logoData = account.logoData
             logoAsset = account.logo
-            initialBalanceText = Self.text(account.initialBalance)
+            initialBalanceText = DecimalInput.text(account.initialBalance)
         }
     }
 
@@ -96,14 +96,6 @@ final class AccountFormViewModel: Identifiable {
 
     // MARK: Intents
 
-    func setLogo(fromImageData data: Data) async {
-        isProcessingLogo = true
-        defer { isProcessingLogo = false }
-        if let processed = await LogoImageProcessor.makeLogo(from: data) {
-            logoData = processed
-        }
-    }
-
     func removeLogo() {
         logoData = nil
         logoAsset = nil
@@ -136,16 +128,5 @@ final class AccountFormViewModel: Identifiable {
             repository.update(account)
         }
         return true
-    }
-
-    // MARK: Helpers
-
-    private static func text(_ value: Double) -> String {
-        value.formatted(
-            .number
-                .locale(Locale(identifier: "en_US_POSIX"))
-                .grouping(.never)
-                .precision(.fractionLength(0...2))
-        )
     }
 }

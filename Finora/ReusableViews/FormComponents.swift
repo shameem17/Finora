@@ -20,14 +20,14 @@ struct FormFieldRow<Content: View>: View {
         HStack(alignment: alignTop ? .top : .center, spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
                 .frame(width: 32, height: 32)
-                .background(CustomColor.darkGray.color.opacity(0.06),
+                .background(Color.fillSubtle,
                             in: RoundedRectangle(cornerRadius: 10, style: .continuous))
 
             Text(title)
                 .font(.manrope, size: 14, weight: .semiBold)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.7))
+                .foregroundStyle(Color.textSecondary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
 
@@ -49,11 +49,11 @@ struct ValueRow: View {
         HStack(alignment: .firstTextBaseline, spacing: 12) {
             Text(title)
                 .font(.manrope, size: 14, weight: emphasized ? .bold : .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(emphasized ? 1 : 0.6))
+                .foregroundStyle(Color.textPrimary.opacity(emphasized ? 1 : 0.6))
             Spacer(minLength: 8)
             Text(value)
                 .font(.manrope, size: 14, weight: emphasized ? .extraBold : .semiBold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
                 .multilineTextAlignment(.trailing)
                 .contentTransition(.numericText())
         }
@@ -69,7 +69,7 @@ struct SearchField: View {
     var body: some View {
         HStack(spacing: 10) {
             Image(systemName: "magnifyingglass")
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.45))
+                .foregroundStyle(Color.textTertiary)
 
             TextField(prompt, text: $text)
                 .textInputAutocapitalization(.never)
@@ -81,14 +81,14 @@ struct SearchField: View {
                     text = ""
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
+                        .foregroundStyle(Color.textTertiary)
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel("Clear search")
             }
         }
         .font(.manrope, size: 15, weight: .semiBold)
-        .foregroundStyle(CustomColor.darkGray.color)
+        .foregroundStyle(Color.textPrimary)
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .background(Capsule().fill(CustomColor.customWhite.color.opacity(0.75)))
@@ -105,10 +105,10 @@ struct FormErrorBanner: View {
         if let message {
             Label(message, systemImage: "exclamationmark.triangle.fill")
                 .font(.manrope, size: 13, weight: .semiBold)
-                .foregroundStyle(CustomColor.dangerRed.color)
+                .foregroundStyle(Color.negative)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(14)
-                .background(CustomColor.dangerRed.color.opacity(0.1),
+                .background(Color.negative.opacity(0.1),
                             in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                 .transition(.opacity)
         }
@@ -128,7 +128,7 @@ struct FormPrimaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(.manrope, size: 20, weight: .extraBold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
                 .padding(.vertical, 18)
                 .frame(maxWidth: .infinity)
                 .background(tint.color)
@@ -140,5 +140,108 @@ struct FormPrimaryButton: View {
         .animation(.easeInOut(duration: 0.2), value: isEnabled)
         .padding(.horizontal, 16)
         .padding(.bottom, 8)
+    }
+}
+
+// MARK: - Section building blocks
+
+extension View {
+    /// The standard white content card: 20pt padding, full width, rounded.
+    func sectionCard(padding: CGFloat = 20) -> some View {
+        self
+            .padding(padding)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .finoraCard()
+    }
+}
+
+/// Small uppercase caption above a block of content ("TOTAL SAVINGS").
+struct SectionLabel: View {
+    let text: String
+
+    init(_ text: String) { self.text = text }
+
+    var body: some View {
+        Text(text.uppercased())
+            .font(.manrope, size: 12, weight: .semiBold)
+            .tracking(1)
+            .foregroundStyle(Color.textSecondary)
+    }
+}
+
+/// Title over value, used in rows of figures inside summary and detail cards.
+struct StatColumn: View {
+    let title: String
+    let value: String
+    var color: Color = .textPrimary
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 3) {
+            Text(title)
+                .font(.manrope, size: 11, weight: .semiBold)
+                .foregroundStyle(Color.textSecondary)
+            Text(value)
+                .font(.manrope, size: 15, weight: .bold)
+                .foregroundStyle(color)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .contentTransition(.numericText())
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+/// Friendly placeholder card for a list with nothing in it yet.
+struct EmptyStateCard: View {
+    let icon: String
+    let title: String
+    let message: String
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: icon)
+                .font(.system(size: 44, weight: .light))
+                .foregroundStyle(Color.textTertiary)
+
+            Text(title)
+                .font(.manrope, size: 18, weight: .bold)
+                .foregroundStyle(Color.textPrimary)
+
+            Text(message)
+                .font(.manrope, size: 14, weight: .medium)
+                .foregroundStyle(Color.textSecondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 40)
+        .padding(.horizontal, 24)
+        .finoraCard()
+    }
+}
+
+/// Round "eye" button that toggles balance masking (backed by `AppSettings.hidesBalances`).
+struct BalanceVisibilityButton: View {
+    @Binding var isHidden: Bool
+
+    var body: some View {
+        Button {
+            withAnimation(.smooth) { isHidden.toggle() }
+        } label: {
+            Image(systemName: isHidden ? "eye.slash" : "eye")
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color.textPrimary)
+                .frame(width: 44, height: 44)
+                .background(Color.fillSubtle, in: Circle())
+        }
+        .accessibilityLabel(isHidden ? "Show balances" : "Hide balances")
+    }
+}
+
+extension View {
+    /// Text style for single-line values inside a `FormFieldRow`.
+    func formFieldStyle() -> some View {
+        self
+            .font(.manrope, size: 15, weight: .semiBold)
+            .foregroundStyle(Color.textPrimary)
     }
 }

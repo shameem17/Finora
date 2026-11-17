@@ -27,13 +27,13 @@ struct PillPicker<Option: PickerOption>: View {
                         .font(.manrope, size: 14, weight: .bold)
                         .foregroundStyle(isSelected
                                          ? CustomColor.customWhite.color
-                                         : CustomColor.darkGray.color.opacity(0.55))
+                                         : Color.textSecondary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 11)
                         .background {
                             if isSelected {
                                 Capsule()
-                                    .fill(CustomColor.darkGray.color)
+                                    .fill(Color.textPrimary)
                                     .matchedGeometryEffect(id: "pill", in: pill)
                             }
                         }

@@ -43,10 +43,7 @@ final class CategoryFormViewModel: Identifiable {
             name = category.name
             icon = category.icon
             tintHex = category.tint
-            if let budget = category.monthlyBudget {
-                budgetText = budget.truncatingRemainder(dividingBy: 1) == 0
-                    ? String(Int(budget)) : String(budget)
-            }
+            budgetText = category.monthlyBudget.map(DecimalInput.text) ?? ""
         }
     }
 

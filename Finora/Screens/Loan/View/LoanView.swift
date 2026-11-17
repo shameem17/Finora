@@ -82,15 +82,15 @@ struct LoanView<ViewModel: LoanViewModelProtocol>: View {
                 Text(section.group.title)
                     .font(.manrope, size: 16, weight: .bold)
                     .foregroundStyle(section.group == .overdue
-                                     ? CustomColor.dangerRed.color
-                                     : CustomColor.darkGray.color.opacity(0.7))
+                                     ? Color.negative
+                                     : Color.textSecondary)
 
                 Text("\(section.items.count)")
                     .font(.manrope, size: 12, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 2)
-                    .background(CustomColor.darkGray.color.opacity(0.06), in: Capsule())
+                    .background(Color.fillSubtle, in: Capsule())
             }
             .padding(.leading, 4)
 

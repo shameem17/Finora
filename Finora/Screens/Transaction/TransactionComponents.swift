@@ -53,22 +53,22 @@ struct TransferSummaryCard: View {
             HStack(alignment: .firstTextBaseline) {
                 Text("Total Transferred")
                     .font(.manrope, size: 18, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
 
                 Spacer()
 
                 Text(period.subtitle)
                     .font(.manrope, size: 13, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
-                    .background(CustomColor.darkGray.color.opacity(0.06), in: Capsule())
+                    .background(Color.fillSubtle, in: Capsule())
                     .contentTransition(.opacity)
             }
 
             Text(CurrencyFormatter.taka(summary.totalAmount))
                 .font(.manrope, size: 40, weight: .extraBold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .contentTransition(.numericText())
@@ -112,10 +112,10 @@ private struct StatTile: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                 Text(value)
                     .font(.manrope, size: 15, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .contentTransition(.numericText())
@@ -124,7 +124,7 @@ private struct StatTile: View {
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(CustomColor.darkGray.color.opacity(0.04),
+        .background(Color.fillSubtle,
                     in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
@@ -151,12 +151,12 @@ struct TransferRow: View {
             VStack(alignment: .leading, spacing: 3) {
                 Text("\(transfer.from.name) → \(transfer.to.name)")
                     .font(.manrope, size: 15, weight: .bold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
 
                 Text(transfer.reason.isEmpty ? "Balance transfer" : transfer.reason)
                     .font(.manrope, size: 12, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
             }
 
@@ -165,7 +165,7 @@ struct TransferRow: View {
             VStack(alignment: .trailing, spacing: 3) {
                 Text(CurrencyFormatter.taka(transfer.amount, showFraction: true))
                     .font(.manrope, size: 15, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
 
                 if transfer.charge > 0 {
@@ -189,17 +189,17 @@ struct EmptyTransfersView: View {
         VStack(spacing: 12) {
             Image(systemName: "arrow.left.arrow.right.circle")
                 .font(.system(size: 44, weight: .light))
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.35))
+                .foregroundStyle(Color.textTertiary)
 
             Text("No transfers yet")
                 .font(.manrope, size: 18, weight: .bold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
 
             Text(period == .all
                  ? "Move money between your accounts and it will show up here."
                  : "Nothing recorded for this period.")
                 .font(.manrope, size: 14, weight: .medium)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                .foregroundStyle(Color.textSecondary)
                 .multilineTextAlignment(.center)
         }
         .frame(maxWidth: .infinity)

@@ -72,13 +72,13 @@ struct SummaryCard: View {
 struct InsightsCard: View {
     let insights: MonthlyInsights
  
-    private var ink: Color { CustomColor.darkGray.color }
+    private var ink: Color { Color.textPrimary }
  
     private var ringColor: Color {
         switch insights.savingsRate {
-        case 0.2...:  return CustomColor.successGreen.color
+        case 0.2...:  return Color.positive
         case 0.1...:  return CustomColor.amberYellow.color
-        default:      return CustomColor.dangerRed.color
+        default:      return Color.negative
         }
     }
  
@@ -143,12 +143,12 @@ struct InsightsCard: View {
         case .onTrack(let surplus):
             Label("On track to save \(TakaFormatter.string(surplus))",
                   systemImage: "arrow.up.right.circle.fill")
-                .foregroundStyle(CustomColor.successGreen.color)
+                .foregroundStyle(Color.positive)
                 .font(.manrope, size: 13, weight: .semiBold)
         case .overspending(let deficit):
             Label("Projected to overspend by \(TakaFormatter.string(deficit))",
                   systemImage: "exclamationmark.triangle.fill")
-                .foregroundStyle(CustomColor.dangerRed.color)
+                .foregroundStyle(Color.negative)
                 .font(.manrope, size: 13, weight: .semiBold)
         }
     }
@@ -160,8 +160,8 @@ struct InsightsCard: View {
             InsightStat(icon: isDown ? "arrow.down.right" : "arrow.up.right",
                         title: "vs last month",
                         value: "\(Int((abs(change) * 100).rounded()))%",
-                        tint: isDown ? CustomColor.successGreen.color
-                                     : CustomColor.dangerRed.color)
+                        tint: isDown ? Color.positive
+                                     : Color.negative)
         } else {
             InsightStat(icon: "minus",
                         title: "vs last month",
@@ -189,7 +189,7 @@ private struct SavingsRing: View {
  
             Text("\(Int((progress * 100).rounded()))%")
                 .font(.manrope, size: 20, weight: .extraBold)
-                .foregroundStyle(CustomColor.darkGray.color)
+                .foregroundStyle(Color.textPrimary)
                 .contentTransition(.numericText())
         }
         .animation(.smooth, value: progress)
@@ -218,19 +218,19 @@ private struct InsightStat: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.manrope, size: 11, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
  
                 Text(value)
                     .font(.manrope, size: 15, weight: .extraBold)
-                    .foregroundStyle(CustomColor.darkGray.color)
+                    .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
  
                 // Always reserve the line so all three tiles share one height.
                 Text(caption ?? " ")
                     .font(.manrope, size: 11, weight: .medium)
-                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
             }
