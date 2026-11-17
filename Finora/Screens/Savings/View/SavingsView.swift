@@ -40,6 +40,14 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
             }
         }
         .navigationTitle("Savings")
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button { model.showLog() } label: {
+                    Image(systemName: "clock.arrow.circlepath")
+                }
+                .accessibilityLabel("Savings log")
+            }
+        }
         .safeAreaInset(edge: .bottom) {
             AddActionButton(title: "Add Savings Account", tint: .vividTeal) {
                 form = model.makeFormViewModel()

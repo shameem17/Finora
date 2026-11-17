@@ -124,6 +124,9 @@
 		99927C002430AB0001001DCA2B /* SavingsEntryFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C002330AB0001001DCA2B /* SavingsEntryFormView.swift */; };
 		99927C002730AB0001001DCA2B /* SavingsRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C002630AB0001001DCA2B /* SavingsRouting.swift */; };
 		99927C002930AB0001001DCA2B /* SavingsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927C002830AB0001001DCA2B /* SavingsCoordinator.swift */; };
+		99927D000230AB0001001DCA2B /* SavingsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927D000130AB0001001DCA2B /* SavingsLog.swift */; };
+		99927D000430AB0001001DCA2B /* SavingsLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927D000330AB0001001DCA2B /* SavingsLogViewModel.swift */; };
+		99927D000630AB0001001DCA2B /* SavingsLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927D000530AB0001001DCA2B /* SavingsLogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -246,6 +249,9 @@
 		99927C002330AB0001001DCA2B /* SavingsEntryFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsEntryFormView.swift; sourceTree = "<group>"; };
 		99927C002630AB0001001DCA2B /* SavingsRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsRouting.swift; sourceTree = "<group>"; };
 		99927C002830AB0001001DCA2B /* SavingsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsCoordinator.swift; sourceTree = "<group>"; };
+		99927D000130AB0001001DCA2B /* SavingsLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsLog.swift; sourceTree = "<group>"; };
+		99927D000330AB0001001DCA2B /* SavingsLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsLogViewModel.swift; sourceTree = "<group>"; };
+		99927D000530AB0001001DCA2B /* SavingsLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingsLogView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

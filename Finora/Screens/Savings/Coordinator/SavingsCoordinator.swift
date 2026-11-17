@@ -43,6 +43,15 @@ extension SavingsCoordinator: SavingsRouting {
         rootViewController?.pushViewController(controller, animated: true)
     }
 
+    func showLog(of id: SavingsAccount.ID?) {
+        let model = SavingsLogViewModel(scope: id, dependencies: dependencies)
+
+        let controller = UIHostingController(rootView: SavingsLogView(model: model))
+        controller.hidesBottomBarWhenPushed = true
+        controller.navigationItem.largeTitleDisplayMode = .never
+        rootViewController?.pushViewController(controller, animated: true)
+    }
+
     func closeDetail() {
         rootViewController?.popViewController(animated: true)
     }

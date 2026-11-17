@@ -130,6 +130,8 @@ struct SavingsCard: View {
 
 struct SavingsEntryRow: View {
     let entry: SavingsEntry
+    /// Shown above the details when the row appears outside its own savings account.
+    var savingsName: String?
 
     private var source: String {
         guard let account = entry.account else { return "Outside accounts" }
@@ -145,6 +147,12 @@ struct SavingsEntryRow: View {
                 .background(entry.kind.tint.color.opacity(0.15), in: Circle())
 
             VStack(alignment: .leading, spacing: 2) {
+                if let savingsName {
+                    Text(savingsName)
+                        .font(.manrope, size: 11, weight: .semiBold)
+                        .foregroundStyle(CustomColor.darkGray.color.opacity(0.45))
+                        .lineLimit(1)
+                }
                 Text(entry.kind.historyTitle)
                     .font(.manrope, size: 14, weight: .bold)
                     .foregroundStyle(CustomColor.darkGray.color)

@@ -15,6 +15,7 @@ protocol SavingsViewModelProtocol: AnyObject, Observable {
 
     func load()
     func showDetail(of id: SavingsAccount.ID)
+    func showLog()
     func makeFormViewModel() -> SavingsFormViewModel
     func makeEntryFormViewModel(for id: SavingsAccount.ID, kind: SavingsEntryKind) -> SavingsEntryFormViewModel?
 }
@@ -56,6 +57,10 @@ final class SavingsViewModel: SavingsViewModelProtocol {
 
     func showDetail(of id: SavingsAccount.ID) {
         router?.showDetail(of: id)
+    }
+
+    func showLog() {
+        router?.showLog(of: nil)
     }
 
     func makeFormViewModel() -> SavingsFormViewModel {

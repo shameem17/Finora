@@ -238,10 +238,20 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
 
     private var history: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Text("HISTORY")
-                .font(.manrope, size: 12, weight: .semiBold)
-                .tracking(1)
-                .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+            HStack {
+                Text("HISTORY")
+                    .font(.manrope, size: 12, weight: .semiBold)
+                    .tracking(1)
+                    .foregroundStyle(CustomColor.darkGray.color.opacity(0.55))
+                Spacer()
+                if !model.entries.isEmpty {
+                    Button { model.showLog() } label: {
+                        Text("Full log")
+                            .font(.manrope, size: 13, weight: .bold)
+                            .foregroundStyle(CustomColor.vividTeal.color)
+                    }
+                }
+            }
 
             if model.entries.isEmpty {
                 Text("No deposits or withdrawals yet.")
