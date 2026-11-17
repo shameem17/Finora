@@ -84,12 +84,12 @@ final class RepaymentFormViewModel: Identifiable {
     // MARK: Intents
 
     func payInFull() {
-        amountText = Self.text(outstanding)
+        amountText = DecimalInput.text(outstanding)
     }
 
     func payNextInstallment() {
         guard let nextInstallment else { return }
-        amountText = Self.text(nextInstallment.remaining)
+        amountText = DecimalInput.text(nextInstallment.remaining)
     }
 
     @discardableResult
@@ -121,13 +121,4 @@ final class RepaymentFormViewModel: Identifiable {
     }
 
     // MARK: Helpers
-
-    private static func text(_ value: Double) -> String {
-        value.formatted(
-            .number
-                .locale(Locale(identifier: "en_US_POSIX"))
-                .grouping(.never)
-                .precision(.fractionLength(0...2))
-        )
-    }
 }

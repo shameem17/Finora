@@ -64,6 +64,11 @@ enum DecimalInput {
 
     /// Editable text for an amount: whole numbers without decimals, otherwise two.
     static func text(_ value: Double) -> String {
-        value.truncatingRemainder(dividingBy: 1) == 0 ? String(Int(value)) : String(format: "%.2f", value)
+        value.formatted(
+            .number
+                .locale(Locale(identifier: "en_US_POSIX"))
+                .grouping(.never)
+                .precision(.fractionLength(0...2))
+        )
     }
 }
