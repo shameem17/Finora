@@ -31,80 +31,96 @@ final class SavingsService: SavingsServiceProtocol {
 
     private let savings: SavingsRepositoryProtocol
     private let accounts: AccountRepositoryProtocol
+    private let unitOfWork: UnitOfWork
 
-    init(savings: SavingsRepositoryProtocol, accounts: AccountRepositoryProtocol) {
+    init(savings: SavingsRepositoryProtocol,
+         accounts: AccountRepositoryProtocol,
+         unitOfWork: UnitOfWork = ImmediateUnitOfWork()) {
         self.savings = savings
         self.accounts = accounts
+        self.unitOfWork = unitOfWork
     }
 
     func create(_ item: SavingsAccount) {
-        savings.add(item)
+        unitOfWork.perform { savings.add(item) }
     }
 
     func update(_ item: SavingsAccount) {
-        guard var stored = savings.savings(id: item.id) else { return }
-        stored.name = item.name
-        stored.number = item.number
-        stored.accountID = item.accountID
-        stored.logoData = item.logoData
-        stored.tint = item.tint
-        stored.startDate = item.startDate
-        stored.target = item.target
-        stored.targetDate = item.targetDate
-        stored.note = item.note
-        savings.update(stored)
+        unitOfWork.perform {
+            guard var stored = savings.savings(id: item.id) else { return }
+            stored.name = item.name
+            stored.number = item.number
+            stored.accountID = item.accountID
+            stored.logoData = item.logoData
+            stored.tint = item.tint
+            stored.startDate = item.startDate
+            stored.target = item.target
+            stored.targetDate = item.targetDate
+            stored.note = item.note
+            savings.update(stored)
+        }
     }
 
     func delete(savingsID: SavingsAccount.ID, returnRemaining: Bool) {
-        guard let item = savings.savings(id: savingsID) else { return }
-        if returnRemaining, item.currentSavings > 0 {
-            accounts.adjustBalance(of: item.accountID, by: item.currentSavings)
+        unitOfWork.perform {
+            guard let item = savings.savings(id: savingsID) else { return }
+            if returnRemaining, item.currentSavings > 0 {
+                accounts.adjustBalance(of: item.accountID, by: item.currentSavings)
+            }
+            savings.delete(id: savingsID)
         }
-        savings.delete(id: savingsID)
     }
 
     func deposit(_ entry: SavingsEntry, to savingsID: SavingsAccount.ID) {
-        guard var item = savings.savings(id: savingsID) else { return }
-        apply(entry, sign: 1)
-        item.entries.append(entry)
-        savings.update(item)
+        unitOfWork.perform {
+            guard var item = savings.savings(id: savingsID) else { return }
+            apply(entry, sign: 1)
+            item.entries.append(entry)
+            savings.update(item)
+        }
     }
 
     func withdraw(_ entry: SavingsEntry, from savingsID: SavingsAccount.ID) {
-        guard var item = savings.savings(id: savingsID),
-              entry.amount <= item.currentSavings + 0.005 else { return }
-        apply(entry, sign: 1)
-        item.entries.append(entry)
-        savings.update(item)
+        unitOfWork.perform {
+            guard var item = savings.savings(id: savingsID),
+                  entry.amount <= item.currentSavings + 0.005 else { return }
+            apply(entry, sign: 1)
+            item.entries.append(entry)
+            savings.update(item)
+        }
     }
 
     @discardableResult
     func deleteEntry(id: SavingsEntry.ID, from savingsID: SavingsAccount.ID) -> Bool {
-        guard var item = savings.savings(id: savingsID),
-              let entry = item.entries.first(where: { $0.id == id }) else { return false }
+        unitOfWork.perform { () -> Bool in
+            guard var item = savings.savings(id: savingsID),
+                  let entry = item.entries.first(where: { $0.id == id }) else { return false }
 
-        item.entries.removeAll { $0.id == id }
-        // Removing a deposit must not leave more withdrawn than ever saved.
-        guard item.totalDeposited - item.totalWithdrawn > -0.005 else { return false }
+            item.entries.removeAll { $0.id == id }
+            // Removing a deposit must not leave more withdrawn than ever saved.
+            guard item.totalDeposited - item.totalWithdrawn > -0.005 else { return false }
 
-        apply(entry, sign: -1)
-        savings.update(item)
-        return true
+            apply(entry, sign: -1)
+            savings.update(item)
+            return true
+        }
     }
 
     @discardableResult
     func updateEntry(_ entry: SavingsEntry, in savingsID: SavingsAccount.ID) -> Bool {
-        guard var item = savings.savings(id: savingsID),
-              let index = item.entries.firstIndex(where: { $0.id == entry.id }) else { return false }
+        unitOfWork.perform { () -> Bool in
+            guard var item = savings.savings(id: savingsID),
+                  let index = item.entries.firstIndex(where: { $0.id == entry.id }) else { return false }
 
-        let old = item.entries[index]
-        item.entries[index] = entry
-        guard item.totalDeposited - item.totalWithdrawn > -0.005 else { return false }
+            let old = item.entries[index]
+            item.entries[index] = entry
+            guard item.totalDeposited - item.totalWithdrawn > -0.005 else { return false }
 
-        apply(old, sign: -1)
-        apply(entry, sign: 1)
-        savings.update(item)
-        return true
+            apply(old, sign: -1)
+            apply(entry, sign: 1)
+            savings.update(item)
+            return true
+        }
     }
 
     /// Applies (`sign` 1) or reverses (`sign` -1) an entry's effect on its linked account.

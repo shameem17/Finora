@@ -5,10 +5,9 @@
 //  Created by Shameem on 11/10/26.
 //
 
-
 import Foundation
+import SwiftUI
 import Combine
-
 
 protocol HomeViewModelProtocol {
    func prepareData()
@@ -87,7 +86,7 @@ struct MonthlyInsights: Equatable {
 }
 
 extension MonthlyInsights {
-   // DEMO ONLY: replace with a repository query.
+   /// Previews only. The app computes real insights from stored entries.
    static func sample(progress: MonthProgress) -> MonthlyInsights {
        MonthlyInsights(
            income: 85_000,
@@ -122,16 +121,26 @@ final class HomeViewModel: HomeViewModelProtocol {
    // services
    let dateService: DateServiceProtocol
    private let accountRepository: AccountRepositoryProtocol
+   private let cashFlowRepository: CashFlowRepositoryProtocol
+   private let categoryRepository: CategoryRepositoryProtocol
+   private let calendar: Calendar
 
    @ObservationIgnored private var cancellables = Set<AnyCancellable>()
 
    init(dateService: DateServiceProtocol = DateService(),
-        accountRepository: AccountRepositoryProtocol = InMemoryAccountRepository.shared) {
+        accountRepository: AccountRepositoryProtocol = SwiftDataAccountRepository.shared,
+        cashFlowRepository: CashFlowRepositoryProtocol = SwiftDataCashFlowRepository.shared,
+        categoryRepository: CategoryRepositoryProtocol = SwiftDataCategoryRepository.shared,
+        calendar: Calendar = .current) {
        self.dateService = dateService
        self.accountRepository = accountRepository
+       self.cashFlowRepository = cashFlowRepository
+       self.categoryRepository = categoryRepository
+       self.calendar = calendar
 
-       // Keep the account cards in sync with edits made on the Accounts tab.
+       // Keep balances and insights in sync with edits made on any other tab.
        accountRepository.changes
+           .merge(with: cashFlowRepository.changes, categoryRepository.changes)
            .sink { [weak self] in
                guard self?.homeViewData != nil else { return }
                self?.prepareData()
@@ -144,7 +153,52 @@ final class HomeViewModel: HomeViewModelProtocol {
        homeViewData = HomeViewData(
            headerTitle: "\(date.month) \(date.year), Overview",
            accounts: accountRepository.fetchAccounts(),
-           insights: .sample(progress: dateService.monthProgress())
+           insights: makeInsights()
        )
+   }
+
+   // MARK: Private
+
+   private func makeInsights() -> MonthlyInsights {
+       let now = Date.now
+       let previous = calendar.date(byAdding: .month, value: -1, to: now) ?? now
+       let calendar = self.calendar
+
+       func inMonth(_ reference: Date) -> (CashFlowEntry) -> Bool {
+           { calendar.isDate($0.date, equalTo: reference, toGranularity: .month) }
+       }
+
+       let income = cashFlowRepository.fetchEntries(kind: .income)
+           .filter(inMonth(now))
+           .reduce(0) { $0 + $1.amount }
+
+       let expenses = cashFlowRepository.fetchEntries(kind: .expense)
+       let monthExpenses = expenses.filter(inMonth(now))
+       let expense = monthExpenses.reduce(0) { $0 + $1.amount }
+       let previousExpense = expenses.filter(inMonth(previous)).reduce(0) { $0 + $1.amount }
+
+       let categories = Dictionary(categoryRepository.fetchCategories(kind: .expense).map { ($0.id, $0) },
+                                   uniquingKeysWith: { first, _ in first })
+
+       let top = Dictionary(grouping: monthExpenses, by: \.categoryID)
+           .map { id, group -> BreakdownItem in
+               let amount = group.reduce(0) { $0 + $1.amount }
+               if let category = categories[id] {
+                   return BreakdownItem(name: category.name, amount: amount,
+                                        color: Color(hex: category.tint), icon: category.icon)
+               }
+               return BreakdownItem(name: "Uncategorised", amount: amount,
+                                    color: Color.textTertiary, icon: "questionmark.circle")
+           }
+           .max { $0.amount < $1.amount }
+           ?? BreakdownItem(name: "None yet", amount: 0, color: Color.textTertiary, icon: "minus")
+
+       let progress = dateService.monthProgress()
+       return MonthlyInsights(income: income,
+                              expense: expense,
+                              previousMonthExpense: previousExpense,
+                              elapsedDays: progress.elapsedDays,
+                              totalDays: progress.totalDays,
+                              topExpense: top)
    }
 }

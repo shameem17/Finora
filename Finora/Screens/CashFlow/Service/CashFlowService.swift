@@ -21,28 +21,38 @@ final class CashFlowService: CashFlowServiceProtocol {
 
     private let entries: CashFlowRepositoryProtocol
     private let accounts: AccountRepositoryProtocol
+    private let unitOfWork: UnitOfWork
 
-    init(entries: CashFlowRepositoryProtocol, accounts: AccountRepositoryProtocol) {
+    init(entries: CashFlowRepositoryProtocol,
+         accounts: AccountRepositoryProtocol,
+         unitOfWork: UnitOfWork = ImmediateUnitOfWork()) {
         self.entries = entries
         self.accounts = accounts
+        self.unitOfWork = unitOfWork
     }
 
     func record(_ entry: CashFlowEntry) {
-        accounts.adjustBalance(of: entry.accountID, by: entry.accountDelta)
-        entries.add(entry)
+        unitOfWork.perform {
+            accounts.adjustBalance(of: entry.accountID, by: entry.accountDelta)
+            entries.add(entry)
+        }
     }
 
     func update(_ entry: CashFlowEntry) {
-        guard let old = entries.entry(id: entry.id) else { return }
-        accounts.adjustBalance(of: old.accountID, by: -old.accountDelta)
-        accounts.adjustBalance(of: entry.accountID, by: entry.accountDelta)
-        entries.update(entry)
+        unitOfWork.perform {
+            guard let old = entries.entry(id: entry.id) else { return }
+            accounts.adjustBalance(of: old.accountID, by: -old.accountDelta)
+            accounts.adjustBalance(of: entry.accountID, by: entry.accountDelta)
+            entries.update(entry)
+        }
     }
 
     func delete(id: CashFlowEntry.ID) {
-        guard let old = entries.entry(id: id) else { return }
-        accounts.adjustBalance(of: old.accountID, by: -old.accountDelta)
-        entries.delete(id: id)
+        unitOfWork.perform {
+            guard let old = entries.entry(id: id) else { return }
+            accounts.adjustBalance(of: old.accountID, by: -old.accountDelta)
+            entries.delete(id: id)
+        }
     }
 }
 
@@ -53,9 +63,10 @@ struct CashFlowDependencies {
     let service: CashFlowServiceProtocol
 
     static func live() -> CashFlowDependencies {
-        make(entries: InMemoryCashFlowRepository.shared,
-             categories: InMemoryCategoryRepository.shared,
-             accounts: InMemoryAccountRepository.shared)
+        make(entries: SwiftDataCashFlowRepository.shared,
+             categories: SwiftDataCategoryRepository.shared,
+             accounts: SwiftDataAccountRepository.shared,
+             unitOfWork: PersistenceController.shared)
     }
 
     #if DEBUG
@@ -74,15 +85,17 @@ struct CashFlowDependencies {
 
     private static func make(entries: CashFlowRepositoryProtocol,
                              categories: CategoryRepositoryProtocol,
-                             accounts: AccountRepositoryProtocol) -> CashFlowDependencies {
+                             accounts: AccountRepositoryProtocol,
+                             unitOfWork: UnitOfWork = ImmediateUnitOfWork()) -> CashFlowDependencies {
         CashFlowDependencies(entries: entries, categories: categories, accounts: accounts,
-                             service: CashFlowService(entries: entries, accounts: accounts))
+                             service: CashFlowService(entries: entries, accounts: accounts,
+                                                      unitOfWork: unitOfWork))
     }
 }
 
 #if DEBUG
 enum CashFlowSampleData {
-    /// A few records this month so the charts aren't empty in debug builds.
+    /// A few records this month so the charts aren't empty in previews.
     static func entries(categories: [TransactionCategory], accounts: [Account]) -> [CashFlowEntry] {
         guard let account = accounts.first else { return [] }
         let amounts: [String: Double] = [

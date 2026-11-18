@@ -26,64 +26,81 @@ final class LoanService: LoanServiceProtocol {
     private let people: PersonRepositoryProtocol
     private let accounts: AccountRepositoryProtocol
     private let reminders: LoanReminderScheduling
+    private let unitOfWork: UnitOfWork
 
     init(loans: LoanRepositoryProtocol,
          people: PersonRepositoryProtocol,
          accounts: AccountRepositoryProtocol,
-         reminders: LoanReminderScheduling) {
+         reminders: LoanReminderScheduling,
+         unitOfWork: UnitOfWork = ImmediateUnitOfWork()) {
         self.loans = loans
         self.people = people
         self.accounts = accounts
         self.reminders = reminders
+        self.unitOfWork = unitOfWork
     }
 
     // MARK: LoanServiceProtocol
+    //
+    // Money and records change inside one atomic commit; reminders are synced
+    // afterwards from what was actually stored.
 
     func create(_ loan: Loan) {
-        // Balances first, so observers of the loan list never see a half-applied change.
-        accounts.adjustBalance(of: loan.account.id, by: loan.kind.principalDelta(loan.principal))
-        loans.add(loan)
-        syncReminder(for: loan)
+        unitOfWork.perform {
+            accounts.adjustBalance(of: loan.account.id, by: loan.kind.principalDelta(loan.principal))
+            loans.add(loan)
+        }
+        syncReminder(for: loan.id)
     }
 
     func update(_ loan: Loan) {
-        loans.update(loan)
-        syncReminder(for: loan)
+        unitOfWork.perform { loans.update(loan) }
+        syncReminder(for: loan.id)
     }
 
     func delete(loanID: Loan.ID) {
-        guard let loan = loans.loan(id: loanID) else { return }
+        unitOfWork.perform {
+            guard let loan = loans.loan(id: loanID) else { return }
 
-        accounts.adjustBalance(of: loan.account.id, by: -loan.kind.principalDelta(loan.principal))
-        for repayment in loan.repayments {
-            accounts.adjustBalance(of: repayment.account.id, by: -loan.kind.repaymentDelta(repayment.amount))
+            accounts.adjustBalance(of: loan.account.id, by: -loan.kind.principalDelta(loan.principal))
+            for repayment in loan.repayments {
+                accounts.adjustBalance(of: repayment.account.id, by: -loan.kind.repaymentDelta(repayment.amount))
+            }
+            loans.delete(id: loanID)
         }
         reminders.cancel(loanID: loanID)
-        loans.delete(id: loanID)
     }
 
     func addRepayment(_ repayment: Repayment, to loanID: Loan.ID) {
-        guard var loan = loans.loan(id: loanID) else { return }
+        unitOfWork.perform {
+            guard var loan = loans.loan(id: loanID) else { return }
 
-        accounts.adjustBalance(of: repayment.account.id, by: loan.kind.repaymentDelta(repayment.amount))
-        loan.repayments.append(repayment)
-        loans.update(loan)
-        syncReminder(for: loan)
+            accounts.adjustBalance(of: repayment.account.id, by: loan.kind.repaymentDelta(repayment.amount))
+            loan.repayments.append(repayment)
+            loans.update(loan)
+        }
+        syncReminder(for: loanID)
     }
 
     func deleteRepayment(id: Repayment.ID, from loanID: Loan.ID) {
-        guard var loan = loans.loan(id: loanID),
-              let repayment = loan.repayments.first(where: { $0.id == id }) else { return }
+        unitOfWork.perform {
+            guard var loan = loans.loan(id: loanID),
+                  let repayment = loan.repayments.first(where: { $0.id == id }) else { return }
 
-        accounts.adjustBalance(of: repayment.account.id, by: -loan.kind.repaymentDelta(repayment.amount))
-        loan.repayments.removeAll { $0.id == id }
-        loans.update(loan)
-        syncReminder(for: loan)
+            accounts.adjustBalance(of: repayment.account.id, by: -loan.kind.repaymentDelta(repayment.amount))
+            loan.repayments.removeAll { $0.id == id }
+            loans.update(loan)
+        }
+        syncReminder(for: loanID)
     }
 
     // MARK: Private
 
-    private func syncReminder(for loan: Loan) {
+    private func syncReminder(for id: Loan.ID) {
+        guard let loan = loans.loan(id: id) else {
+            reminders.cancel(loanID: id)
+            return
+        }
         reminders.sync(loan, person: people.person(id: loan.personID))
     }
 }

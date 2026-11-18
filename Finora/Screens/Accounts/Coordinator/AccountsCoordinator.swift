@@ -16,7 +16,7 @@ final class AccountsCoordinator: Coordinator {
     private let repository: AccountRepositoryProtocol
 
     init(settings: AppSettings,
-         repository: AccountRepositoryProtocol = InMemoryAccountRepository.shared) {
+         repository: AccountRepositoryProtocol = SwiftDataAccountRepository.shared) {
         self.rootViewController = UINavigationController()
         self.settings = settings
         self.repository = repository

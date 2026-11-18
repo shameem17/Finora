@@ -16,13 +16,14 @@ struct LoanDependencies {
     let service: LoanServiceProtocol
 
     static func live(isRemindersEnabled: @escaping () -> Bool = { true }) -> LoanDependencies {
-        let loans = InMemoryLoanRepository.shared
-        let people = InMemoryPersonRepository.shared
-        let accounts = InMemoryAccountRepository.shared
+        let loans = SwiftDataLoanRepository.shared
+        let people = SwiftDataPersonRepository.shared
+        let accounts = SwiftDataAccountRepository.shared
         let service = LoanService(loans: loans,
                                   people: people,
                                   accounts: accounts,
-                                  reminders: LoanReminderScheduler(isEnabled: isRemindersEnabled))
+                                  reminders: LoanReminderScheduler(isEnabled: isRemindersEnabled),
+                                  unitOfWork: PersistenceController.shared)
         return LoanDependencies(loans: loans, people: people, accounts: accounts, service: service)
     }
 }

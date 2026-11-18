@@ -14,15 +14,11 @@ struct SavingsDependencies {
     let service: SavingsServiceProtocol
 
     static func live() -> SavingsDependencies {
-        let savings = InMemorySavingsRepository.shared
-        let accounts = InMemoryAccountRepository.shared
-        #if DEBUG
-        if savings.fetchSavings().isEmpty {
-            SavingsSampleData.savings(accounts: accounts.fetchAccounts()).forEach(savings.add)
-        }
-        #endif
+        let savings = SwiftDataSavingsRepository.shared
+        let accounts = SwiftDataAccountRepository.shared
         return SavingsDependencies(savings: savings, accounts: accounts,
-                                   service: SavingsService(savings: savings, accounts: accounts))
+                                   service: SavingsService(savings: savings, accounts: accounts,
+                                                           unitOfWork: PersistenceController.shared))
     }
 
     #if DEBUG

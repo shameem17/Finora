@@ -62,6 +62,9 @@
 		8882738030A989B4001DCA2B /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882737330A989B4001DCA2B /* Transfer.swift */; };
 		8882738130A989B4001DCA2B /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882737030A989B4001DCA2B /* Transaction.swift */; };
 		8882738330A98A1F001DCA2B /* TransactionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882738230A98A1C001DCA2B /* TransactionCoordinator.swift */; };
+		8882738530AD82ED001DCA2B /* SwiftDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882738430AD82DE001DCA2B /* SwiftDataRepository.swift */; };
+		8882738730AD830B001DCA2B /* PersistanceEntries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882738630AD8306001DCA2B /* PersistanceEntries.swift */; };
+		8882738930AD8332001DCA2B /* PersistanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882738830AD832D001DCA2B /* PersistanceController.swift */; };
 		88827A0330AB0002001DCA2B /* PersonModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0230AB0001001DCA2B /* PersonModels.swift */; };
 		88827A0530AB0002001DCA2B /* LoanModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0430AB0001001DCA2B /* LoanModels.swift */; };
 		88827A0730AB0002001DCA2B /* LoanSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88827A0630AB0001001DCA2B /* LoanSummary.swift */; };
@@ -194,6 +197,9 @@
 		8882737530A989B4001DCA2B /* TransferFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferFormViewModel.swift; sourceTree = "<group>"; };
 		8882737630A989B4001DCA2B /* TransferRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRepository.swift; sourceTree = "<group>"; };
 		8882738230A98A1C001DCA2B /* TransactionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCoordinator.swift; sourceTree = "<group>"; };
+		8882738430AD82DE001DCA2B /* SwiftDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataRepository.swift; sourceTree = "<group>"; };
+		8882738630AD8306001DCA2B /* PersistanceEntries.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceEntries.swift; sourceTree = "<group>"; };
+		8882738830AD832D001DCA2B /* PersistanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceController.swift; sourceTree = "<group>"; };
 		88827A0230AB0001001DCA2B /* PersonModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModels.swift; sourceTree = "<group>"; };
 		88827A0430AB0001001DCA2B /* LoanModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanModels.swift; sourceTree = "<group>"; };
 		88827A0630AB0001001DCA2B /* LoanSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoanSummary.swift; sourceTree = "<group>"; };
@@ -713,6 +719,41 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		99927A00004930AB001DCA2B /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00004C30AB001DCA2B /* ViewModel */,
+				99927A00004D30AB001DCA2B /* View */,
+				99927A00004E30AB001DCA2B /* Coordinator */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		99927A00004A30AB001DCA2B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00004F30AB001DCA2B /* Model */,
+				99927A00005030AB001DCA2B /* Repository */,
+				99927A00005130AB001DCA2B /* ViewModel */,
+				99927A00005230AB001DCA2B /* View */,
+				99927A00005330AB001DCA2B /* Coordinator */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		99927A00004B30AB001DCA2B /* Savings */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00005430AB001DCA2B /* Model */,
+				99927A00005530AB001DCA2B /* Repository */,
+				99927A00005630AB001DCA2B /* Service */,
+				99927A00005730AB001DCA2B /* ViewModel */,
+				99927A00005830AB001DCA2B /* View */,
+				99927A00005930AB001DCA2B /* Coordinator */,
+			);
+			path = Savings;
+			sourceTree = "<group>";
+		};
 		99927A00004C30AB001DCA2B /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -737,16 +778,6 @@
 				99927A00000A30AB001DCA2B /* AccountsCoordinator.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		99927A00004930AB001DCA2B /* Accounts */ = {
-			isa = PBXGroup;
-			children = (
-				99927A00004C30AB001DCA2B /* ViewModel */,
-				99927A00004D30AB001DCA2B /* View */,
-				99927A00004E30AB001DCA2B /* Coordinator */,
-			);
-			path = Accounts;
 			sourceTree = "<group>";
 		};
 		99927A00004F30AB001DCA2B /* Model */ = {
@@ -790,18 +821,6 @@
 				99927A00001A30AB001DCA2B /* CategoriesCoordinator.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		99927A00004A30AB001DCA2B /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				99927A00004F30AB001DCA2B /* Model */,
-				99927A00005030AB001DCA2B /* Repository */,
-				99927A00005130AB001DCA2B /* ViewModel */,
-				99927A00005230AB001DCA2B /* View */,
-				99927A00005330AB001DCA2B /* Coordinator */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		99927A00005430AB001DCA2B /* Model */ = {
@@ -867,22 +886,12 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
-		99927A00004B30AB001DCA2B /* Savings */ = {
-			isa = PBXGroup;
-			children = (
-				99927A00005430AB001DCA2B /* Model */,
-				99927A00005530AB001DCA2B /* Repository */,
-				99927A00005630AB001DCA2B /* Service */,
-				99927A00005730AB001DCA2B /* ViewModel */,
-				99927A00005830AB001DCA2B /* View */,
-				99927A00005930AB001DCA2B /* Coordinator */,
-			);
-			path = Savings;
-			sourceTree = "<group>";
-		};
 		99927A00006030AB001DCA2B /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
+				8882738830AD832D001DCA2B /* PersistanceController.swift */,
+				8882738630AD8306001DCA2B /* PersistanceEntries.swift */,
+				8882738430AD82DE001DCA2B /* SwiftDataRepository.swift */,
 				99927A00005E30AB001DCA2B /* InMemoryStore.swift */,
 			);
 			path = Persistence;
@@ -1030,6 +1039,7 @@
 				8882732430A1DDD5001DCA2B /* AppFont.swift in Sources */,
 				8882730C30A19CFE001DCA2B /* AllCoordinator.swift in Sources */,
 				8882732B30A2ED71001DCA2B /* HomeView.swift in Sources */,
+				8882738530AD82ED001DCA2B /* SwiftDataRepository.swift in Sources */,
 				8882734730A2F794001DCA2B /* DateService.swift in Sources */,
 				99927A00005F30AB001DCA2B /* InMemoryStore.swift in Sources */,
 				888272ED30A18E31001DCA2B /* DeepLinkHandler.swift in Sources */,
@@ -1089,6 +1099,7 @@
 				99927A00000930AB001DCA2B /* AccountsCoordinator.swift in Sources */,
 				99927A00000B30AB001DCA2B /* CategoryModels.swift in Sources */,
 				99927A00000D30AB001DCA2B /* CategoryRepository.swift in Sources */,
+				8882738930AD8332001DCA2B /* PersistanceController.swift in Sources */,
 				99927A00000F30AB001DCA2B /* CategoriesViewModel.swift in Sources */,
 				99927A00001130AB001DCA2B /* CategoryFormViewModel.swift in Sources */,
 				99927A00001330AB001DCA2B /* CategoryComponents.swift in Sources */,
@@ -1097,6 +1108,7 @@
 				99927A00001930AB001DCA2B /* CategoriesCoordinator.swift in Sources */,
 				99927A00001B30AB001DCA2B /* ColorSwatchPicker.swift in Sources */,
 				99927A00001D30AB001DCA2B /* LogoImageProcessor.swift in Sources */,
+				8882738730AD830B001DCA2B /* PersistanceEntries.swift in Sources */,
 				99927A00001F30AB001DCA2B /* SavingsModels.swift in Sources */,
 				99927A00004330AB001DCA2B /* SavingsLog.swift in Sources */,
 				99927A00002130AB001DCA2B /* SavingsSummary.swift in Sources */,

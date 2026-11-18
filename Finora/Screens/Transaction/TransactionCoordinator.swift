@@ -10,28 +10,28 @@ import UIKit
 
 class TransactionCoordinator: Coordinator {
     var rootViewController: UINavigationController?
-    
+
     let settings: AppSettings
     let viewModel: TransactionViewModel
-    
+
     lazy var transactionView: UIViewController = {
         let view = TransactionView(model: viewModel)
         let vc = UIHostingController(rootView: view)
         return vc
     }()
-    
+
     init(settings: AppSettings,
-         accountRepository: AccountRepositoryProtocol = InMemoryAccountRepository.shared,
-         transferRepository: TransferRepositoryProtocol = InMemoryTransferRepository.shared) {
+         accountRepository: AccountRepositoryProtocol = SwiftDataAccountRepository.shared,
+         transferRepository: TransferRepositoryProtocol = SwiftDataTransferRepository.shared,
+         unitOfWork: UnitOfWork = PersistenceController.shared) {
         self.rootViewController = UINavigationController()
         self.settings = settings
         self.viewModel = TransactionViewModel(accountRepository: accountRepository,
-                                              transferRepository: transferRepository)
+                                              transferRepository: transferRepository,
+                                              unitOfWork: unitOfWork)
     }
-    
+
     func start() {
         rootViewController?.setViewControllers([transactionView], animated: false)
     }
-    
-    
 }

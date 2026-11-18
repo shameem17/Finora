@@ -16,7 +16,7 @@ final class CategoriesCoordinator: Coordinator {
     private let repository: CategoryRepositoryProtocol
 
     init(settings: AppSettings,
-         repository: CategoryRepositoryProtocol = InMemoryCategoryRepository.shared) {
+         repository: CategoryRepositoryProtocol = SwiftDataCategoryRepository.shared) {
         self.rootViewController = UINavigationController()
         self.settings = settings
         self.repository = repository
