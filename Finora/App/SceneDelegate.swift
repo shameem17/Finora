@@ -26,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.appCoordinator = appCoordinator
       
+        window.tintColor = UIColor(CustomColor.secondary.color)
         window.makeKeyAndVisible()
     }
 

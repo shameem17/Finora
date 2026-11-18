@@ -128,7 +128,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                     .foregroundStyle(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(CustomColor.incoming.color, in: Capsule())
+                    .background(Color.brandSecondary, in: Capsule())
             }
         }
         .padding(.horizontal, 16)
@@ -231,7 +231,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                     Button { log = model.makeLogViewModel() } label: {
                         Text("Full log")
                             .font(.manrope, size: 13, weight: .bold)
-                            .foregroundStyle(CustomColor.incoming.color)
+                            .foregroundStyle(Color.brandSecondary)
                     }
                 }
             }

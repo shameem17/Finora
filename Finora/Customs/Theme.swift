@@ -4,44 +4,61 @@
 //
 //  Customs
 //
-//  One place for the semantic colours every screen uses, so features stay
-//  visually consistent and a restyle is a one-file change. The raw palette
-//  lives in `CustomColor` / `Colors.swift`.
+//  Semantic colours built from the three palette colours in `Colors.swift`.
+//  Screens use these names, never raw hex values, so a restyle is a one-file
+//  change and every feature stays visually consistent.
 //
 
 import SwiftUI
 
 extension Color {
 
-    // MARK: Surfaces
+    // MARK: Surfaces (primary, ~60%)
 
-    /// Screen background (`appBackground` is the underlying palette colour).
-    static let screenBackground = Color.appBackground
+    /// Screen background.
+    static let screenBackground = Color.brandPrimary
+
+    /// Cards and fields: the primary colour lifted towards white.
+    static let cardSurface = Color.white.opacity(0.72)
 
     /// Faint fill for chips, icon wells and inactive controls.
-    static let fillSubtle = CustomColor.darkGray.color.opacity(0.06)
+    static let fillSubtle = Color.brandSecondary.opacity(0.07)
 
-    // MARK: Text
+    // MARK: Text and icons (secondary, ~30%)
 
-    static let textPrimary = CustomColor.darkGray.color
-    static let textSecondary = CustomColor.darkGray.color.opacity(0.55)
-    static let textTertiary = CustomColor.darkGray.color.opacity(0.4)
+    static let textPrimary = Color.brandSecondary
+    static let textSecondary = Color.brandSecondary.opacity(0.62)
+    static let textTertiary = Color.brandSecondary.opacity(0.4)
 
-    // MARK: Meaning
+    // MARK: Accent (~10%)
 
-    /// Money in / good news.
-    static let positive = CustomColor.successGreen.color
-    /// Money out / destructive.
-    static let negative = CustomColor.dangerRed.color
-    /// Primary call-to-action (add buttons, save buttons).
-    static let accent = CustomColor.warmCoral.color
+    /// Buttons, the selected pill, highlights. Always paired with `onAccent` text.
+    static let accent = Color.brandAccent
+    static let onAccent = Color.brandSecondary
+
+    // MARK: Hero cards (secondary as a surface)
+
+    static let heroSurface = Color.brandSecondary
+    static let onHero = Color.brandPrimary
+    static let onHeroSecondary = Color.brandPrimary.opacity(0.7)
+
+    // MARK: Money
+
+    /// Money in. Colour is not used to tell in from out; signs and icons do.
+    static let positive = Color.brandSecondary
+    /// Money out / warnings.
+    static let negative = Color.brandSecondary.opacity(0.7)
 }
 
-extension CustomColor {
-    /// Default tint of primary actions across the app.
-    static let accent: CustomColor = .warmCoral
-    /// Tint of deposits / incoming money.
-    static let incoming: CustomColor = .vividTeal
-    /// Tint of withdrawals / outgoing money.
-    static let outgoing: CustomColor = .warmCoral
+extension View {
+
+    /// Deep-violet summary card with light text (use `Color.onHero` inside).
+    func heroCard(cornerRadius: CGFloat = 28) -> some View {
+        self
+            .background(
+                RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+                    .fill(Color.heroSurface)
+            )
+            .shadow(color: Color.brandSecondary.opacity(0.25), radius: 14, x: 0, y: 8)
+    }
 }

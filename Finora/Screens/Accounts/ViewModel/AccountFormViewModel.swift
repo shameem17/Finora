@@ -22,7 +22,7 @@ final class AccountFormViewModel: Identifiable, LogoEditing {
     var name = ""
     var number = ""
     var type: AccountType = .bank
-    var tintHex = "#1A4DB3"
+    var tintHex = Palette.secondaryHex
     var initialBalanceText = ""
 
     var logoData: Data?

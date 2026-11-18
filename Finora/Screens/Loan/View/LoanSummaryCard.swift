@@ -39,12 +39,12 @@ struct LoanSummaryCard: View {
                 StatTile(title: "Lent out",
                          value: CurrencyFormatter.taka(summary.lentInPeriod),
                          icon: "arrow.up.right",
-                         tint: CustomColor.vividTeal.color)
+                         tint: Color.brandSecondary)
 
                 StatTile(title: "Borrowed",
                          value: CurrencyFormatter.taka(summary.borrowedInPeriod),
                          icon: "arrow.down.left",
-                         tint: CustomColor.warmCoral.color)
+                         tint: Color.brandSecondary)
 
                 StatTile(title: "Received back",
                          value: CurrencyFormatter.taka(summary.receivedInPeriod),
@@ -54,7 +54,7 @@ struct LoanSummaryCard: View {
                 StatTile(title: "Paid back",
                          value: CurrencyFormatter.taka(summary.repaidInPeriod),
                          icon: "checkmark.circle",
-                         tint: CustomColor.royalAzure.color)
+                         tint: Color.brandSecondary)
             }
 
             sectionLabel(period == .all ? "Scheduled in total" : "Due \(period.phrase)")

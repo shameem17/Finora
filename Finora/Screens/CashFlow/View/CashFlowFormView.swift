@@ -97,7 +97,7 @@ struct CashFlowFormView: View {
                 DatePicker("Date", selection: $form.date,
                            in: ...Date.now, displayedComponents: .date)
                     .labelsHidden()
-                    .tint(Color.accent)
+                    .tint(Color.brandSecondary)
             }
 
             Divider()

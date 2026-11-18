@@ -71,11 +71,11 @@ extension OnboardingCard{
             )
             .padding(.trailing, 4)
             .padding(.bottom, 4)
-            .background(Color.yellow)
+            .background(Color.brandAccent)
             .clipShape(
                 Capsule()
             )
-            .shadow(color: Color.yellow.opacity(0.8), radius: 4, x: 0, y: 4)
+            .shadow(color: Color.brandAccent.opacity(0.8), radius: 4, x: 0, y: 4)
             
             Spacer()
             

@@ -26,14 +26,14 @@ struct PillPicker<Option: PickerOption>: View {
                     Text(option.title)
                         .font(.manrope, size: 14, weight: .bold)
                         .foregroundStyle(isSelected
-                                         ? CustomColor.customWhite.color
+                                         ? Color.onAccent
                                          : Color.textSecondary)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 11)
                         .background {
                             if isSelected {
                                 Capsule()
-                                    .fill(Color.textPrimary)
+                                    .fill(Color.accent)
                                     .matchedGeometryEffect(id: "pill", in: pill)
                             }
                         }
@@ -43,7 +43,7 @@ struct PillPicker<Option: PickerOption>: View {
             }
         }
         .padding(4)
-        .background(Capsule().fill(CustomColor.customWhite.color.opacity(0.75)))
-        .overlay(Capsule().strokeBorder(Color.black.opacity(0.04), lineWidth: 1))
+        .background(Capsule().fill(Color.cardSurface))
+        .overlay(Capsule().strokeBorder(Color.brandSecondary.opacity(0.06), lineWidth: 1))
     }
 }

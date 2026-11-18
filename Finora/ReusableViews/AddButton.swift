@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AddActionButton: View {
     let title: String
-    var tint: CustomColor = .warmCoral
+    var tint: CustomColor = .accent
     let action: () -> Void
 
     var body: some View {

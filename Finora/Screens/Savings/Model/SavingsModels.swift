@@ -14,7 +14,7 @@ enum SavingsEntryKind: String, Hashable {
     var title: String { self == .deposit ? "Add Savings" : "Withdraw" }
     var historyTitle: String { self == .deposit ? "Deposit" : "Withdrawal" }
     var icon: String { self == .deposit ? "arrow.down.to.line" : "arrow.up.right" }
-    var tint: CustomColor { self == .deposit ? .incoming : .outgoing }
+    var tint: CustomColor { self == .deposit ? .accent : .accent }
     var accountTitle: String { self == .deposit ? "Take money from" : "Send money to" }
     var sign: String { self == .deposit ? "+" : "−" }
 }

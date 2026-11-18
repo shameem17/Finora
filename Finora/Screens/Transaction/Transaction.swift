@@ -78,9 +78,9 @@ struct TransactionView<ViewModel: TransactionViewModelProtocol>: View {
             .foregroundStyle(Color.textPrimary)
             .padding(.vertical, 18)
             .frame(maxWidth: .infinity)
-            .background(CustomColor.warmCoral.color)
+            .background(Color.accent)
             .clipShape(Capsule())
-            .shadow(color: CustomColor.warmCoral.color.opacity(0.4), radius: 12, y: 6)
+            .shadow(color: Color.accent.opacity(0.4), radius: 12, y: 6)
         }
         .padding(.horizontal, 16)
         .padding(.bottom, 8)

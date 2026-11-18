@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Presentation helpers (copy + colours live in the view layer)
 
 extension LoanKind {
-    var tint: CustomColor { self == .lent ? .incoming : .outgoing }
+    var tint: CustomColor { self == .lent ? .accent : .accent }
 
     /// "Borrower" / "Lender"
     var personRole: String { self == .lent ? "Borrower" : "Lender" }
@@ -61,9 +61,9 @@ extension LoanStatus {
         case .overdue:
             return Color.negative
         case .due(let days):
-            return days <= 7 ? Color(hex: "#B26A00") : CustomColor.secondaryGray.color
+            return days <= 7 ? Color.textPrimary : Color.textSecondary
         case .open:
-            return CustomColor.secondaryGray.color
+            return Color.textSecondary
         }
     }
 }
@@ -86,14 +86,7 @@ struct PersonAvatar: View {
     let person: Person
     var size: CGFloat = 46
 
-    private static let palette: [CustomColor] = [
-        .vividTeal, .royalAzure, .electricPurple, .warmCoral,
-        .darkLavender, .deepForestGreen, .infoTeal, .amberYellow
-    ]
-
-    private var tint: Color {
-        Self.palette[person.colorSeed % Self.palette.count].color
-    }
+    private var tint: Color { Color.brandSecondary }
 
     var body: some View {
         Group {

@@ -75,7 +75,7 @@ struct SavingsEntryFormView: View {
                         .foregroundStyle(Color.textSecondary)
                 }
             }
-            .tint(CustomColor.incoming.color)
+            .tint(Color.brandSecondary)
             .disabled(form.accounts.isEmpty)
 
             if form.usesAccount {
@@ -101,7 +101,7 @@ struct SavingsEntryFormView: View {
                 DatePicker("Date", selection: $form.date,
                            in: form.earliestDate...Date.now, displayedComponents: .date)
                     .labelsHidden()
-                    .tint(Color.accent)
+                    .tint(Color.brandSecondary)
             }
 
             Divider()

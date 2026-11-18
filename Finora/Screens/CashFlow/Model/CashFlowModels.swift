@@ -55,5 +55,5 @@ extension CategoryKind {
     var totalTitle: String { self == .income ? "Total Income" : "Total Expense" }
     var centerCaption: String { self == .income ? "Earned" : "Spent" }
     var accountTitle: String { self == .income ? "Deposit to" : "Pay from" }
-    var tint: CustomColor { self == .income ? .incoming : .outgoing }
+    var tint: CustomColor { self == .income ? .accent : .accent }
 }
