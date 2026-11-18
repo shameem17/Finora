@@ -126,13 +126,3 @@ struct DonutCard: View {
         .animation(.smooth, value: items)
     }
 }
-#Preview {
-    ZStack {
-        Color.appBackground.ignoresSafeArea()
-        DonutCard(title: "Total Income",
-                  subtitle: "November 2026",
-                  centerCaption: "Earned",
-                  items: BreakdownItem.sampleIncome)
-            .padding()
-    }
-}
