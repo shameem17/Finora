@@ -21,8 +21,9 @@ protocol LoanViewModelProtocol: AnyObject, Observable {
 
     func load()
     func showDetail(of item: LoanItem)
-    func showPeople()
     func makeFormViewModel() -> LoanFormViewModel
+    func makePeopleViewModel() -> PeopleViewModel
+    func makePersonFormViewModel() -> PersonFormViewModel
 }
 
 @Observable
@@ -102,8 +103,12 @@ final class LoanViewModel: LoanViewModelProtocol {
         router?.showDetail(of: item.id)
     }
 
-    func showPeople() {
-        router?.showPeople()
+    func makePeopleViewModel() -> PeopleViewModel {
+        PeopleViewModel(dependencies: dependencies)
+    }
+
+    func makePersonFormViewModel() -> PersonFormViewModel {
+        PersonFormViewModel(mode: .create, repository: dependencies.people)
     }
 
     func makeFormViewModel() -> LoanFormViewModel {

@@ -38,12 +38,10 @@ extension SavingsCoordinator: SavingsRouting {
         model.router = self
 
         let controller = UIHostingController(rootView: SavingsDetailView(model: model))
-        controller.hidesBottomBarWhenPushed = true
-        controller.navigationItem.largeTitleDisplayMode = .never
-        rootViewController?.pushViewController(controller, animated: true)
+        rootViewController?.presentModal(controller)
     }
 
     func closeDetail() {
-        rootViewController?.popViewController(animated: true)
+        rootViewController?.dismissModal()
     }
 }

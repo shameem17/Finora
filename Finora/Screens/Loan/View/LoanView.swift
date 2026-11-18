@@ -14,6 +14,8 @@ struct LoanView<ViewModel: LoanViewModelProtocol>: View {
 
     @Bindable var model: ViewModel
     @State private var form: LoanFormViewModel?
+    @State private var people: PeopleViewModel?
+    @State private var personForm: PersonFormViewModel?
 
     var body: some View {
         ZStack {
@@ -35,8 +37,18 @@ struct LoanView<ViewModel: LoanViewModelProtocol>: View {
         .navigationTitle("Loans")
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    model.showPeople()
+                Menu {
+                    Button {
+                        personForm = model.makePersonFormViewModel()
+                    } label: {
+                        Label("Add Person", systemImage: "person.badge.plus")
+                    }
+
+                    Button {
+                        people = model.makePeopleViewModel()
+                    } label: {
+                        Label("Manage People", systemImage: "person.2")
+                    }
                 } label: {
                     Image(systemName: "person.2.fill")
                 }
@@ -50,6 +62,19 @@ struct LoanView<ViewModel: LoanViewModelProtocol>: View {
         }
         .task { model.load() }
         .sheet(item: $form) { LoanFormView(form: $0) }
+        .sheet(item: $personForm) { PersonFormView(form: $0) }
+        .sheet(item: $people) { peopleModel in
+            NavigationStack {
+                PeopleView(model: peopleModel)
+                    .toolbar {
+                        ToolbarItem(placement: .confirmationAction) {
+                            Button("Done") { people = nil }
+                                .font(.manrope, size: 16, weight: .semiBold)
+                        }
+                    }
+            }
+            .presentationDragIndicator(.visible)
+        }
     }
 
     // MARK: - List

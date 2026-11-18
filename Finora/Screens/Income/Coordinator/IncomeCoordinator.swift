@@ -11,9 +11,11 @@ import UIKit
 class IncomeCoordinator: Coordinator {
     var rootViewController: UINavigationController?
     let settings: AppSettings
+    private let dependencies: CashFlowDependencies
     
     lazy var incomeView: UIViewController = {
-        let view = IncomeView()
+        let model = CashFlowViewModel(kind: .income, dependencies: dependencies)
+        let view = CashFlowView(model: model)
         let vc = UIHostingController(rootView: view)
         return vc
     }()
@@ -21,6 +23,7 @@ class IncomeCoordinator: Coordinator {
     init(settings: AppSettings) {
         self.rootViewController = UINavigationController()
         self.settings = settings
+        self.dependencies = .live()
     }
     
     func start() {

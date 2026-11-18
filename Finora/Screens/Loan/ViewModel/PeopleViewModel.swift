@@ -30,7 +30,9 @@ protocol PeopleViewModelProtocol: AnyObject, Observable {
 }
 
 @Observable
-final class PeopleViewModel: PeopleViewModelProtocol {
+final class PeopleViewModel: PeopleViewModelProtocol, Identifiable {
+
+    let id = UUID()
 
     var searchText = ""
 

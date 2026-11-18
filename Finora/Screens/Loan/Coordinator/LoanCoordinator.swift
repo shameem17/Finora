@@ -40,21 +40,10 @@ extension LoanCoordinator: LoanRouting {
         model.router = self
 
         let controller = UIHostingController(rootView: LoanDetailView(model: model))
-        controller.hidesBottomBarWhenPushed = true
-        controller.navigationItem.largeTitleDisplayMode = .never
-        rootViewController?.pushViewController(controller, animated: true)
-    }
-
-    func showPeople() {
-        let model = PeopleViewModel(dependencies: dependencies)
-
-        let controller = UIHostingController(rootView: PeopleView(model: model))
-        controller.hidesBottomBarWhenPushed = true
-        controller.navigationItem.largeTitleDisplayMode = .never
-        rootViewController?.pushViewController(controller, animated: true)
+        rootViewController?.presentModal(controller)
     }
 
     func closeDetail() {
-        rootViewController?.popViewController(animated: true)
+        rootViewController?.dismissModal()
     }
 }

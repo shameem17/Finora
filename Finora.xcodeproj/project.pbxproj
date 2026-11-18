@@ -37,8 +37,6 @@
 		8882732630A2E37E001DCA2B /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732530A2E37A001DCA2B /* WaveView.swift */; };
 		8882732830A2E3C3001DCA2B /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732730A2E3C2001DCA2B /* Colors.swift */; };
 		8882732B30A2ED71001DCA2B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882732A30A2ED6D001DCA2B /* HomeView.swift */; };
-		8882733230A2EFFA001DCA2B /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882733130A2EFF5001DCA2B /* IncomeView.swift */; };
-		8882733430A2F01F001DCA2B /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882733330A2F01A001DCA2B /* Expense.swift */; };
 		8882733A30A2F076001DCA2B /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882733930A2F073001DCA2B /* Settings.swift */; };
 		8882734130A2F62D001DCA2B /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882734030A2F62C001DCA2B /* HomeCoordinator.swift */; };
 		8882734330A2F670001DCA2B /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882734230A2F66B001DCA2B /* HomeViewModel.swift */; };
@@ -49,12 +47,10 @@
 		8882735130A4431D001DCA2B /* Accounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882735030A4431B001DCA2B /* Accounts.swift */; };
 		8882735830A58215001DCA2B /* IncomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882735730A5820F001DCA2B /* IncomeCoordinator.swift */; };
 		8882735B30A58275001DCA2B /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882735A30A58270001DCA2B /* Filter.swift */; };
-		8882735D30A5829E001DCA2B /* IncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882735C30A58299001DCA2B /* IncomeViewModel.swift */; };
 		8882736030A5831A001DCA2B /* FilterPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882735F30A58310001DCA2B /* FilterPicker.swift */; };
 		8882736230A58372001DCA2B /* AddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736130A5836B001DCA2B /* AddButton.swift */; };
 		8882736430A583F0001DCA2B /* BreakdownRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736330A583EB001DCA2B /* BreakdownRow.swift */; };
 		8882736630A58411001DCA2B /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736530A5840B001DCA2B /* ProgressBar.swift */; };
-		8882736830A985F1001DCA2B /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736730A985F1001DCA2B /* ExpenseViewModel.swift */; };
 		8882736B30A98633001DCA2B /* ExpenseCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882736A30A9862E001DCA2B /* ExpenseCoordinator.swift */; };
 		8882737830A989B4001DCA2B /* TransferFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882737530A989B4001DCA2B /* TransferFormViewModel.swift */; };
 		8882737A30A989B4001DCA2B /* TransactionComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8882737130A989B4001DCA2B /* TransactionComponents.swift */; };
@@ -130,6 +126,14 @@
 		99927A00005B30AB001DCA2B /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00005A30AB001DCA2B /* Theme.swift */; };
 		99927A00005D30AB001DCA2B /* FormKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00005C30AB001DCA2B /* FormKit.swift */; };
 		99927A00005F30AB001DCA2B /* InMemoryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00005E30AB001DCA2B /* InMemoryStore.swift */; };
+		99927A00006230AB001DCA2B /* ModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00006130AB001DCA2B /* ModalPresenter.swift */; };
+		99927A00006430AB001DCA2B /* CashFlowModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00006330AB001DCA2B /* CashFlowModels.swift */; };
+		99927A00006730AB001DCA2B /* CashFlowRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00006630AB001DCA2B /* CashFlowRepository.swift */; };
+		99927A00006A30AB001DCA2B /* CashFlowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00006930AB001DCA2B /* CashFlowService.swift */; };
+		99927A00006D30AB001DCA2B /* CashFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00006C30AB001DCA2B /* CashFlowViewModel.swift */; };
+		99927A00006F30AB001DCA2B /* CashFlowFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00006E30AB001DCA2B /* CashFlowFormViewModel.swift */; };
+		99927A00007230AB001DCA2B /* CashFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007130AB001DCA2B /* CashFlowView.swift */; };
+		99927A00007430AB001DCA2B /* CashFlowFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007330AB001DCA2B /* CashFlowFormView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,8 +169,6 @@
 		8882732530A2E37A001DCA2B /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
 		8882732730A2E3C2001DCA2B /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		8882732A30A2ED6D001DCA2B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		8882733130A2EFF5001DCA2B /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
-		8882733330A2F01A001DCA2B /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		8882733930A2F073001DCA2B /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8882734030A2F62C001DCA2B /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		8882734230A2F66B001DCA2B /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -177,12 +179,10 @@
 		8882735030A4431B001DCA2B /* Accounts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accounts.swift; sourceTree = "<group>"; };
 		8882735730A5820F001DCA2B /* IncomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeCoordinator.swift; sourceTree = "<group>"; };
 		8882735A30A58270001DCA2B /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
-		8882735C30A58299001DCA2B /* IncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewModel.swift; sourceTree = "<group>"; };
 		8882735F30A58310001DCA2B /* FilterPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPicker.swift; sourceTree = "<group>"; };
 		8882736130A5836B001DCA2B /* AddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButton.swift; sourceTree = "<group>"; };
 		8882736330A583EB001DCA2B /* BreakdownRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreakdownRow.swift; sourceTree = "<group>"; };
 		8882736530A5840B001DCA2B /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
-		8882736730A985F1001DCA2B /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		8882736A30A9862E001DCA2B /* ExpenseCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseCoordinator.swift; sourceTree = "<group>"; };
 		8882736C30A989B4001DCA2B /* AccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRepository.swift; sourceTree = "<group>"; };
 		8882736F30A989B4001DCA2B /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
@@ -258,6 +258,14 @@
 		99927A00005A30AB001DCA2B /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		99927A00005C30AB001DCA2B /* FormKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormKit.swift; sourceTree = "<group>"; };
 		99927A00005E30AB001DCA2B /* InMemoryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryStore.swift; sourceTree = "<group>"; };
+		99927A00006130AB001DCA2B /* ModalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPresenter.swift; sourceTree = "<group>"; };
+		99927A00006330AB001DCA2B /* CashFlowModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowModels.swift; sourceTree = "<group>"; };
+		99927A00006630AB001DCA2B /* CashFlowRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowRepository.swift; sourceTree = "<group>"; };
+		99927A00006930AB001DCA2B /* CashFlowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowService.swift; sourceTree = "<group>"; };
+		99927A00006C30AB001DCA2B /* CashFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowViewModel.swift; sourceTree = "<group>"; };
+		99927A00006E30AB001DCA2B /* CashFlowFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowFormViewModel.swift; sourceTree = "<group>"; };
+		99927A00007130AB001DCA2B /* CashFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowView.swift; sourceTree = "<group>"; };
+		99927A00007330AB001DCA2B /* CashFlowFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowFormView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				888272DE30A18E31001DCA2B /* MainCoordinator.swift */,
+				99927A00006130AB001DCA2B /* ModalPresenter.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -371,6 +380,7 @@
 				99927A00004930AB001DCA2B /* Accounts */,
 				99927A00004A30AB001DCA2B /* Categories */,
 				99927A00004B30AB001DCA2B /* Savings */,
+				99927A00007630AB001DCA2B /* CashFlow */,
 				8882732F30A2EFA7001DCA2B /* Loan */,
 				888272FC30A19002001DCA2B /* Onboarding */,
 				8882733030A2EFED001DCA2B /* Settings */,
@@ -467,9 +477,7 @@
 				8882735630A581FA001DCA2B /* Coordinator */,
 				8882735530A581EF001DCA2B /* Repository */,
 				8882735430A581EA001DCA2B /* Model */,
-				8882735330A581E4001DCA2B /* ViewModel */,
 				8882735230A581DE001DCA2B /* View */,
-				8882733130A2EFF5001DCA2B /* IncomeView.swift */,
 			);
 			path = Income;
 			sourceTree = "<group>";
@@ -478,8 +486,6 @@
 			isa = PBXGroup;
 			children = (
 				8882736930A98627001DCA2B /* Coordinator */,
-				8882736730A985F1001DCA2B /* ExpenseViewModel.swift */,
-				8882733330A2F01A001DCA2B /* Expense.swift */,
 			);
 			path = Expense;
 			sourceTree = "<group>";
@@ -585,14 +591,6 @@
 			children = (
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		8882735330A581E4001DCA2B /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				8882735C30A58299001DCA2B /* IncomeViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8882735430A581EA001DCA2B /* Model */ = {
@@ -890,6 +888,60 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		99927A00006530AB001DCA2B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00006330AB001DCA2B /* CashFlowModels.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		99927A00006830AB001DCA2B /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00006630AB001DCA2B /* CashFlowRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		99927A00006B30AB001DCA2B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00006930AB001DCA2B /* CashFlowService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		99927A00007030AB001DCA2B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00006C30AB001DCA2B /* CashFlowViewModel.swift */,
+				99927A00006E30AB001DCA2B /* CashFlowFormViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		99927A00007530AB001DCA2B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00007130AB001DCA2B /* CashFlowView.swift */,
+				99927A00007330AB001DCA2B /* CashFlowFormView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		99927A00007630AB001DCA2B /* CashFlow */ = {
+			isa = PBXGroup;
+			children = (
+				99927A00006530AB001DCA2B /* Model */,
+				99927A00006830AB001DCA2B /* Repository */,
+				99927A00006B30AB001DCA2B /* Service */,
+				99927A00007030AB001DCA2B /* ViewModel */,
+				99927A00007530AB001DCA2B /* View */,
+			);
+			path = CashFlow;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -970,14 +1022,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8882733430A2F01F001DCA2B /* Expense.swift in Sources */,
 				8882730830A19173001DCA2B /* Colors + Extension.swift in Sources */,
 				8882734130A2F62D001DCA2B /* HomeCoordinator.swift in Sources */,
 				8882735130A4431D001DCA2B /* Accounts.swift in Sources */,
 				888272EB30A18E31001DCA2B /* AppCoordinator.swift in Sources */,
 				888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */,
 				8882732430A1DDD5001DCA2B /* AppFont.swift in Sources */,
-				8882733230A2EFFA001DCA2B /* IncomeView.swift in Sources */,
 				8882730C30A19CFE001DCA2B /* AllCoordinator.swift in Sources */,
 				8882732B30A2ED71001DCA2B /* HomeView.swift in Sources */,
 				8882734730A2F794001DCA2B /* DateService.swift in Sources */,
@@ -985,6 +1035,7 @@
 				888272ED30A18E31001DCA2B /* DeepLinkHandler.swift in Sources */,
 				888272EE30A18E31001DCA2B /* DeepLinkParser.swift in Sources */,
 				888272EF30A18E31001DCA2B /* MainCoordinator.swift in Sources */,
+				99927A00006230AB001DCA2B /* ModalPresenter.swift in Sources */,
 				888272F030A18E31001DCA2B /* Coordinator.swift in Sources */,
 				888272F130A18E31001DCA2B /* AppDelegate.swift in Sources */,
 				8882732830A2E3C3001DCA2B /* Colors.swift in Sources */,
@@ -992,7 +1043,6 @@
 				8882734F30A43686001DCA2B /* AccountCard.swift in Sources */,
 				8882734330A2F670001DCA2B /* HomeViewModel.swift in Sources */,
 				8882730030A1901F001DCA2B /* OnboardingViewModel.swift in Sources */,
-				8882736830A985F1001DCA2B /* ExpenseViewModel.swift in Sources */,
 				8882732630A2E37E001DCA2B /* WaveView.swift in Sources */,
 				8882736030A5831A001DCA2B /* FilterPicker.swift in Sources */,
 				8882734D30A4319D001DCA2B /* SummaryCard.swift in Sources */,
@@ -1001,7 +1051,6 @@
 				8882735B30A58275001DCA2B /* Filter.swift in Sources */,
 				8882738330A98A1F001DCA2B /* TransactionCoordinator.swift in Sources */,
 				888272FE30A19010001DCA2B /* OnboardingCoordinator.swift in Sources */,
-				8882735D30A5829E001DCA2B /* IncomeViewModel.swift in Sources */,
 				888272F630A18E4C001DCA2B /* AppSettings.swift in Sources */,
 				8882730230A190E9001DCA2B /* OnboardingModel.swift in Sources */,
 				8882734B30A3396F001DCA2B /* DonutCard.swift in Sources */,
@@ -1069,6 +1118,13 @@
 				99927A00003D30AB001DCA2B /* SavingsEntryFormView.swift in Sources */,
 				99927A00003F30AB001DCA2B /* SavingsRouting.swift in Sources */,
 				99927A00004130AB001DCA2B /* SavingsCoordinator.swift in Sources */,
+				99927A00006430AB001DCA2B /* CashFlowModels.swift in Sources */,
+				99927A00006730AB001DCA2B /* CashFlowRepository.swift in Sources */,
+				99927A00006A30AB001DCA2B /* CashFlowService.swift in Sources */,
+				99927A00006D30AB001DCA2B /* CashFlowViewModel.swift in Sources */,
+				99927A00006F30AB001DCA2B /* CashFlowFormViewModel.swift in Sources */,
+				99927A00007230AB001DCA2B /* CashFlowView.swift in Sources */,
+				99927A00007430AB001DCA2B /* CashFlowFormView.swift in Sources */,
 				88827A3830AB0002001DCA2B /* FormComponents.swift in Sources */,
 				99927A00005D30AB001DCA2B /* FormKit.swift in Sources */,
 				8882736430A583F0001DCA2B /* BreakdownRow.swift in Sources */,
