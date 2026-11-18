@@ -18,9 +18,9 @@ extension View {
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .strokeBorder(Color.brandSecondary.opacity(0.06), lineWidth: 1)
+                    .strokeBorder(Color.hairline, lineWidth: 1)
             )
-            .shadow(color: Color.brandSecondary.opacity(0.08), radius: 14, x: 0, y: 6)
+            .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 6)
     }
 }
 
@@ -79,12 +79,12 @@ struct TransferSummaryCard: View {
                 StatTile(title: "Charges paid",
                          value: CurrencyFormatter.taka(summary.totalCharges, showFraction: true),
                          icon: "percent",
-                         tint: Color.brandSecondary)
+                         tint: Color.brandAccent)
 
                 StatTile(title: "Transfers",
                          value: "\(summary.count)",
                          icon: "arrow.left.arrow.right",
-                         tint: Color.brandSecondary)
+                         tint: Color.brandAccent)
             }
         }
         .padding(20)

@@ -28,7 +28,7 @@ enum SummaryType: CaseIterable {
 
    var brandColor: CustomColor {
        switch self {
-       case .income, .expense, .balance: return .secondary
+       case .income, .expense, .balance: return .accent
        }
    }
 }
@@ -95,7 +95,7 @@ extension MonthlyInsights {
            totalDays: progress.totalDays,
            topExpense: .init(name: "Food",
                              amount: 12_400,
-                             color: Color.brandSecondary,
+                             color: Color.brandAccent,
                              icon: "fork.knife")
        )
    }

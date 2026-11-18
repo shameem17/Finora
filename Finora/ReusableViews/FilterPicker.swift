@@ -44,6 +44,6 @@ struct PillPicker<Option: PickerOption>: View {
         }
         .padding(4)
         .background(Capsule().fill(Color.cardSurface))
-        .overlay(Capsule().strokeBorder(Color.brandSecondary.opacity(0.06), lineWidth: 1))
+        .overlay(Capsule().strokeBorder(Color.hairline, lineWidth: 1))
     }
 }

@@ -125,10 +125,10 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
             } label: {
                 Label("Add Savings", systemImage: SavingsEntryKind.deposit.icon)
                     .font(.manrope, size: 16, weight: .bold)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color.onAccent)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(Color.brandSecondary, in: Capsule())
+                    .background(Color.brandAccent, in: Capsule())
             }
         }
         .padding(.horizontal, 16)
@@ -231,7 +231,7 @@ struct SavingsDetailView<ViewModel: SavingsDetailViewModelProtocol>: View {
                     Button { log = model.makeLogViewModel() } label: {
                         Text("Full log")
                             .font(.manrope, size: 13, weight: .bold)
-                            .foregroundStyle(Color.brandSecondary)
+                            .foregroundStyle(Color.brandAccent)
                     }
                 }
             }

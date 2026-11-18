@@ -86,7 +86,7 @@ struct PersonAvatar: View {
     let person: Person
     var size: CGFloat = 46
 
-    private var tint: Color { Color.brandSecondary }
+    private var tint: Color { Color.brandAccent }
 
     var body: some View {
         Group {

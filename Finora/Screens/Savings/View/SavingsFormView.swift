@@ -82,7 +82,7 @@ struct SavingsFormView: View {
                 DatePicker("Start date", selection: $form.startDate,
                            in: ...Date.now, displayedComponents: .date)
                     .labelsHidden()
-                    .tint(Color.brandSecondary)
+                    .tint(Color.brandAccent)
             }
 
             Divider()
@@ -121,7 +121,7 @@ struct SavingsFormView: View {
             FormFieldRow(icon: "calendar.badge.clock", title: "Set a target date") {
                 Toggle("Set a target date", isOn: $form.hasTargetDate.animation(.smooth))
                     .labelsHidden()
-                    .tint(Color.brandSecondary)
+                    .tint(Color.brandAccent)
             }
 
             if form.hasTargetDate {
@@ -130,7 +130,7 @@ struct SavingsFormView: View {
                     DatePicker("Target date", selection: $form.targetDate,
                                in: form.startDate..., displayedComponents: .date)
                         .labelsHidden()
-                        .tint(Color.brandSecondary)
+                        .tint(Color.brandAccent)
                 }
             }
         }

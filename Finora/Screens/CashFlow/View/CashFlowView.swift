@@ -81,7 +81,7 @@ struct CashFlowRow: View {
     var body: some View {
         HStack(spacing: 12) {
             CategoryIconBadge(icon: item.category?.icon ?? "questionmark.circle",
-                              tint: item.category?.tint ?? Palette.secondaryHex,
+                              tint: item.category?.tint ?? Palette.accentHex,
                               size: 40)
 
             VStack(alignment: .leading, spacing: 2) {

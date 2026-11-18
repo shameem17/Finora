@@ -92,7 +92,7 @@ struct SearchField: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .background(Capsule().fill(Color.cardSurface))
-        .overlay(Capsule().strokeBorder(Color.brandSecondary.opacity(0.06), lineWidth: 1))
+        .overlay(Capsule().strokeBorder(Color.hairline, lineWidth: 1))
     }
 }
 
@@ -128,7 +128,7 @@ struct FormPrimaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(.manrope, size: 20, weight: .extraBold)
-                .foregroundStyle(Color.textPrimary)
+                .foregroundStyle(Color.onAccent)
                 .padding(.vertical, 18)
                 .frame(maxWidth: .infinity)
                 .background(tint.color)

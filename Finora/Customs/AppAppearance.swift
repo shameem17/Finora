@@ -22,6 +22,7 @@ enum AppAppearance {
         let tab = UITabBarAppearance()
         tab.configureWithOpaqueBackground()
         tab.backgroundColor = secondary
+        tab.shadowColor = primary.withAlphaComponent(0.12)
         for item in [tab.stackedLayoutAppearance, tab.inlineLayoutAppearance, tab.compactInlineLayoutAppearance] {
             item.normal.iconColor = primary.withAlphaComponent(0.6)
             item.normal.titleTextAttributes = [.foregroundColor: primary.withAlphaComponent(0.6)]
@@ -31,16 +32,16 @@ enum AppAppearance {
         UITabBar.appearance().standardAppearance = tab
         UITabBar.appearance().scrollEdgeAppearance = tab
 
-        // Navigation bar: primary surface, secondary text.
+        // Navigation bar: violet surface, light text, lime controls.
         let nav = UINavigationBarAppearance()
         nav.configureWithOpaqueBackground()
-        nav.backgroundColor = primary
+        nav.backgroundColor = secondary
         nav.shadowColor = .clear
-        nav.titleTextAttributes = [.foregroundColor: secondary]
-        nav.largeTitleTextAttributes = [.foregroundColor: secondary]
+        nav.titleTextAttributes = [.foregroundColor: primary]
+        nav.largeTitleTextAttributes = [.foregroundColor: primary]
         UINavigationBar.appearance().standardAppearance = nav
         UINavigationBar.appearance().scrollEdgeAppearance = nav
         UINavigationBar.appearance().compactAppearance = nav
-        UINavigationBar.appearance().tintColor = secondary
+        UINavigationBar.appearance().tintColor = accent
     }
 }
