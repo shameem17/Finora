@@ -93,7 +93,7 @@ struct TransferFormView: View {
                            in: ...Date.now,
                            displayedComponents: .date)
                     .labelsHidden()
-                    .tint(Color.accent)
+                    .tint(Color.brandAccent)
             }
 
             Divider()

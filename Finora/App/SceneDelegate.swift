@@ -26,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.appCoordinator = appCoordinator
       
+        window.tintColor = UIColor(CustomColor.accent.color)
+        window.overrideUserInterfaceStyle = .dark
         window.makeKeyAndVisible()
     }
 

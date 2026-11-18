@@ -64,13 +64,13 @@ struct DonutCard: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(CustomColor.customWhite.color)
+                .fill(Color.cardSurface)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .strokeBorder(Color.black.opacity(0.04), lineWidth: 1)
+                .strokeBorder(Color.hairline, lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.06), radius: 14, x: 0, y: 6)
+        .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 6)
     }
 
     // MARK: Pieces
@@ -126,17 +126,6 @@ struct DonutCard: View {
         .animation(.smooth, value: items)
     }
 }
-// MARK: - Temporary sample data (remove once the repository exists)
-
-extension BreakdownItem {
-    static let sampleIncome: [BreakdownItem] = [
-        .init(name: "Salary",    amount: 2000, color: CustomColor.vividTeal.color,      icon: "banknote"),
-        .init(name: "Freelance", amount: 654,  color: CustomColor.royalAzure.color,    icon: "laptopcomputer"),
-        .init(name: "Business",  amount: 500,  color: CustomColor.warmCoral.color,     icon: "storefront"),
-        .init(name: "Gifts",     amount: 64,   color: CustomColor.electricPurple.color, icon: "gift")
-    ]
-}
-
 #Preview {
     ZStack {
         Color.appBackground.ignoresSafeArea()

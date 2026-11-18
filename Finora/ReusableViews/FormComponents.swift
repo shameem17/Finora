@@ -91,8 +91,8 @@ struct SearchField: View {
         .foregroundStyle(Color.textPrimary)
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
-        .background(Capsule().fill(CustomColor.customWhite.color.opacity(0.75)))
-        .overlay(Capsule().strokeBorder(Color.black.opacity(0.04), lineWidth: 1))
+        .background(Capsule().fill(Color.cardSurface))
+        .overlay(Capsule().strokeBorder(Color.hairline, lineWidth: 1))
     }
 }
 
@@ -120,7 +120,7 @@ struct FormErrorBanner: View {
 /// Full-width capsule used for "Save" at the bottom of forms.
 struct FormPrimaryButton: View {
     let title: String
-    var tint: CustomColor = .warmCoral
+    var tint: CustomColor = .accent
     var isEnabled = true
     let action: () -> Void
 
@@ -128,7 +128,7 @@ struct FormPrimaryButton: View {
         Button(action: action) {
             Text(title)
                 .font(.manrope, size: 20, weight: .extraBold)
-                .foregroundStyle(Color.textPrimary)
+                .foregroundStyle(Color.onAccent)
                 .padding(.vertical, 18)
                 .frame(maxWidth: .infinity)
                 .background(tint.color)

@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AddActionButton: View {
     let title: String
-    var tint: CustomColor = .warmCoral
+    var tint: CustomColor = .accent
     let action: () -> Void
 
     var body: some View {
@@ -21,7 +21,7 @@ struct AddActionButton: View {
                 Text(title)
             }
             .font(.manrope, size: 20, weight: .extraBold)
-            .foregroundStyle(Color.textPrimary)
+            .foregroundStyle(Color.onAccent)
             .padding(.vertical, 18)
             .frame(maxWidth: .infinity)
             .background(tint.color)

@@ -188,7 +188,7 @@ struct LoanFormView: View {
                            in: ...Date.now,
                            displayedComponents: .date)
                     .labelsHidden()
-                    .tint(Color.accent)
+                    .tint(Color.brandAccent)
                     .onChange(of: form.date) { _, _ in form.loanDateChanged() }
             }
 
@@ -197,7 +197,7 @@ struct LoanFormView: View {
             FormFieldRow(icon: "calendar.badge.clock", title: "Set a due date") {
                 Toggle("Set a due date", isOn: $form.hasDueDate.animation(.smooth))
                     .labelsHidden()
-                    .tint(CustomColor.vividTeal.color)
+                    .tint(Color.brandAccent)
             }
 
             if form.hasDueDate {
@@ -209,7 +209,7 @@ struct LoanFormView: View {
                                in: form.date...,
                                displayedComponents: .date)
                         .labelsHidden()
-                        .tint(Color.accent)
+                        .tint(Color.brandAccent)
                 }
 
                 Divider()

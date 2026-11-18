@@ -14,13 +14,13 @@ extension View {
         self
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .fill(CustomColor.customWhite.color)
+                    .fill(Color.cardSurface)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
-                    .strokeBorder(Color.black.opacity(0.04), lineWidth: 1)
+                    .strokeBorder(Color.hairline, lineWidth: 1)
             )
-            .shadow(color: .black.opacity(0.06), radius: 14, x: 0, y: 6)
+            .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 6)
     }
 }
 
@@ -79,12 +79,12 @@ struct TransferSummaryCard: View {
                 StatTile(title: "Charges paid",
                          value: CurrencyFormatter.taka(summary.totalCharges, showFraction: true),
                          icon: "percent",
-                         tint: CustomColor.warmCoral.color)
+                         tint: Color.brandAccent)
 
                 StatTile(title: "Transfers",
                          value: "\(summary.count)",
                          icon: "arrow.left.arrow.right",
-                         tint: CustomColor.electricPurple.color)
+                         tint: Color.brandAccent)
             }
         }
         .padding(20)
@@ -142,7 +142,7 @@ struct TransferRow: View {
                 AccountBadge(type: transfer.to.type, tint: transfer.to.tint, size: 30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 9, style: .continuous)
-                            .strokeBorder(CustomColor.customWhite.color, lineWidth: 2)
+                            .strokeBorder(Color.cardSurface, lineWidth: 2)
                     )
                     .offset(x: 14, y: 14)
             }
@@ -171,7 +171,7 @@ struct TransferRow: View {
                 if transfer.charge > 0 {
                     Text("+\(CurrencyFormatter.taka(transfer.charge, showFraction: true)) fee")
                         .font(.manrope, size: 11, weight: .semiBold)
-                        .foregroundStyle(CustomColor.warmCoral.color)
+                        .foregroundStyle(Color.textSecondary)
                 }
             }
         }

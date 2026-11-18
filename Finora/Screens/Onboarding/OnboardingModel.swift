@@ -50,7 +50,7 @@ enum OnboardingStep: Int, CaseIterable {
                 imageName: "onboardFirst",
                 bgcolorCode: Color.firstStepBackground,
                 titleColor: .customBlack,
-                descriptionColor: Color(hex: "#1C1E1F"),
+                descriptionColor: Color.brandSecondary,
                 button: .next,
                 shortNote: "Your financial journey\nstarts here"
             )
@@ -63,7 +63,7 @@ enum OnboardingStep: Int, CaseIterable {
                 imageName: "onboardSecond",
                 bgcolorCode: Color.secondStepBackground,
                 titleColor: .customBlack,
-                descriptionColor: Color(hex: "#1C1E1F"),
+                descriptionColor: Color.brandSecondary,
                 button: .next,
                 shortNote: "Budget, save, and plan your\nfinancial future with ease"
             )
@@ -76,7 +76,7 @@ enum OnboardingStep: Int, CaseIterable {
                 imageName: "onboardThird",
                 bgcolorCode: Color.thirdStepBackground,
                 titleColor: .customBlack,
-                descriptionColor: Color(hex: "#1C1E1F"),
+                descriptionColor: Color.brandSecondary,
                 button: .getStarted,
                 shortNote: "Your privacy is our priority.\nYour data stays with you"
             )

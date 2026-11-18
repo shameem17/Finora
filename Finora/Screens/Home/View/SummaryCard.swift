@@ -30,7 +30,7 @@ struct SummaryCard: View {
  
                 Text(type.name)
                     .font(.manrope, size: 14, weight: .medium)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
             }
  
@@ -46,7 +46,7 @@ struct SummaryCard: View {
         .background(
             ZStack {
                 RoundedRectangle(cornerRadius: 22, style: .continuous)
-                    .fill(Color(.secondarySystemGroupedBackground))
+                    .fill(Color.cardSurface)
  
                 // Faint brand tint fading from the top-left corner
                 RoundedRectangle(cornerRadius: 22, style: .continuous)
@@ -63,7 +63,7 @@ struct SummaryCard: View {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .strokeBorder(color.opacity(0.12), lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 4)
+        .shadow(color: Color.black.opacity(0.25), radius: 10, x: 0, y: 4)
     }
 }
  
@@ -76,9 +76,9 @@ struct InsightsCard: View {
  
     private var ringColor: Color {
         switch insights.savingsRate {
-        case 0.2...:  return Color.positive
-        case 0.1...:  return CustomColor.amberYellow.color
-        default:      return Color.negative
+        case 0.2...:  return Color.brandAccent
+        case 0.1...:  return Color.brandPrimary
+        default:      return Color.brandPrimary.opacity(0.6)
         }
     }
  
@@ -111,7 +111,7 @@ struct InsightsCard: View {
                 InsightStat(icon: "calendar",
                             title: "Daily avg",
                             value: TakaFormatter.string(insights.dailyAverage),
-                            tint: CustomColor.royalAzure.color)
+                            tint: Color.brandAccent)
  
                 InsightStat(icon: insights.topExpense.icon,
                             title: "Top spend",
@@ -126,13 +126,13 @@ struct InsightsCard: View {
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .fill(CustomColor.customWhite.color)
+                .fill(Color.cardSurface)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
-                .strokeBorder(Color.black.opacity(0.04), lineWidth: 1)
+                .strokeBorder(Color.hairline, lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.06), radius: 14, x: 0, y: 6)
+        .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 6)
     }
  
     // MARK: Pieces
@@ -166,7 +166,7 @@ struct InsightsCard: View {
             InsightStat(icon: "minus",
                         title: "vs last month",
                         value: "—",
-                        tint: CustomColor.secondaryGray.color)
+                        tint: Color.textSecondary)
         }
     }
 }

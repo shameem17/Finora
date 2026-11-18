@@ -25,7 +25,7 @@ struct SavingsSummaryCard: View {
 
             if let progress = summary.progress {
                 VStack(alignment: .leading, spacing: 6) {
-                    ProgressBar(fraction: progress, color: CustomColor.incoming.color)
+                    ProgressBar(fraction: progress, color: Color.brandAccent)
                     Text("\(Int((progress * 100).rounded()))% of \(CurrencyFormatter.taka(summary.totalTarget)) target")
                         .font(.manrope, size: 12, weight: .medium)
                         .foregroundStyle(Color.textSecondary)

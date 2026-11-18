@@ -95,7 +95,7 @@ extension OnboardingView {
                 .foregroundColor(.white)
                 .padding(.horizontal)
                 .padding(.vertical, 5)
-                .background(Color(hex: "#FF6347"))
+                .background(Color.brandSecondary)
                 .clipShape(Capsule())
         }
     }

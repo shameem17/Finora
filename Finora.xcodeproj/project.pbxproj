@@ -137,6 +137,7 @@
 		99927A00006F30AB001DCA2B /* CashFlowFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00006E30AB001DCA2B /* CashFlowFormViewModel.swift */; };
 		99927A00007230AB001DCA2B /* CashFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007130AB001DCA2B /* CashFlowView.swift */; };
 		99927A00007430AB001DCA2B /* CashFlowFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007330AB001DCA2B /* CashFlowFormView.swift */; };
+		99927A00007830AB001DCA2B /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007730AB001DCA2B /* AppAppearance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -272,6 +273,7 @@
 		99927A00006E30AB001DCA2B /* CashFlowFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowFormViewModel.swift; sourceTree = "<group>"; };
 		99927A00007130AB001DCA2B /* CashFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowView.swift; sourceTree = "<group>"; };
 		99927A00007330AB001DCA2B /* CashFlowFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowFormView.swift; sourceTree = "<group>"; };
+		99927A00007730AB001DCA2B /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,6 +462,7 @@
 			children = (
 				8882732730A2E3C2001DCA2B /* Colors.swift */,
 				99927A00005A30AB001DCA2B /* Theme.swift */,
+				99927A00007730AB001DCA2B /* AppAppearance.swift */,
 				8882732330A1DDD0001DCA2B /* AppFont.swift */,
 			);
 			path = Customs;
@@ -1050,6 +1053,7 @@
 				888272F130A18E31001DCA2B /* AppDelegate.swift in Sources */,
 				8882732830A2E3C3001DCA2B /* Colors.swift in Sources */,
 				99927A00005B30AB001DCA2B /* Theme.swift in Sources */,
+				99927A00007830AB001DCA2B /* AppAppearance.swift in Sources */,
 				8882734F30A43686001DCA2B /* AccountCard.swift in Sources */,
 				8882734330A2F670001DCA2B /* HomeViewModel.swift in Sources */,
 				8882730030A1901F001DCA2B /* OnboardingViewModel.swift in Sources */,

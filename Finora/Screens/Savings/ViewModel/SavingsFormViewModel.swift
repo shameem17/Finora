@@ -27,7 +27,7 @@ final class SavingsFormViewModel: Identifiable, LogoEditing {
         didSet { if !isSuggesting { nameEdited = true } }
     }
     var number = ""
-    var tintHex = "#00BFA6"
+    var tintHex = Palette.accentHex
     var startDate: Date = .now
     var targetText = ""
     var hasTargetDate = false

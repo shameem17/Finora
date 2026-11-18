@@ -280,7 +280,7 @@ struct PersonFormView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
             }
-            .foregroundStyle(isSelected ? CustomColor.customWhite.color : Color.textSecondary)
+            .foregroundStyle(isSelected ? Color.cardSurface : Color.textSecondary)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 12)
             .background(
@@ -415,7 +415,7 @@ struct PersonPickerView: View {
                     .font(.system(size: 16, weight: .bold))
                     .foregroundStyle(Color.textPrimary)
                     .frame(width: 46, height: 46)
-                    .background(CustomColor.warmCoral.color.opacity(0.25), in: Circle())
+                    .background(Color.accent, in: Circle())
 
                 Text("Add new person")
                     .font(.manrope, size: 15, weight: .bold)

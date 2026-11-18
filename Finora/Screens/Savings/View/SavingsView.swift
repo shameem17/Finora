@@ -50,7 +50,7 @@ struct SavingsView<ViewModel: SavingsViewModelProtocol>: View {
             }
         }
         .safeAreaInset(edge: .bottom) {
-            AddActionButton(title: "Add Savings Account", tint: .incoming) {
+            AddActionButton(title: "Add Savings Account", tint: .accent) {
                 form = model.makeFormViewModel()
             }
         }
