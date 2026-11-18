@@ -20,7 +20,7 @@ extension View {
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .strokeBorder(Color.hairline, lineWidth: 1)
             )
-            .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 6)
+            .shadow(color: Color.brandSecondary.opacity(0.10), radius: 14, x: 0, y: 6)
     }
 }
 
@@ -79,12 +79,12 @@ struct TransferSummaryCard: View {
                 StatTile(title: "Charges paid",
                          value: CurrencyFormatter.taka(summary.totalCharges, showFraction: true),
                          icon: "percent",
-                         tint: Color.brandAccent)
+                         tint: Color.brandSecondary)
 
                 StatTile(title: "Transfers",
                          value: "\(summary.count)",
                          icon: "arrow.left.arrow.right",
-                         tint: Color.brandAccent)
+                         tint: Color.brandSecondary)
             }
         }
         .padding(20)

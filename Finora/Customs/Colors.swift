@@ -4,20 +4,21 @@
 //
 //  The whole app is drawn with three colours, in a 60 / 30 / 10 split:
 //
-//    primary    #F4F2F6  soft white   ~60%  screen backgrounds, card surfaces
-//    secondary  #3F066D  deep violet  ~30%  text, hero cards, tab bar, icons
-//    accent     #C3F53A  electric lime ~10%  buttons, the selected pill, highlights
+//    primary    #F3EBDD  cream          ~60%  screen backgrounds, card surfaces
+//    secondary  #013230  deep teal      ~30%  text, icons, hero cards, tab bar
+//    accent     #F29A3A  tangerine      ~10%  buttons, the selected pill, highlights
 //
-//  Anything a *user* themes (an account, a savings pot, a category) keeps its own
-//  colour from the colour picker; see `ColorSwatchPicker`.
+//  Warm cream and tangerine balanced by cool teal. Anything a *user* themes
+//  (an account, a savings pot, a category) keeps its own colour from the colour
+//  picker; see `ColorSwatchPicker`.
 //
 
 import SwiftUI
 
 enum CustomColor: String {
-    case primary   = "#F4F2F6"
-    case secondary = "#3F066D"
-    case accent    = "#C3F53A"
+    case primary   = "#F3EBDD"
+    case secondary = "#013230"
+    case accent    = "#F29A3A"
 
     var color: Color { Color(hex: rawValue) }
 }

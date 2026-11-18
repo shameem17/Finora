@@ -63,7 +63,7 @@ struct SummaryCard: View {
             RoundedRectangle(cornerRadius: 22, style: .continuous)
                 .strokeBorder(color.opacity(0.12), lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.25), radius: 10, x: 0, y: 4)
+        .shadow(color: Color.brandSecondary.opacity(0.10), radius: 10, x: 0, y: 4)
     }
 }
  
@@ -76,9 +76,9 @@ struct InsightsCard: View {
  
     private var ringColor: Color {
         switch insights.savingsRate {
-        case 0.2...:  return Color.brandAccent
-        case 0.1...:  return Color.brandPrimary
-        default:      return Color.brandPrimary.opacity(0.6)
+        case 0.2...:  return Color.brandSecondary
+        case 0.1...:  return Color.brandSecondary.opacity(0.75)
+        default:      return Color.brandSecondary.opacity(0.5)
         }
     }
  
@@ -111,7 +111,7 @@ struct InsightsCard: View {
                 InsightStat(icon: "calendar",
                             title: "Daily avg",
                             value: TakaFormatter.string(insights.dailyAverage),
-                            tint: Color.brandAccent)
+                            tint: Color.brandSecondary)
  
                 InsightStat(icon: insights.topExpense.icon,
                             title: "Top spend",
@@ -132,7 +132,7 @@ struct InsightsCard: View {
             RoundedRectangle(cornerRadius: 28, style: .continuous)
                 .strokeBorder(Color.hairline, lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 6)
+        .shadow(color: Color.brandSecondary.opacity(0.10), radius: 14, x: 0, y: 6)
     }
  
     // MARK: Pieces

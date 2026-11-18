@@ -88,7 +88,7 @@ struct RepaymentFormView: View {
                            in: form.earliestDate...Date.now,
                            displayedComponents: .date)
                     .labelsHidden()
-                    .tint(Color.brandAccent)
+                    .tint(Color.brandSecondary)
             }
 
             Divider()

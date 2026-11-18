@@ -19,7 +19,7 @@ enum AppAppearance {
         let primary = UIColor(CustomColor.primary.color)
         let accent = UIColor(CustomColor.accent.color)
 
-        // Tab bar: secondary surface, accent selection.
+        // Tab bar: teal surface, tangerine selection.
         let tab = UITabBarAppearance()
         tab.configureWithOpaqueBackground()
         tab.backgroundColor = secondary
@@ -33,16 +33,16 @@ enum AppAppearance {
         UITabBar.appearance().standardAppearance = tab
         UITabBar.appearance().scrollEdgeAppearance = tab
 
-        // Navigation bar: violet surface, light text, lime controls.
+        // Navigation bar: cream surface, teal text and controls.
         let nav = UINavigationBarAppearance()
         nav.configureWithOpaqueBackground()
-        nav.backgroundColor = secondary
+        nav.backgroundColor = primary
         nav.shadowColor = .clear
-        nav.titleTextAttributes = [.foregroundColor: primary]
-        nav.largeTitleTextAttributes = [.foregroundColor: primary]
+        nav.titleTextAttributes = [.foregroundColor: secondary]
+        nav.largeTitleTextAttributes = [.foregroundColor: secondary]
         UINavigationBar.appearance().standardAppearance = nav
         UINavigationBar.appearance().scrollEdgeAppearance = nav
         UINavigationBar.appearance().compactAppearance = nav
-        UINavigationBar.appearance().tintColor = accent
+        UINavigationBar.appearance().tintColor = secondary
     }
 }

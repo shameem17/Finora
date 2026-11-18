@@ -37,7 +37,7 @@ final class CategoryFormViewModel: Identifiable {
         case .create(let kind):
             self.kind = kind
             icon = kind.icons[0]
-            tintHex = Palette.accentHex
+            tintHex = Palette.secondaryHex
         case .edit(let category):
             kind = category.kind
             name = category.name

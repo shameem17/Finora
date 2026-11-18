@@ -70,7 +70,7 @@ struct DonutCard: View {
             RoundedRectangle(cornerRadius: 28, style: .continuous)
                 .strokeBorder(Color.hairline, lineWidth: 1)
         )
-        .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 6)
+        .shadow(color: Color.brandSecondary.opacity(0.10), radius: 14, x: 0, y: 6)
     }
 
     // MARK: Pieces

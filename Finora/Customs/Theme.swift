@@ -13,55 +13,55 @@ import SwiftUI
 
 extension Color {
 
-    // MARK: Surfaces (secondary violet, dark style)
+    // MARK: Surfaces (primary cream, ~60%)
 
-    /// Screen background: deep violet.
-    static let screenBackground = Color.brandSecondary
+    /// Screen background.
+    static let screenBackground = Color.brandPrimary
 
-    /// Cards and fields: the light primary laid over violet at low opacity.
-    static let cardSurface = Color.brandPrimary.opacity(0.09)
+    /// Cards and fields: cream lifted towards white.
+    static let cardSurface = Color.white.opacity(0.6)
 
     /// Faint fill for chips, icon wells and inactive controls.
-    static let fillSubtle = Color.brandPrimary.opacity(0.10)
+    static let fillSubtle = Color.brandSecondary.opacity(0.07)
 
     /// Hairline borders on cards.
-    static let hairline = Color.brandPrimary.opacity(0.10)
+    static let hairline = Color.brandSecondary.opacity(0.08)
 
-    // MARK: Text and icons (primary)
+    // MARK: Text and icons (secondary teal, ~30%)
 
-    static let textPrimary = Color.brandPrimary
-    static let textSecondary = Color.brandPrimary.opacity(0.68)
-    static let textTertiary = Color.brandPrimary.opacity(0.45)
+    static let textPrimary = Color.brandSecondary
+    static let textSecondary = Color.brandSecondary.opacity(0.65)
+    static let textTertiary = Color.brandSecondary.opacity(0.42)
 
-    // MARK: Accent (lime, ~10%)
+    // MARK: Accent (tangerine, ~10%)
 
     /// Buttons, the selected pill, highlights. Always paired with `onAccent` text.
     static let accent = Color.brandAccent
     static let onAccent = Color.brandSecondary
 
-    // MARK: Hero cards (light card on the dark screen)
+    // MARK: Hero cards (teal as a surface)
 
-    static let heroSurface = Color.brandPrimary
-    static let onHero = Color.brandSecondary
-    static let onHeroSecondary = Color.brandSecondary.opacity(0.65)
+    static let heroSurface = Color.brandSecondary
+    static let onHero = Color.brandPrimary
+    static let onHeroSecondary = Color.brandPrimary.opacity(0.72)
 
     // MARK: Money
 
     /// Money in. Colour is not used to tell in from out; signs and icons do.
-    static let positive = Color.brandAccent
+    static let positive = Color.brandSecondary
     /// Money out / warnings.
-    static let negative = Color.brandPrimary.opacity(0.7)
+    static let negative = Color.brandSecondary.opacity(0.7)
 }
 
 extension View {
 
-    /// Light summary card with violet text (use `Color.onHero` inside).
+    /// Teal summary card with cream text (use `Color.onHero` inside).
     func heroCard(cornerRadius: CGFloat = 28) -> some View {
         self
             .background(
                 RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
                     .fill(Color.heroSurface)
             )
-            .shadow(color: Color.black.opacity(0.25), radius: 14, x: 0, y: 8)
+            .shadow(color: Color.brandSecondary.opacity(0.25), radius: 14, x: 0, y: 8)
     }
 }
