@@ -13,7 +13,10 @@ import SwiftUI
 @Observable
 @MainActor
 final class AppSettings {
-    
+
+    /// `nonisolated` so the environment's default value can be created anywhere.
+    nonisolated init() {}
+
     // MARK: - Appearance
 
     /// Currency used by every formatter in the app.
