@@ -221,24 +221,6 @@ struct EmptyStateCard: View {
     }
 }
 
-/// Round "eye" button that toggles balance masking (backed by `AppSettings.hidesBalances`).
-struct BalanceVisibilityButton: View {
-    @Binding var isHidden: Bool
-
-    var body: some View {
-        Button {
-            withAnimation(.smooth) { isHidden.toggle() }
-        } label: {
-            Image(systemName: isHidden ? "eye.slash" : "eye")
-                .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(Color.textPrimary)
-                .frame(width: 44, height: 44)
-                .background(Color.fillSubtle, in: Circle())
-        }
-        .accessibilityLabel(isHidden ? "Show balances" : "Hide balances")
-    }
-}
-
 extension View {
     /// Text style for single-line values inside a `FormFieldRow`.
     func formFieldStyle() -> some View {

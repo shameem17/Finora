@@ -246,7 +246,7 @@ private struct InsightStat: View {
  
 #Preview {
     ZStack {
-        Color.appBackground.ignoresSafeArea()
+        Color.screenBackground.ignoresSafeArea()
         InsightsCard(insights: .sample)
             .padding()
     }

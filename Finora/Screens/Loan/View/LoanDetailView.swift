@@ -20,7 +20,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
 
     var body: some View {
         ZStack {
-            Color.appBackground.ignoresSafeArea()
+            Color.screenBackground.ignoresSafeArea()
 
             if let item = model.item {
                 ScrollView(showsIndicators: false) {

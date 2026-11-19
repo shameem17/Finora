@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SwiftUI
 import Combine
-import os
 
 class AppCoordinator: Coordinator {
 
@@ -21,14 +20,6 @@ class AppCoordinator: Coordinator {
     
     var hasOnboarded: CurrentValueSubject<Bool, Never> = CurrentValueSubject(false)
     private var cancellables = Set<AnyCancellable>()
-    
-    /// Deep link received before the main flow was ready (e.g. cold launch).
-    private var pendingDeepLink: DeepLink?
-    
-    private static let logger = Logger(
-        subsystem: Bundle.main.bundleIdentifier ?? "com.finora.app",
-        category: "DeepLink"
-    )
     
     init(window: UIWindow, settings: AppSettings) {
         self.window = window
@@ -74,7 +65,6 @@ class AppCoordinator: Coordinator {
         let value = UserDefaults.standard.bool(forKey: key)
         
         if value {
-            print("Onboarding status found in UserDefaults: \(value)")
             hasOnboarded.send(true)
         }
         

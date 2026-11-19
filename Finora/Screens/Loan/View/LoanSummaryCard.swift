@@ -258,7 +258,7 @@ private struct StatTile: View {
 
 #Preview {
     ZStack {
-        Color.appBackground.ignoresSafeArea()
+        Color.screenBackground.ignoresSafeArea()
         ScrollView {
             LoanSummaryCard(
                 period: .month,

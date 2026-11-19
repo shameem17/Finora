@@ -9,12 +9,10 @@ import SwiftUI
 
 
 enum FontFamily {
-    case poppins
     case manrope
     
     var name: String {
         switch self {
-        case .poppins: return "Poppins"
         case .manrope: return "Manrope"
         }
     }

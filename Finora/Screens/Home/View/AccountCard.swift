@@ -61,7 +61,6 @@ private func maskedNumber(_ number: String) -> String {
 
 struct AccountCard: View {
     let account: Account
-    var hideBalance: Bool = false
     /// Off while the card waits behind others: only its background shows.
     var showsContent: Bool = true
 
@@ -119,7 +118,7 @@ struct AccountCard: View {
                     .tracking(0.8)
                     .foregroundStyle(.white.opacity(0.65))
 
-                Text(hideBalance ? CurrencyFormatter.hidden : CurrencyFormatter.taka(account.balance, showFraction: true))
+                Text(CurrencyFormatter.taka(account.balance, showFraction: true))
                     .font(.system(size: 24, weight: .bold, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1)

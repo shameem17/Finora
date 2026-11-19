@@ -27,7 +27,6 @@ class HomeCoordinator: Coordinator {
     }
     
     func start() {
-        print("start HomeCoordinator. rootViewController: \(rootViewController == nil)")
         rootViewController?.setViewControllers([homeVC], animated: false)
     }
     

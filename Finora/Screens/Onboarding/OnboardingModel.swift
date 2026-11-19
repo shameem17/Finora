@@ -48,8 +48,8 @@ enum OnboardingStep: Int, CaseIterable {
                 title: "Take Control",
                 description: "Track every income and expense effortlessly. Understand where your money goes and make smarter financial decisions every day.",
                 imageName: "onboardFirst",
-                bgcolorCode: Color.firstStepBackground,
-                titleColor: .customBlack,
+                bgcolorCode: Color.brandPrimary,
+                titleColor: Color.brandSecondary,
                 descriptionColor: Color.brandSecondary,
                 button: .next,
                 shortNote: "Your financial journey\nstarts here"
@@ -61,8 +61,8 @@ enum OnboardingStep: Int, CaseIterable {
                 title: "Plan Today",
                 description: "Manage your budgets, loans, savings and financial goals in one place. Build better money habits and achieve your dreams.",
                 imageName: "onboardSecond",
-                bgcolorCode: Color.secondStepBackground,
-                titleColor: .customBlack,
+                bgcolorCode: Color.brandPrimary,
+                titleColor: Color.brandSecondary,
                 descriptionColor: Color.brandSecondary,
                 button: .next,
                 shortNote: "Budget, save, and plan your\nfinancial future with ease"
@@ -74,8 +74,8 @@ enum OnboardingStep: Int, CaseIterable {
                 title: "Your Privacy",
                 description: "Your financial information stays on your device. No account, no internet connection, and no cloud storage required.",
                 imageName: "onboardThird",
-                bgcolorCode: Color.thirdStepBackground,
-                titleColor: .customBlack,
+                bgcolorCode: Color.brandPrimary,
+                titleColor: Color.brandSecondary,
                 descriptionColor: Color.brandSecondary,
                 button: .getStarted,
                 shortNote: "Your privacy is our priority.\nYour data stays with you"
@@ -89,10 +89,6 @@ enum OnboardingStep: Int, CaseIterable {
 
     var previous: OnboardingStep? {
         OnboardingStep(rawValue: rawValue - 1)
-    }
-
-    var isLast: Bool {
-        self == .third
     }
 }
 

@@ -37,10 +37,6 @@ final class OnboardingViewModel: OnboardingViewModelProtocol {
         pages[currentStep]
     }
     
-    var isLastPage: Bool {
-        currentStep.isLast
-    }
-    
     func next() {
         switch currentStep {
         case .first: currentStep = .second
@@ -58,10 +54,6 @@ final class OnboardingViewModel: OnboardingViewModelProtocol {
     }
     
     func skip() {
-        onBoardingDone()
-    }
-    
-    func onboardingCompleted(){
         onBoardingDone()
     }
 }

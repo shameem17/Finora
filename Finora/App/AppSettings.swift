@@ -24,13 +24,7 @@ final class AppSettings {
         didSet { AppCurrency.current = currency }
     }
 
-    /// Masks balances everywhere (Home, Accounts…) when on. Remembered between launches.
-    var hidesBalances: Bool = UserDefaults.standard.bool(forKey: SettingsKey.hidesBalances) {
-        didSet { UserDefaults.standard.set(hidesBalances, forKey: SettingsKey.hidesBalances) }
-    }
-
     // MARK: - App
-    var language: AppLanguage = .system
 
     var notificationsEnabled: Bool = (UserDefaults.standard.object(forKey: SettingsKey.notifications) as? Bool) ?? true {
         didSet { UserDefaults.standard.set(notificationsEnabled, forKey: SettingsKey.notifications) }
@@ -38,17 +32,9 @@ final class AppSettings {
 }
 
 nonisolated enum SettingsKey {
-    static let hidesBalances = "finora.settings.hidesBalances"
     static let notifications = "finora.settings.notificationsEnabled"
 }
 
-
-
-enum AppLanguage: String, CaseIterable, Equatable {
-    case english
-    case bengali
-    case system
-}
 
 
 /// Currency shown across the app. `current` is kept in sync by `AppSettings`

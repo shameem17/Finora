@@ -14,27 +14,23 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
 
     let model: ViewModel
 
-    @Environment(\.appSettings) private var settings
     @State private var form: AccountFormViewModel?
     @State private var frontID: Account.ID?
 
-
     var body: some View {
-        @Bindable var settings = settings
-
         ZStack {
             Color.screenBackground.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {
-                    totalCard(isHidden: $settings.hidesBalances)
+                    totalCard
 
                     if model.accounts.isEmpty {
                         EmptyStateCard(icon: "creditcard",
                                        title: "No accounts yet",
                                        message: "Add your bank, mobile wallet, card or cash to start tracking balances.")
                     } else {
-                        stack(hidesBalances: settings.hidesBalances)
+                        stack
                     }
                 }
                 .padding(.horizontal, 16)
@@ -52,13 +48,12 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
         .sheet(item: $form) { AccountFormView(form: $0) }
     }
 
-    private func totalCard(isHidden: Binding<Bool>) -> some View {
+    private var totalCard: some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading, spacing: 4) {
                 SectionLabel("Total balance")
 
-                Text(isHidden.wrappedValue ? CurrencyFormatter.hidden
-                                           : CurrencyFormatter.taka(model.totalBalance, showFraction: true))
+                Text(CurrencyFormatter.taka(model.totalBalance, showFraction: true))
                     .font(.manrope, size: 32, weight: .extraBold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
@@ -70,24 +65,20 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
                     .foregroundStyle(Color.textSecondary)
             }
 
-            Spacer(minLength: 8)
-
-            BalanceVisibilityButton(isHidden: isHidden)
         }
         .sectionCard()
     }
 
-    private func stack(hidesBalances: Bool) -> some View {
+    private var stack: some View {
         VStack(spacing: 20) {
             AccountCardStack(accounts: model.accounts,
-                             frontID: $frontID,
-                             hidesBalances: hidesBalances) { account in
+                             frontID: $frontID) { account in
                 form = model.makeFormViewModel(editing: account)
             }
 
             VStack(spacing: 0) {
                 ForEach(model.accounts) { account in
-                    accountRow(account, hidesBalances: hidesBalances)
+                    accountRow(account)
                     if account.id != model.accounts.last?.id {
                         Divider().overlay(Color.hairline)
                     }
@@ -98,7 +89,7 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
     }
 
     /// Compact list under the stack: tapping a row brings that card to the front.
-    private func accountRow(_ account: Account, hidesBalances: Bool) -> some View {
+    private func accountRow(_ account: Account) -> some View {
         Button {
             withAnimation(.spring(response: 0.5, dampingFraction: 0.82)) { frontID = account.id }
         } label: {
@@ -118,7 +109,7 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
 
                 Spacer(minLength: 8)
 
-                Text(hidesBalances ? CurrencyFormatter.hidden : CurrencyFormatter.taka(account.balance, showFraction: true))
+                Text(CurrencyFormatter.taka(account.balance, showFraction: true))
                     .font(.manrope, size: 15, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)

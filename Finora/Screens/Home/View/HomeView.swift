@@ -24,11 +24,10 @@ extension PickerOption where Self: RawRepresentable, RawValue == String {
 struct HomeView<ViewModel: HomeViewModelProtocol>: View {
     let model: ViewModel
  
-    @Environment(\.appSettings) private var settings
  
     var body: some View {
         ZStack {
-            Color.appBackground.ignoresSafeArea()
+            Color.screenBackground.ignoresSafeArea()
  
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(spacing: 24) {
@@ -64,7 +63,6 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
  
     private func amountText(for type: SummaryType) -> String {
         guard let insights = model.homeViewData?.insights else { return "—" }
-        if settings.hidesBalances { return CurrencyFormatter.hidden }
         return TakaFormatter.string(insights.amount(for: type))
     }
  
@@ -95,7 +93,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         if let overview = model.homeViewData?.overview {
             VStack(spacing: 16) {
                 SectionHeader(title: "Summary") { EmptyView() }
-                FinanceOverviewCard(overview: overview, hidesBalances: settings.hidesBalances)
+                FinanceOverviewCard(overview: overview)
             }
         }
     }
@@ -104,35 +102,24 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
  
     private var accountSummaryCard: some View {
         VStack(spacing: 16) {
-            SectionHeader(title: "Accounts") {
-                BalanceVisibilityButton(isHidden: hidesBalances)
-            }
+            SectionHeader(title: "Accounts") { EmptyView() }
 
             HomeAccountGrid(accounts: model.homeViewData?.accounts ?? [])
         }
     }
 
-    private var hidesBalances: Binding<Bool> {
-        Binding(get: { settings.hidesBalances },
-                set: { settings.hidesBalances = $0 })
-    }
 }
 
-/// Reads the setting itself, so the cards always redraw when it changes.
 private struct HomeAccountGrid: View {
     let accounts: [Account]
-
-    @Environment(\.appSettings) private var settings
 
     private let columns = [GridItem(.adaptive(minimum: 160), spacing: 16)]
 
     var body: some View {
-        let hidesBalances = settings.hidesBalances
-
         // No nested ScrollView: the outer one scrolls, so the grid stays lazy.
         LazyVGrid(columns: columns, spacing: 16) {
             ForEach(accounts) { account in
-                AccountCard(account: account, hideBalance: hidesBalances)
+                AccountCard(account: account)
                     .shadow(color: Color(hex: account.tint).opacity(0.35), radius: 10, x: 0, y: 0)
             }
         }

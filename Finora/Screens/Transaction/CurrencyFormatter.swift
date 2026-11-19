@@ -14,9 +14,6 @@ enum CurrencyFormatter {
     /// Symbol of the current currency, e.g. "৳".
     static var symbol: String { AppCurrency.current.symbol }
 
-    /// What a masked balance looks like.
-    static var hidden: String { "\(symbol) ••••••" }
-
     private static let whole = makeFormatter(maxFractionDigits: 0)
     private static let fractional = makeFormatter(maxFractionDigits: 2)
 

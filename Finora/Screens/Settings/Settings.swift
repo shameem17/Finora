@@ -31,11 +31,6 @@ struct SettingsView: View {
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 20) {
                     group("Preferences") {
-                        toggleRow(icon: "eye.slash",
-                                  title: "Hide balances",
-                                  subtitle: "Mask amounts across the app",
-                                  isOn: $settings.hidesBalances)
-                        divider
                         toggleRow(icon: "bell",
                                   title: "Loan reminders",
                                   subtitle: "Local notifications for due dates",

@@ -54,7 +54,6 @@ struct AccountCardStack: View {
 
     let accounts: [Account]
     @Binding var frontID: Account.ID?
-    var hidesBalances = false
     let onEdit: (Account) -> Void
 
     /// Cards that have been flipped to show their back while at the front.
@@ -122,11 +121,11 @@ struct AccountCardStack: View {
         let lift: CGFloat = rising == account.id ? liftHeight : 0
 
         return FlipCard(angle: angle) {
-            AccountCard(account: account, hideBalance: hidesBalances, showsContent: isFront)
+            AccountCard(account: account, showsContent: isFront)
                 .overlay(alignment: .top) { peekHeader(for: account).opacity(isFront ? 0 : 1) }
                 .frame(height: cardHeight)
         } back: {
-            AccountCardBack(account: account, hideBalance: hidesBalances)
+            AccountCardBack(account: account)
                 .frame(height: cardHeight)
         }
         .shadow(color: Color.brandSecondary.opacity(isFront ? 0.25 : 0.18), radius: isFront ? 14 : 5, y: isFront ? 6 : 2)
@@ -153,7 +152,7 @@ struct AccountCardStack: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
             Spacer(minLength: 8)
-            Text(hidesBalances ? CurrencyFormatter.hidden : CurrencyFormatter.taka(account.balance))
+            Text(CurrencyFormatter.taka(account.balance))
                 .font(.manrope, size: 14, weight: .bold)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
@@ -254,7 +253,6 @@ struct AccountCardStack: View {
 
 struct AccountCardBack: View {
     let account: Account
-    var hideBalance = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -265,7 +263,7 @@ struct AccountCardBack: View {
                 .padding(.top, 22)
 
             VStack(alignment: .leading, spacing: 14) {
-                detail("Account number", value: hideBalance ? "•••• •••• ••••" : spaced(account.number))
+                detail("Account number", value: spaced(account.number))
                     .font(.system(.subheadline, design: .monospaced, weight: .semibold))
 
                 HStack(alignment: .top, spacing: 12) {
@@ -309,11 +307,10 @@ struct AccountCardBack: View {
     }
 
     private func money(_ value: Double) -> String {
-        hideBalance ? CurrencyFormatter.hidden : CurrencyFormatter.taka(value)
+        CurrencyFormatter.taka(value)
     }
 
     private func movement(_ value: Double) -> String {
-        guard !hideBalance else { return CurrencyFormatter.hidden }
         let sign = value > 0 ? "+" : (value < 0 ? "−" : "")
         return sign + CurrencyFormatter.taka(abs(value))
     }

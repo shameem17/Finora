@@ -40,23 +40,13 @@ final class MainCoordinator: Coordinator {
             childCoordinators.append(coordinator)
         }
         
-        print("child coordinators count: \(childCoordinators.count)")
         tabBarController.viewControllers = childCoordinators.compactMap { $0.rootViewController }
     }
     
    
     
     // MARK: - Private Helpers
-    
-    private func selectTab(_ tab: AppTab, in allTabs: [AppTab]) {
-        guard let index = allTabs.firstIndex(of: tab) else { return }
-        tabBarController.selectedIndex = index
-        
-        // Pop to root on the selected tab's navigation stack for a clean state
-        childCoordinators[index].rootViewController?.popToRootViewController(animated: false)
-    }
-    
-    
+
     private func setupTabBarItem(for viewController: UIViewController?, title: String, image: String, selectedImage: String) {
         guard let viewController = viewController else { return }
         let unselectedImage = UIImage(systemName: image)

@@ -19,7 +19,7 @@ struct LoanView<ViewModel: LoanViewModelProtocol>: View {
 
     var body: some View {
         ZStack {
-            Color.appBackground.ignoresSafeArea()
+            Color.screenBackground.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {

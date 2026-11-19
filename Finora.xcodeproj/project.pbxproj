@@ -9,9 +9,6 @@
 /* Begin PBXBuildFile section */
 		888272E930A18E31001DCA2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888272E430A18E31001DCA2B /* Assets.xcassets */; };
 		888272EB30A18E31001DCA2B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272D830A18E31001DCA2B /* AppCoordinator.swift */; };
-		888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DA30A18E31001DCA2B /* DeepLink.swift */; };
-		888272ED30A18E31001DCA2B /* DeepLinkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DB30A18E31001DCA2B /* DeepLinkHandler.swift */; };
-		888272EE30A18E31001DCA2B /* DeepLinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DC30A18E31001DCA2B /* DeepLinkParser.swift */; };
 		888272EF30A18E31001DCA2B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272DE30A18E31001DCA2B /* MainCoordinator.swift */; };
 		888272F030A18E31001DCA2B /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272E030A18E31001DCA2B /* Coordinator.swift */; };
 		888272F130A18E31001DCA2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888272E330A18E31001DCA2B /* AppDelegate.swift */; };
@@ -147,9 +144,6 @@
 /* Begin PBXFileReference section */
 		888272AF30A1894C001DCA2B /* Finora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		888272D830A18E31001DCA2B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		888272DA30A18E31001DCA2B /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
-		888272DB30A18E31001DCA2B /* DeepLinkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkHandler.swift; sourceTree = "<group>"; };
-		888272DC30A18E31001DCA2B /* DeepLinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLinkParser.swift; sourceTree = "<group>"; };
 		888272DE30A18E31001DCA2B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		888272E030A18E31001DCA2B /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		888272E330A18E31001DCA2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -319,16 +313,6 @@
 			path = App;
 			sourceTree = "<group>";
 		};
-		888272DD30A18E31001DCA2B /* DeepLink */ = {
-			isa = PBXGroup;
-			children = (
-				888272DA30A18E31001DCA2B /* DeepLink.swift */,
-				888272DB30A18E31001DCA2B /* DeepLinkHandler.swift */,
-				888272DC30A18E31001DCA2B /* DeepLinkParser.swift */,
-			);
-			path = DeepLink;
-			sourceTree = "<group>";
-		};
 		888272DF30A18E31001DCA2B /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -350,7 +334,6 @@
 			isa = PBXGroup;
 			children = (
 				888272D930A18E31001DCA2B /* App */,
-				888272DD30A18E31001DCA2B /* DeepLink */,
 				888272DF30A18E31001DCA2B /* Main */,
 				888272E130A18E31001DCA2B /* Protocol */,
 			);
@@ -1051,15 +1034,12 @@
 				8882735130A4431D001DCA2B /* Accounts.swift in Sources */,
 				99927A00007A30AB001DCA2B /* FinanceOverview.swift in Sources */,
 				888272EB30A18E31001DCA2B /* AppCoordinator.swift in Sources */,
-				888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */,
 				8882732430A1DDD5001DCA2B /* AppFont.swift in Sources */,
 				8882730C30A19CFE001DCA2B /* AllCoordinator.swift in Sources */,
 				8882732B30A2ED71001DCA2B /* HomeView.swift in Sources */,
 				8882738530AD82ED001DCA2B /* SwiftDataRepository.swift in Sources */,
 				8882734730A2F794001DCA2B /* DateService.swift in Sources */,
 				99927A00005F30AB001DCA2B /* InMemoryStore.swift in Sources */,
-				888272ED30A18E31001DCA2B /* DeepLinkHandler.swift in Sources */,
-				888272EE30A18E31001DCA2B /* DeepLinkParser.swift in Sources */,
 				888272EF30A18E31001DCA2B /* MainCoordinator.swift in Sources */,
 				99927A00006230AB001DCA2B /* ModalPresenter.swift in Sources */,
 				888272F030A18E31001DCA2B /* Coordinator.swift in Sources */,

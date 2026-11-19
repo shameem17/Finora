@@ -65,10 +65,4 @@ struct Person: Identifiable, Hashable {
             .joined()
         return letters.isEmpty ? "?" : letters.uppercased()
     }
-
-    /// Stable across launches (`String.hashValue` is randomised per process),
-    /// so a person keeps the same avatar colour everywhere.
-    var colorSeed: Int {
-        name.unicodeScalars.reduce(7) { ($0 &* 31 &+ Int($1.value)) & 0x7fff_ffff }
-    }
 }

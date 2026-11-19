@@ -13,7 +13,6 @@ import SwiftUI
 struct FinanceOverviewCard: View {
 
     let overview: FinanceOverview
-    var hidesBalances = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -122,11 +121,10 @@ struct FinanceOverviewCard: View {
     // MARK: Formatting
 
     private func format(_ value: Double) -> String {
-        hidesBalances ? CurrencyFormatter.hidden : CurrencyFormatter.taka(value)
+        CurrencyFormatter.taka(value)
     }
 
     private func signed(_ value: Double) -> String {
-        guard !hidesBalances else { return CurrencyFormatter.hidden }
         let sign = value > 0 ? "+" : (value < 0 ? "−" : "")
         return sign + CurrencyFormatter.taka(abs(value))
     }

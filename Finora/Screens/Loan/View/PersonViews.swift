@@ -18,7 +18,7 @@ struct PeopleView<ViewModel: PeopleViewModelProtocol>: View {
 
     var body: some View {
         ZStack {
-            Color.appBackground.ignoresSafeArea()
+            Color.screenBackground.ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
@@ -182,7 +182,7 @@ struct PersonFormView: View {
 
     private var content: some View {
             ZStack {
-                Color.appBackground.ignoresSafeArea()
+                Color.screenBackground.ignoresSafeArea()
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {
@@ -376,7 +376,7 @@ struct PersonPickerView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color.appBackground.ignoresSafeArea()
+                Color.screenBackground.ignoresSafeArea()
 
                 ScrollView(showsIndicators: false) {
                     VStack(spacing: 16) {

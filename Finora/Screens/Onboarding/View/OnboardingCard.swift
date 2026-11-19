@@ -82,7 +82,7 @@ extension OnboardingCard{
             
             Text(data.shortNote)
                 .font(.manrope, size: 12, weight: .regular)
-                .foregroundColor(.customBlack)
+                .foregroundColor(Color.brandSecondary)
                 .multilineTextAlignment(.trailing)
                 .lineLimit(2)
             

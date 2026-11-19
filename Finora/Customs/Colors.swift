@@ -27,23 +27,10 @@ extension Color {
     static let brandPrimary   = CustomColor.primary.color
     static let brandSecondary = CustomColor.secondary.color
     static let brandAccent    = CustomColor.accent.color
-
-    // Names older screens still use.
-    static let appBackground = Color.brandPrimary
-    static let customBlack   = Color.brandSecondary
-    static let firstStepBackground  = Color.brandPrimary
-    static let secondStepBackground = Color.brandPrimary
-    static let thirdStepBackground  = Color.brandPrimary
 }
 
 /// Hex strings for places that store a colour as text (user-themed items).
 enum Palette {
     static let secondaryHex = CustomColor.secondary.rawValue
-    static let accentHex = CustomColor.accent.rawValue
 }
 
-extension String {
-    func toColor() -> Color {
-        return Color(hex: self)
-    }
-}
