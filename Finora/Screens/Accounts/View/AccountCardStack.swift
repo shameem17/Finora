@@ -64,9 +64,28 @@ struct AccountCardStack: View {
     @State private var rising: Account.ID?
 
     private let cardHeight: CGFloat = 200
-    private let peek: CGFloat = 38
-    private let maxVisible = 4
     private let liftHeight: CGFloat = 70
+    /// Comfortable strip height for a card behind the front one.
+    private let idealPeek: CGFloat = 38
+    /// Smallest strip that still shows a readable name and balance.
+    private let minPeek: CGFloat = 26
+    /// The stack never grows taller than this beyond the front card.
+    private let maxExtraHeight: CGFloat = 230
+
+    /// Strips shrink as accounts are added so every card stays in view.
+    private var peek: CGFloat {
+        let behind = max(accounts.count - 1, 1)
+        return min(idealPeek, max(maxExtraHeight / CGFloat(behind), minPeek))
+    }
+
+    /// Everything fits down to `minPeek`; only beyond that are the last cards left out.
+    private var maxVisible: Int { 1 + Int(maxExtraHeight / minPeek) }
+
+    private var scaleStep: CGFloat {
+        min(0.045, 0.16 / CGFloat(max(visibleCount - 1, 1)))
+    }
+
+    private var visibleCount: Int { min(accounts.count, maxVisible) }
 
     /// The accounts, rotated so the front card comes first.
     private var ordered: [Account] {
@@ -111,7 +130,7 @@ struct AccountCardStack: View {
                 .frame(height: cardHeight)
         }
         .shadow(color: Color.brandSecondary.opacity(isFront ? 0.25 : 0.18), radius: isFront ? 14 : 5, y: isFront ? 6 : 2)
-        .scaleEffect(1 - CGFloat(position) * 0.045, anchor: .bottom)
+        .scaleEffect(1 - CGFloat(position) * scaleStep, anchor: .bottom)
         .offset(x: isFront ? dragOffset : 0, y: -(CGFloat(position) * peek + lift))
         .rotationEffect(.degrees(isFront ? Double(dragOffset) / 40 : 0), anchor: .bottom)
         .zIndex(Double(-position))
@@ -130,7 +149,7 @@ struct AccountCardStack: View {
             Image(systemName: account.type.icon)
                 .font(.system(size: 12, weight: .bold))
             Text(account.name)
-                .font(.manrope, size: 14, weight: .bold)
+                .font(.manrope, size: peek < 32 ? 12 : 14, weight: .bold)
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
             Spacer(minLength: 8)
@@ -171,7 +190,9 @@ struct AccountCardStack: View {
 
     private var counterText: String {
         guard let id = frontID, let index = accounts.firstIndex(where: { $0.id == id }) else { return "" }
-        return "\(index + 1) of \(accounts.count) · tap to flip, swipe to switch"
+        let hidden = accounts.count - visibleCount
+        let more = hidden > 0 ? " · +\(hidden) more behind" : ""
+        return "\(index + 1) of \(accounts.count)\(more) · tap to flip, swipe to switch"
     }
 
     // MARK: Interaction
