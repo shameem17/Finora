@@ -32,6 +32,7 @@ struct SummaryCard: View {
                     .font(.manrope, size: 14, weight: .medium)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
  
             Text(amount)
@@ -220,6 +221,7 @@ private struct InsightStat: View {
                     .font(.manrope, size: 11, weight: .medium)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
  
                 Text(value)
                     .font(.manrope, size: 15, weight: .extraBold)

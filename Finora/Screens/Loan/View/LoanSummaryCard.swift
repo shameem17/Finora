@@ -181,6 +181,7 @@ private struct BalanceTile: View {
                     .font(.manrope, size: 13, weight: .semiBold)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
 
             VStack(alignment: .leading, spacing: 2) {

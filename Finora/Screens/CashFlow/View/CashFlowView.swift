@@ -89,17 +89,20 @@ struct CashFlowRow: View {
                     .font(.manrope, size: 14, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 Text("\(item.account?.name ?? "Account removed") · \(entry.date.shortDisplay)")
                     .font(.manrope, size: 12, weight: .medium)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 if !entry.note.isEmpty {
                     Text(entry.note)
                         .font(.manrope, size: 12, weight: .medium)
                         .foregroundStyle(Color.textTertiary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
             }
 

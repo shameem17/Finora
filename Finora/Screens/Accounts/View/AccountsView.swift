@@ -110,6 +110,7 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
                         .font(.manrope, size: 15, weight: .bold)
                         .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                     Text(account.type.title)
                         .font(.manrope, size: 12, weight: .medium)
                         .foregroundStyle(Color.textSecondary)

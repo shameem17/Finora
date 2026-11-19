@@ -62,8 +62,30 @@ private func maskedNumber(_ number: String) -> String {
 struct AccountCard: View {
     let account: Account
     var hideBalance: Bool = false
+    /// Off while the card waits behind others: only its background shows.
+    var showsContent: Bool = true
 
     var body: some View {
+        content
+            .opacity(showsContent ? 1 : 0)
+            .padding(16)
+            .frame(maxWidth: .infinity, minHeight: 176, alignment: .leading)
+            .background(CardBackground(tint: account.tint))
+            .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 26, style: .continuous)
+                    .strokeBorder(
+                        LinearGradient(
+                            colors: [.white.opacity(0.35), .white.opacity(0.02)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: 1
+                    )
+            )
+    }
+
+    private var content: some View {
         VStack(alignment: .leading, spacing: 0) {
 
             HStack(alignment: .top) {
@@ -80,6 +102,7 @@ struct AccountCard: View {
                     .font(.system(.headline, design: .rounded, weight: .semibold))
                     .foregroundStyle(.white)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 Text(maskedNumber(account.number))
                     .font(.system(.caption, design: .monospaced))
@@ -104,21 +127,6 @@ struct AccountCard: View {
                     .contentTransition(.numericText())
             }
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, minHeight: 176, alignment: .leading)
-        .background(CardBackground(tint: account.tint))
-        .clipShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .strokeBorder(
-                    LinearGradient(
-                        colors: [.white.opacity(0.35), .white.opacity(0.02)],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 1
-                )
-        )
     }
 }
 

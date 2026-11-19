@@ -5,9 +5,9 @@
 //  Screens/Accounts/View
 //
 //  Accounts as a stack of bank cards. The front card shows its face; tapping it
-//  flips it to the back. Cards behind show their backs, peeking out above the
-//  front card: tapping one flips it round to the front, and swiping the front
-//  card sends it to the back of the stack.
+//  flips it to the back. Cards behind peek out above it with their name and
+//  balance: tapping one lifts it out from behind and settles it in front, and
+//  swiping the front card sends it to the back of the stack.
 //
 
 import SwiftUI
@@ -60,10 +60,13 @@ struct AccountCardStack: View {
     /// Cards that have been flipped to show their back while at the front.
     @State private var flippedFront: Set<Account.ID> = []
     @State private var dragOffset: CGFloat = 0
+    /// The card currently lifting out from behind the stack.
+    @State private var rising: Account.ID?
 
     private let cardHeight: CGFloat = 200
-    private let peek: CGFloat = 16
+    private let peek: CGFloat = 38
     private let maxVisible = 4
+    private let liftHeight: CGFloat = 70
 
     /// The accounts, rotated so the front card comes first.
     private var ordered: [Account] {
@@ -84,7 +87,6 @@ struct AccountCardStack: View {
             }
             .frame(height: cardHeight + peek * CGFloat(max(visible.count - 1, 0)))
             .animation(.spring(response: 0.5, dampingFraction: 0.82), value: frontID)
-            .animation(.spring(response: 0.5, dampingFraction: 0.82), value: flippedFront)
 
             footer
         }
@@ -96,19 +98,21 @@ struct AccountCardStack: View {
 
     private func card(for account: Account, at position: Int) -> some View {
         let isFront = position == 0
-        // The front card faces forward unless flipped; every card behind shows its back.
-        let angle: Double = (isFront && !flippedFront.contains(account.id)) ? 0 : 180
+        // Only the front card ever turns over; cards behind always face forward.
+        let angle: Double = (isFront && flippedFront.contains(account.id)) ? 180 : 0
+        let lift: CGFloat = rising == account.id ? liftHeight : 0
 
         return FlipCard(angle: angle) {
-            AccountCard(account: account, hideBalance: hidesBalances)
+            AccountCard(account: account, hideBalance: hidesBalances, showsContent: isFront)
+                .overlay(alignment: .top) { peekHeader(for: account).opacity(isFront ? 0 : 1) }
                 .frame(height: cardHeight)
         } back: {
             AccountCardBack(account: account, hideBalance: hidesBalances)
                 .frame(height: cardHeight)
         }
-        .shadow(color: Color.brandSecondary.opacity(isFront ? 0.25 : 0.12), radius: isFront ? 14 : 6, y: 6)
-        .scaleEffect(1 - CGFloat(position) * 0.05, anchor: .bottom)
-        .offset(x: isFront ? dragOffset : 0, y: -CGFloat(position) * peek)
+        .shadow(color: Color.brandSecondary.opacity(isFront ? 0.25 : 0.18), radius: isFront ? 14 : 5, y: isFront ? 6 : 2)
+        .scaleEffect(1 - CGFloat(position) * 0.045, anchor: .bottom)
+        .offset(x: isFront ? dragOffset : 0, y: -(CGFloat(position) * peek + lift))
         .rotationEffect(.degrees(isFront ? Double(dragOffset) / 40 : 0), anchor: .bottom)
         .zIndex(Double(-position))
         .onTapGesture { tap(account, isFront: isFront) }
@@ -120,11 +124,33 @@ struct AccountCardStack: View {
         .accessibilityAddTraits(.isButton)
     }
 
+    /// What a card shows while it waits behind the others.
+    private func peekHeader(for account: Account) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: account.type.icon)
+                .font(.system(size: 12, weight: .bold))
+            Text(account.name)
+                .font(.manrope, size: 14, weight: .bold)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+            Spacer(minLength: 8)
+            Text(hidesBalances ? CurrencyFormatter.hidden : CurrencyFormatter.taka(account.balance))
+                .font(.manrope, size: 14, weight: .bold)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
+        }
+        .foregroundStyle(.white)
+        .padding(.horizontal, 18)
+        .frame(height: peek, alignment: .center)
+    }
+
     private var footer: some View {
         HStack {
             Text(counterText)
                 .font(.manrope, size: 13, weight: .semiBold)
                 .foregroundStyle(Color.textSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
 
             Spacer()
 
@@ -163,14 +189,27 @@ struct AccountCardStack: View {
     }
 
     private func tap(_ account: Account, isFront: Bool) {
-        withAnimation(.spring(response: 0.5, dampingFraction: 0.82)) {
-            if isFront {
+        guard rising == nil else { return }
+
+        if isFront {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.82)) {
                 if flippedFront.contains(account.id) { flippedFront.remove(account.id) }
                 else { flippedFront.insert(account.id) }
-            } else {
-                // Arrives face-up: its back rotates round to the front.
-                flippedFront.remove(account.id)
+            }
+            return
+        }
+
+        // 1. The tapped card lifts out from behind the stack…
+        withAnimation(.easeOut(duration: 0.22)) {
+            flippedFront.removeAll()
+            rising = account.id
+        }
+        // 2. …then slides down in front of the old front card.
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(200))
+            withAnimation(.spring(response: 0.55, dampingFraction: 0.8)) {
                 frontID = account.id
+                rising = nil
             }
         }
     }

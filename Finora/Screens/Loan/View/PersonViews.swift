@@ -89,11 +89,13 @@ private struct PersonRow: View {
                     .font(.manrope, size: 15, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 Text(subtitle)
                     .font(.manrope, size: 12, weight: .medium)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
 
             Spacer(minLength: 8)
@@ -448,11 +450,13 @@ struct PersonPickerView: View {
                                     .font(.manrope, size: 15, weight: .bold)
                                     .foregroundStyle(Color.textPrimary)
                                     .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
 
                                 Text(person.phone ?? person.category.title)
                                     .font(.manrope, size: 12, weight: .medium)
                                     .foregroundStyle(Color.textSecondary)
                                     .lineLimit(1)
+                                    .minimumScaleFactor(0.7)
                             }
 
                             Spacer(minLength: 8)

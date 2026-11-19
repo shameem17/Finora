@@ -56,6 +56,7 @@ struct RepaymentFormView: View {
                     .font(.manrope, size: 16, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 Text("\(kind.outstandingCaption): \(CurrencyFormatter.taka(form.outstanding, showFraction: true))")
                     .font(.manrope, size: 12, weight: .medium)

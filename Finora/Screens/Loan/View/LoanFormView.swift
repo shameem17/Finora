@@ -78,12 +78,14 @@ struct LoanFormView: View {
                     .font(.manrope, size: 16, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 if let person = form.person {
                     Text(person.phone ?? person.category.title)
                         .font(.manrope, size: 12, weight: .medium)
                         .foregroundStyle(Color.textSecondary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
             }
 
@@ -114,6 +116,7 @@ struct LoanFormView: View {
                     .font(.manrope, size: 16, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
 
             Spacer(minLength: 8)

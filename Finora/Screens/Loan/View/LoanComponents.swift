@@ -116,6 +116,7 @@ struct StatusChip: View {
             .font(.manrope, size: 11, weight: .bold)
             .foregroundStyle(color)
             .lineLimit(1)
+            .minimumScaleFactor(0.7)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .background(color.opacity(0.14), in: Capsule())
@@ -146,11 +147,13 @@ struct LoanRow: View {
                         .font(.manrope, size: 15, weight: .bold)
                         .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
 
                     Text(subtitle)
                         .font(.manrope, size: 12, weight: .medium)
                         .foregroundStyle(Color.textSecondary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
 
                 Spacer(minLength: 8)

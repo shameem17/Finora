@@ -50,6 +50,7 @@ struct SavingsEntryFormView: View {
                     .font(.manrope, size: 16, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 Text("Saved: \(CurrencyFormatter.taka(form.current, showFraction: true))")
                     .font(.manrope, size: 12, weight: .medium)

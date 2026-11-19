@@ -17,7 +17,7 @@ class SettingsCoordinator: Coordinator {
     let settings: AppSettings
     
     lazy var settingsView: UIViewController = {
-        let view = SettingsView()
+        let view = SettingsView().environment(\.appSettings, settings)
         let vc = UIHostingController(rootView: view)
         return vc
     }()
@@ -28,6 +28,7 @@ class SettingsCoordinator: Coordinator {
     }
     
     func start() {
+        rootViewController?.navigationBar.prefersLargeTitles = true
         rootViewController?.setViewControllers([settingsView], animated: false)
     }
     

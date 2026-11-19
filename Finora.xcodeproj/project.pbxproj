@@ -141,6 +141,7 @@
 		99927A00007A30AB001DCA2B /* FinanceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007930AB001DCA2B /* FinanceOverview.swift */; };
 		99927A00007C30AB001DCA2B /* FinanceOverviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007B30AB001DCA2B /* FinanceOverviewCard.swift */; };
 		99927A00007E30AB001DCA2B /* AccountCardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007D30AB001DCA2B /* AccountCardStack.swift */; };
+		99927A00008030AB001DCA2B /* PrivacyPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007F30AB001DCA2B /* PrivacyPolicyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -280,6 +281,7 @@
 		99927A00007930AB001DCA2B /* FinanceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceOverview.swift; sourceTree = "<group>"; };
 		99927A00007B30AB001DCA2B /* FinanceOverviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceOverviewCard.swift; sourceTree = "<group>"; };
 		99927A00007D30AB001DCA2B /* AccountCardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardStack.swift; sourceTree = "<group>"; };
+		99927A00007F30AB001DCA2B /* PrivacyPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -539,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				8882733930A2F073001DCA2B /* Settings.swift */,
+				99927A00007F30AB001DCA2B /* PrivacyPolicyView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1081,6 +1084,7 @@
 				8882734B30A3396F001DCA2B /* DonutCard.swift in Sources */,
 				8882730530A19145001DCA2B /* OnboardingView.swift in Sources */,
 				8882733A30A2F076001DCA2B /* Settings.swift in Sources */,
+				99927A00008030AB001DCA2B /* PrivacyPolicyView.swift in Sources */,
 				8882730E30A1A05D001DCA2B /* OnboardingCard.swift in Sources */,
 				8882730A30A19C34001DCA2B /* AppTab.swift in Sources */,
 				88827A0330AB0002001DCA2B /* PersonModels.swift in Sources */,

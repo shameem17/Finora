@@ -85,11 +85,13 @@ struct SavingsCard: View {
                         .font(.manrope, size: 16, weight: .bold)
                         .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
 
                     Text(item.account.map { "in \($0.name)" } ?? "Account removed")
                         .font(.manrope, size: 12, weight: .medium)
                         .foregroundStyle(Color.textSecondary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
 
                 Spacer(minLength: 8)
@@ -152,6 +154,7 @@ struct SavingsEntryRow: View {
                         .font(.manrope, size: 11, weight: .semiBold)
                         .foregroundStyle(Color.textTertiary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
                 Text(entry.kind.historyTitle)
                     .font(.manrope, size: 14, weight: .bold)
@@ -161,12 +164,14 @@ struct SavingsEntryRow: View {
                     .font(.manrope, size: 12, weight: .medium)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 if !entry.note.isEmpty {
                     Text(entry.note)
                         .font(.manrope, size: 12, weight: .medium)
                         .foregroundStyle(Color.textTertiary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                 }
             }
 

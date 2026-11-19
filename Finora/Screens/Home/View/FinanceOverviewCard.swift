@@ -80,6 +80,8 @@ struct FinanceOverviewCard: View {
             Text("Accounts + to collect − to repay")
                 .font(.manrope, size: 12, weight: .medium)
                 .foregroundStyle(Color.onHeroSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
         }
     }
 
@@ -94,6 +96,8 @@ struct FinanceOverviewCard: View {
                 Text(title)
                     .font(.manrope, size: 13, weight: .semiBold)
                     .foregroundStyle(Color.onHeroSecondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
 
             Text(format(value))
@@ -106,6 +110,8 @@ struct FinanceOverviewCard: View {
             Text(caption)
                 .font(.manrope, size: 11, weight: .medium)
                 .foregroundStyle(Color.onHeroSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
         }
         .padding(12)
         .frame(maxWidth: .infinity, alignment: .leading)

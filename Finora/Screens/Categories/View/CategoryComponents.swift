@@ -34,6 +34,7 @@ struct CategoryRow: View {
                     .font(.manrope, size: 16, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 if category.kind == .expense {
                     Text(category.monthlyBudget.map { "Budget \(CurrencyFormatter.taka($0, showFraction: false)) / month" } ?? "No budget set")

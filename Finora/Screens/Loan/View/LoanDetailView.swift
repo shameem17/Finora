@@ -113,6 +113,7 @@ struct LoanDetailView<ViewModel: LoanDetailViewModelProtocol>: View {
                         .font(.manrope, size: 18, weight: .extraBold)
                         .foregroundStyle(Color.textPrimary)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.7)
 
                     Text("\(loan.kind.personRole) · \(person.category.title)")
                         .font(.manrope, size: 12, weight: .medium)
@@ -373,6 +374,7 @@ private struct RepaymentRow: View {
                     .font(.manrope, size: 12, weight: .medium)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
 
             Spacer(minLength: 8)

@@ -28,6 +28,8 @@ struct PillPicker<Option: PickerOption>: View {
                         .foregroundStyle(isSelected
                                          ? Color.onAccent
                                          : Color.textSecondary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 11)
                         .background {

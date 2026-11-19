@@ -166,6 +166,8 @@ struct SectionLabel: View {
             .font(.manrope, size: 12, weight: .semiBold)
             .tracking(1)
             .foregroundStyle(Color.textSecondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.7)
     }
 }
 

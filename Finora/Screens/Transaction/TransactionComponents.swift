@@ -153,11 +153,13 @@ struct TransferRow: View {
                     .font(.manrope, size: 15, weight: .bold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 Text(transfer.reason.isEmpty ? "Balance transfer" : transfer.reason)
                     .font(.manrope, size: 12, weight: .medium)
                     .foregroundStyle(Color.textSecondary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
 
             Spacer(minLength: 8)
@@ -167,6 +169,7 @@ struct TransferRow: View {
                     .font(.manrope, size: 15, weight: .extraBold)
                     .foregroundStyle(Color.textPrimary)
                     .lineLimit(1)
+                    .minimumScaleFactor(0.7)
 
                 if transfer.charge > 0 {
                     Text("+\(CurrencyFormatter.taka(transfer.charge, showFraction: true)) fee")
