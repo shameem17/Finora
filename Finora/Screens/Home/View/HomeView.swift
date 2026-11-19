@@ -36,6 +36,7 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
                 VStack(spacing: 24) {
                     overviewCard
                     insightsSection
+                    overviewSection
                     accountSummaryCard
                 }
                 .padding(20)
@@ -88,6 +89,18 @@ struct HomeView<ViewModel: HomeViewModelProtocol>: View {
         }
     }
  
+    // MARK: - Net worth
+
+    @ViewBuilder
+    private var overviewSection: some View {
+        if let overview = model.homeViewData?.overview {
+            VStack(spacing: 16) {
+                SectionHeader(title: "Summary") { EmptyView() }
+                FinanceOverviewCard(overview: overview, hidesBalances: settings.hidesBalances)
+            }
+        }
+    }
+
     // MARK: - Accounts
  
     private var accountSummaryCard: some View {

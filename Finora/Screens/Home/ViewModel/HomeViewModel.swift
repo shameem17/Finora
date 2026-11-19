@@ -108,6 +108,7 @@ struct HomeViewData {
    let headerTitle: String
    let accounts: [Account]
    let insights: MonthlyInsights
+   let overview: FinanceOverview
 }
 
 
@@ -121,6 +122,8 @@ final class HomeViewModel: HomeViewModelProtocol {
    private let accountRepository: AccountRepositoryProtocol
    private let cashFlowRepository: CashFlowRepositoryProtocol
    private let categoryRepository: CategoryRepositoryProtocol
+   private let loanRepository: LoanRepositoryProtocol
+   private let savingsRepository: SavingsRepositoryProtocol
    private let calendar: Calendar
 
    @ObservationIgnored private var cancellables = Set<AnyCancellable>()
@@ -129,16 +132,23 @@ final class HomeViewModel: HomeViewModelProtocol {
         accountRepository: AccountRepositoryProtocol = SwiftDataAccountRepository.shared,
         cashFlowRepository: CashFlowRepositoryProtocol = SwiftDataCashFlowRepository.shared,
         categoryRepository: CategoryRepositoryProtocol = SwiftDataCategoryRepository.shared,
+        loanRepository: LoanRepositoryProtocol = SwiftDataLoanRepository.shared,
+        savingsRepository: SavingsRepositoryProtocol = SwiftDataSavingsRepository.shared,
         calendar: Calendar = .current) {
        self.dateService = dateService
        self.accountRepository = accountRepository
        self.cashFlowRepository = cashFlowRepository
        self.categoryRepository = categoryRepository
+       self.loanRepository = loanRepository
+       self.savingsRepository = savingsRepository
        self.calendar = calendar
 
        // Keep balances and insights in sync with edits made on any other tab.
        accountRepository.changes
-           .merge(with: cashFlowRepository.changes, categoryRepository.changes)
+           .merge(with: cashFlowRepository.changes,
+                  categoryRepository.changes,
+                  loanRepository.changes,
+                  savingsRepository.changes)
            .sink { [weak self] in
                guard self?.homeViewData != nil else { return }
                self?.prepareData()
@@ -148,10 +158,16 @@ final class HomeViewModel: HomeViewModelProtocol {
 
    func prepareData() {
        let date = dateService.currentDate()
+       let accounts = accountRepository.fetchAccounts()
+       let insights = makeInsights()
        homeViewData = HomeViewData(
            headerTitle: "\(date.month) \(date.year), Overview",
-           accounts: accountRepository.fetchAccounts(),
-           insights: makeInsights()
+           accounts: accounts,
+           insights: insights,
+           overview: FinanceOverview.make(accounts: accounts,
+                                          loans: loanRepository.fetchLoans(),
+                                          savings: savingsRepository.fetchSavings(),
+                                          monthBalance: insights.balance)
        )
    }
 

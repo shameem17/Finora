@@ -16,8 +16,8 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
 
     @Environment(\.appSettings) private var settings
     @State private var form: AccountFormViewModel?
+    @State private var frontID: Account.ID?
 
-    private let columns = [GridItem(.adaptive(minimum: 160), spacing: 16)]
 
     var body: some View {
         @Bindable var settings = settings
@@ -34,7 +34,7 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
                                        title: "No accounts yet",
                                        message: "Add your bank, mobile wallet, card or cash to start tracking balances.")
                     } else {
-                        grid(hidesBalances: settings.hidesBalances)
+                        stack(hidesBalances: settings.hidesBalances)
                     }
                 }
                 .padding(.horizontal, 16)
@@ -77,19 +77,60 @@ struct AccountsView<ViewModel: AccountsViewModelProtocol>: View {
         .sectionCard()
     }
 
-    private func grid(hidesBalances: Bool) -> some View {
-        LazyVGrid(columns: columns, spacing: 16) {
-            ForEach(model.accounts) { account in
-                Button {
-                    form = model.makeFormViewModel(editing: account)
-                } label: {
-                    AccountCard(account: account, hideBalance: hidesBalances)
-                        .shadow(color: Color(hex: account.tint).opacity(0.35), radius: 10, x: 0, y: 0)
-                }
-                .buttonStyle(.plain)
-                .accessibilityHint("Edit account")
+    private func stack(hidesBalances: Bool) -> some View {
+        VStack(spacing: 20) {
+            AccountCardStack(accounts: model.accounts,
+                             frontID: $frontID,
+                             hidesBalances: hidesBalances) { account in
+                form = model.makeFormViewModel(editing: account)
             }
+
+            VStack(spacing: 0) {
+                ForEach(model.accounts) { account in
+                    accountRow(account, hidesBalances: hidesBalances)
+                    if account.id != model.accounts.last?.id {
+                        Divider().overlay(Color.hairline)
+                    }
+                }
+            }
+            .sectionCard(padding: 8)
         }
+    }
+
+    /// Compact list under the stack: tapping a row brings that card to the front.
+    private func accountRow(_ account: Account, hidesBalances: Bool) -> some View {
+        Button {
+            withAnimation(.spring(response: 0.5, dampingFraction: 0.82)) { frontID = account.id }
+        } label: {
+            HStack(spacing: 12) {
+                AccountBadge(type: account.type, tint: account.tint, size: 36)
+
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(account.name)
+                        .font(.manrope, size: 15, weight: .bold)
+                        .foregroundStyle(Color.textPrimary)
+                        .lineLimit(1)
+                    Text(account.type.title)
+                        .font(.manrope, size: 12, weight: .medium)
+                        .foregroundStyle(Color.textSecondary)
+                }
+
+                Spacer(minLength: 8)
+
+                Text(hidesBalances ? CurrencyFormatter.hidden : CurrencyFormatter.taka(account.balance, showFraction: true))
+                    .font(.manrope, size: 15, weight: .bold)
+                    .foregroundStyle(Color.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+
+                Image(systemName: frontID == account.id ? "checkmark.circle.fill" : "circle")
+                    .foregroundStyle(frontID == account.id ? Color.accent : Color.textTertiary)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 10)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 }
 

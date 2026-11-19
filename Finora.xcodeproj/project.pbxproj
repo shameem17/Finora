@@ -138,6 +138,9 @@
 		99927A00007230AB001DCA2B /* CashFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007130AB001DCA2B /* CashFlowView.swift */; };
 		99927A00007430AB001DCA2B /* CashFlowFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007330AB001DCA2B /* CashFlowFormView.swift */; };
 		99927A00007830AB001DCA2B /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007730AB001DCA2B /* AppAppearance.swift */; };
+		99927A00007A30AB001DCA2B /* FinanceOverview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007930AB001DCA2B /* FinanceOverview.swift */; };
+		99927A00007C30AB001DCA2B /* FinanceOverviewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007B30AB001DCA2B /* FinanceOverviewCard.swift */; };
+		99927A00007E30AB001DCA2B /* AccountCardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99927A00007D30AB001DCA2B /* AccountCardStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -274,6 +277,9 @@
 		99927A00007130AB001DCA2B /* CashFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowView.swift; sourceTree = "<group>"; };
 		99927A00007330AB001DCA2B /* CashFlowFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashFlowFormView.swift; sourceTree = "<group>"; };
 		99927A00007730AB001DCA2B /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
+		99927A00007930AB001DCA2B /* FinanceOverview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceOverview.swift; sourceTree = "<group>"; };
+		99927A00007B30AB001DCA2B /* FinanceOverviewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinanceOverviewCard.swift; sourceTree = "<group>"; };
+		99927A00007D30AB001DCA2B /* AccountCardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -542,6 +548,7 @@
 			children = (
 				8882734E30A4367F001DCA2B /* AccountCard.swift */,
 				8882734C30A4319A001DCA2B /* SummaryCard.swift */,
+				99927A00007B30AB001DCA2B /* FinanceOverviewCard.swift */,
 				8882732A30A2ED6D001DCA2B /* HomeView.swift */,
 			);
 			path = View;
@@ -567,6 +574,7 @@
 			isa = PBXGroup;
 			children = (
 				8882735030A4431B001DCA2B /* Accounts.swift */,
+				99927A00007930AB001DCA2B /* FinanceOverview.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -770,6 +778,7 @@
 			isa = PBXGroup;
 			children = (
 				99927A00000630AB001DCA2B /* AccountsView.swift */,
+				99927A00007D30AB001DCA2B /* AccountCardStack.swift */,
 				99927A00000830AB001DCA2B /* AccountFormView.swift */,
 			);
 			path = View;
@@ -1037,6 +1046,7 @@
 				8882730830A19173001DCA2B /* Colors + Extension.swift in Sources */,
 				8882734130A2F62D001DCA2B /* HomeCoordinator.swift in Sources */,
 				8882735130A4431D001DCA2B /* Accounts.swift in Sources */,
+				99927A00007A30AB001DCA2B /* FinanceOverview.swift in Sources */,
 				888272EB30A18E31001DCA2B /* AppCoordinator.swift in Sources */,
 				888272EC30A18E31001DCA2B /* DeepLink.swift in Sources */,
 				8882732430A1DDD5001DCA2B /* AppFont.swift in Sources */,
@@ -1060,6 +1070,7 @@
 				8882732630A2E37E001DCA2B /* WaveView.swift in Sources */,
 				8882736030A5831A001DCA2B /* FilterPicker.swift in Sources */,
 				8882734D30A4319D001DCA2B /* SummaryCard.swift in Sources */,
+				99927A00007C30AB001DCA2B /* FinanceOverviewCard.swift in Sources */,
 				888272F230A18E31001DCA2B /* SceneDelegate.swift in Sources */,
 				8882736B30A98633001DCA2B /* ExpenseCoordinator.swift in Sources */,
 				8882735B30A58275001DCA2B /* Filter.swift in Sources */,
@@ -1099,6 +1110,7 @@
 				99927A00000130AB001DCA2B /* AccountsViewModel.swift in Sources */,
 				99927A00000330AB001DCA2B /* AccountFormViewModel.swift in Sources */,
 				99927A00000530AB001DCA2B /* AccountsView.swift in Sources */,
+				99927A00007E30AB001DCA2B /* AccountCardStack.swift in Sources */,
 				99927A00000730AB001DCA2B /* AccountFormView.swift in Sources */,
 				99927A00000930AB001DCA2B /* AccountsCoordinator.swift in Sources */,
 				99927A00000B30AB001DCA2B /* CategoryModels.swift in Sources */,
